@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5891bb649543be543b19f226e3ed3a3b, type: 3}
-  m_Name: PlayerClass 2
+  m_Name: PlayerClass 5
   m_EditorClassIdentifier: 
-  PlayerName: "Bonnie \"La Temp\xEAte\""
+  PlayerName: Miguel "El Barbudo"
   Description: 
-  Image: {fileID: 21300000, guid: 5abd08d7f8cbf804bbf57dc62e65e8f1, type: 3}
+  Image: {fileID: 21300000, guid: 5a8d4a4d43099d5438653389fbf1e1c3, type: 3}
   IsAlive: 1
   CurrentLife: 3
   MaxLife: 3
