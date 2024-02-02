@@ -18,3 +18,5 @@ MonoBehaviour:
   _description: You gain 2 gold
   _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
   _name: Treasure found
+  _horde: 0
+  _zone: Mountain
