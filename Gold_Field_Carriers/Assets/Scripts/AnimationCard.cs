@@ -21,7 +21,7 @@ public class AnimationCard : MonoBehaviour
         if (_cardAnim.transform.rotation.y <= 0.75)
             _text.text = _card._description.text;
 
-        if (Zone.draw)
+        if (Zone._draw)
         {
             _animation = true;
         }
@@ -30,12 +30,14 @@ public class AnimationCard : MonoBehaviour
 
     public void Animation()
     {
+
         if (_animation && _cardAnim.transform.rotation.y > 0)
         {
-            _cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 0.7f,
+            Zone._draw = false;
+            _cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 300 * Time.deltaTime,
                                                        _cardAnim.transform.position.y,
                                                        _cardAnim.transform.position.z);
-            _cardAnim.transform.Rotate(0, 0.2f, 0);
+            _cardAnim.transform.Rotate(0, 100 * Time.deltaTime, 0);
         }
         if (_cardAnim.transform.rotation.y <= 0)
         {
@@ -50,6 +52,7 @@ public class AnimationCard : MonoBehaviour
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
                 _cardAnim.transform.position = new Vector3(1400, 300, 0);
+                Zone._draw = false;
             }           
         }
     }
