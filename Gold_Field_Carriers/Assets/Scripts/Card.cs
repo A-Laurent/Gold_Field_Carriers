@@ -49,14 +49,9 @@ public class Card : MonoBehaviour
         _goldText.text = "Gold : " + Stats._goldPlayer.ToString();
         _zoneText.text = "Zone : " + _theHorde.ToString(); ;
 
-        if (Zone.draw && !CardChoice._choice)
+        if (Zone._draw && !CardChoice._choice)
         {
             DrawCard();
-            Zone.draw = false;
-        }
-        else
-        {
-            Zone.draw = false;
         }
         Shuffle();
     }
