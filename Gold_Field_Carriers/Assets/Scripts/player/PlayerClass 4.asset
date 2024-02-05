@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5891bb649543be543b19f226e3ed3a3b, type: 3}
+  m_Name: PlayerClass 4
+  m_EditorClassIdentifier: 
+  PlayerName: '"Goldie" Joe'
+  Description: 
+  Image: {fileID: 21300000, guid: 12ac316f66224ac48a875ee3af42fa88, type: 3}
+  IsAlive: 1
+  CurrentLife: 3
+  MaxLife: 3
+  CurrentAmmount: 2
+  MaxAmmount: 3
+  Gold: 25
