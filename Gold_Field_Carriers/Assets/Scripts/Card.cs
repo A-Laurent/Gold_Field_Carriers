@@ -1,0 +1,140 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Card : MonoBehaviour
+{
+    public int _cardIndex;
+
+    public Text _hpText;
+    public Text _bulletText;
+    public Text _goldText;
+
+    public List<CardData> _cardDataMountain = new List<CardData>();
+    public List<CardData> _cardDataRiver = new List<CardData>();
+    public List<CardData> _cardDataDesert = new List<CardData>();
+
+    public List<CardData> _cardDataBackupMountain = new List<CardData>();
+    public List<CardData> _cardDataBackupRiver = new List<CardData>();
+    public List<CardData> _cardDataBackupDesert = new List<CardData>();
+    public static string _zone;
+    public int _theHorde;
+
+    public void Start()
+    {
+        for (int i  = 0; i < _cardDataDesert.Count; i++)
+        {
+            _cardDataBackupDesert.Add(_cardDataDesert[i]);
+        }
+        for (int i = 0; i < _cardDataRiver.Count; i++)
+        {
+            _cardDataBackupRiver.Add(_cardDataRiver[i]);
+        }
+        for (int i = 0; i < _cardDataMountain.Count; i++)
+        {
+            _cardDataBackupMountain.Add(_cardDataMountain[i]);
+        }
+    }
+    
+    private void Update()
+    {
+        _hpText.text = "HP : " + Stats._hpPlayer.ToString();
+        _bulletText.text = "Bullet : " + Stats._bulletPlayer.ToString();
+        _goldText.text = "Gold : " + Stats._goldPlayer.ToString();
+
+        if (Input.GetKeyUp(KeyCode.A)) 
+            DrawCard();
+
+        Shuffle();
+    }
+    public void DrawCard()
+    {
+        switch (_zone)
+        {
+            case "Desert": Desert(); break;
+            case "River": River(); break;
+            case "Mountain": Mountain(); break;
+        }
+        
+    }
+
+    public void Shuffle()
+    {
+        if (_cardDataDesert.Count == 0)
+            for (int i = 0; i < _cardDataBackupDesert.Count; i++)
+            {
+                _cardDataDesert.Add(_cardDataBackupDesert[i]);
+            }
+
+        if (_cardDataRiver.Count == 0)
+            for (int i = 0; i < _cardDataBackupRiver.Count; i++)
+            {
+                _cardDataRiver.Add(_cardDataBackupRiver[i]);
+            }
+
+        if (_cardDataMountain.Count == 0)
+            for (int i = 0; i < _cardDataBackupMountain.Count; i++)
+            {
+                _cardDataMountain.Add(_cardDataBackupMountain[i]);
+            }
+    }
+
+    public void Desert()
+    {
+        _cardIndex = Random.Range(0, _cardDataDesert.Count);
+
+        if (_cardDataDesert[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
+        {
+            Stats._goldPlayer -= 3;
+            Stats._hpPlayer -= 1;
+        }
+        else
+        {
+            Stats._goldPlayer += _cardDataDesert[_cardIndex]._gold;
+            Stats._hpPlayer += _cardDataDesert[_cardIndex]._hp;
+            Stats._bulletPlayer += _cardDataDesert[_cardIndex]._bullet;
+            _theHorde += _cardDataDesert[_cardIndex]._horde;
+            
+        }
+        _cardDataDesert.RemoveAt(_cardIndex);
+    }
+
+    public void Mountain()
+    {
+        _cardIndex = Random.Range(0, _cardDataMountain.Count);
+
+        if (_cardDataMountain[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
+        {
+            Stats._goldPlayer -= 3;
+            Stats._hpPlayer -= 1;
+        }
+        else
+        {
+            Stats._goldPlayer += _cardDataMountain[_cardIndex]._gold;
+            Stats._hpPlayer += _cardDataMountain[_cardIndex]._hp;
+            Stats._bulletPlayer += _cardDataMountain[_cardIndex]._bullet;
+            _theHorde += _cardDataMountain[_cardIndex]._horde;
+        }
+        _cardDataMountain.RemoveAt(_cardIndex);
+    }
+
+    public void River()
+    {
+        _cardIndex = Random.Range(0, _cardDataRiver.Count);
+
+        if (_cardDataRiver[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
+        {
+            Stats._goldPlayer -= 3;
+            Stats._hpPlayer -= 1;
+        }
+        else
+        {
+            Stats._goldPlayer += _cardDataRiver[_cardIndex]._gold;
+            Stats._hpPlayer += _cardDataRiver[_cardIndex]._hp;
+            Stats._bulletPlayer += _cardDataRiver[_cardIndex]._bullet;
+            _theHorde += _cardDataRiver[_cardIndex]._horde;
+        }
+        _cardDataRiver.RemoveAt(_cardIndex);
+    }
+}
