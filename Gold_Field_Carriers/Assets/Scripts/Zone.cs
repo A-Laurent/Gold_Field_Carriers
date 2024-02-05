@@ -4,18 +4,32 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
+    public static bool draw;
     public void SetDesert()
     {
-        Card._zone = "Desert";
+        if (!CardChoice._choice && !AnimationCard._animation)
+        {
+            Card._zone = "Desert";
+            draw = true;
+        }
+        
     }
 
     public void SetRiver()
     {
-        Card._zone = "River";
+        if (!CardChoice._choice && !AnimationCard._animation)
+        {
+            Card._zone = "River";
+            draw = true;
+        }
     }
 
     public void SetMountain()
     {
-        Card._zone = "Mountain";
+        if (!CardChoice._choice && !AnimationCard._animation)
+        {
+            Card._zone = "Mountain";
+            draw = true;
+        }
     }
 }

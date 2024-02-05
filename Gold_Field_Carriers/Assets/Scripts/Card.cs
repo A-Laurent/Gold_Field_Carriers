@@ -10,16 +10,20 @@ public class Card : MonoBehaviour
     public Text _hpText;
     public Text _bulletText;
     public Text _goldText;
+    public Text _zoneText;
+    public Text _description;
 
-    public List<CardData> _cardDataMountain = new List<CardData>();
-    public List<CardData> _cardDataRiver = new List<CardData>();
-    public List<CardData> _cardDataDesert = new List<CardData>();
+    public List<CardData> _cardDataMountain = new();
+    public List<CardData> _cardDataRiver = new();
+    public List<CardData> _cardDataDesert = new();
 
-    public List<CardData> _cardDataBackupMountain = new List<CardData>();
-    public List<CardData> _cardDataBackupRiver = new List<CardData>();
-    public List<CardData> _cardDataBackupDesert = new List<CardData>();
+    public List<CardData> _cardDataBackupMountain = new();
+    public List<CardData> _cardDataBackupRiver = new();
+    public List<CardData> _cardDataBackupDesert = new();
+
     public static string _zone;
     public int _theHorde;
+    public GameObject _uiChoice;
 
     public void Start()
     {
@@ -39,13 +43,21 @@ public class Card : MonoBehaviour
     
     private void Update()
     {
+        
         _hpText.text = "HP : " + Stats._hpPlayer.ToString();
         _bulletText.text = "Bullet : " + Stats._bulletPlayer.ToString();
         _goldText.text = "Gold : " + Stats._goldPlayer.ToString();
+        _zoneText.text = "Zone : " + _theHorde.ToString(); ;
 
-        if (Input.GetKeyUp(KeyCode.A)) 
+        if (Zone.draw && !CardChoice._choice)
+        {
             DrawCard();
-
+            Zone.draw = false;
+        }
+        else
+        {
+            Zone.draw = false;
+        }
         Shuffle();
     }
     public void DrawCard()
@@ -55,8 +67,7 @@ public class Card : MonoBehaviour
             case "Desert": Desert(); break;
             case "River": River(); break;
             case "Mountain": Mountain(); break;
-        }
-        
+        }      
     }
 
     public void Shuffle()
@@ -86,18 +97,32 @@ public class Card : MonoBehaviour
 
         if (_cardDataDesert[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _cardDataDesert.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataDesert[_cardIndex]._name == "Choice")
+        {
+            CardChoice._choice = true;
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
             Stats._goldPlayer += _cardDataDesert[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataDesert[_cardIndex]._hp;
+            AnimationStats._hpAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataDesert[_cardIndex]._bullet;
+            AnimationStats._bulletAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataDesert[_cardIndex]._horde;
-            
-        }
-        _cardDataDesert.RemoveAt(_cardIndex);
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _cardDataDesert.RemoveAt(_cardIndex);
+        }     
     }
 
     public void Mountain()
@@ -106,17 +131,32 @@ public class Card : MonoBehaviour
 
         if (_cardDataMountain[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _cardDataMountain.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataMountain[_cardIndex]._name == "Choice")
+        {
+            CardChoice._choice = true;
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
             Stats._goldPlayer += _cardDataMountain[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataMountain[_cardIndex]._hp;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataMountain[_cardIndex]._bullet;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataMountain[_cardIndex]._horde;
-        }
-        _cardDataMountain.RemoveAt(_cardIndex);
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _cardDataMountain.RemoveAt(_cardIndex);
+        }      
     }
 
     public void River()
@@ -125,16 +165,31 @@ public class Card : MonoBehaviour
 
         if (_cardDataRiver[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
+            _description.text = _cardDataRiver[_cardIndex]._description;
+            _cardDataRiver.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataRiver[_cardIndex]._name == "Choice")
+        {
+            CardChoice._choice = true;
+            _description.text = _cardDataRiver[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
             Stats._goldPlayer += _cardDataRiver[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataRiver[_cardIndex]._hp;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataRiver[_cardIndex]._bullet;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataRiver[_cardIndex]._horde;
+            _description.text = _cardDataRiver[_cardIndex]._description;
+            _cardDataRiver.RemoveAt(_cardIndex);
         }
-        _cardDataRiver.RemoveAt(_cardIndex);
-    }
+    } 
 }

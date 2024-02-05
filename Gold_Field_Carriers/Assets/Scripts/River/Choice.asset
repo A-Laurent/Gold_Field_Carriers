@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759f3d9bd8c57214ba678cfd4291e963, type: 3}
-  m_Name: Choice 1
+  m_Name: Choice
   m_EditorClassIdentifier: 
-  _gold: 0
-  _hp: 0
+  _gold: -5
+  _hp: 1
   _bullet: 0
-  _description: 
-  _cardImage: {fileID: 0}
-  _name: 
+  _description: 'You can gain 1 HP or 2 HP and lose 5 gold '
+  _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
+  _name: Choice
   _horde: 0
-  _zone: 
+  _zone: River
