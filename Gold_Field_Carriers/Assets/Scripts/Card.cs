@@ -97,8 +97,8 @@ public class Card : MonoBehaviour
 
         if (_cardDataDesert[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
             _description.text = _cardDataDesert[_cardIndex]._description;
             _cardDataDesert.RemoveAt(_cardIndex);
         }
@@ -111,8 +111,14 @@ public class Card : MonoBehaviour
         else
         {
             Stats._goldPlayer += _cardDataDesert[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataDesert[_cardIndex]._hp;
+            AnimationStats._hpAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataDesert[_cardIndex]._bullet;
+            AnimationStats._bulletAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataDesert[_cardIndex]._horde;
             _description.text = _cardDataDesert[_cardIndex]._description;
             _cardDataDesert.RemoveAt(_cardIndex);
@@ -125,8 +131,8 @@ public class Card : MonoBehaviour
 
         if (_cardDataMountain[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
             _description.text = _cardDataMountain[_cardIndex]._description;
             _cardDataMountain.RemoveAt(_cardIndex);
         }
@@ -139,8 +145,14 @@ public class Card : MonoBehaviour
         else
         {
             Stats._goldPlayer += _cardDataMountain[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataMountain[_cardIndex]._hp;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataMountain[_cardIndex]._bullet;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataMountain[_cardIndex]._horde;
             _description.text = _cardDataMountain[_cardIndex]._description;
             _cardDataMountain.RemoveAt(_cardIndex);
@@ -153,8 +165,8 @@ public class Card : MonoBehaviour
 
         if (_cardDataRiver[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer == 0)
         {
-            Stats._goldPlayer -= 3;
-            Stats._hpPlayer -= 1;
+            Stats._goldPlayer -= 3; AnimationStats._goldAnim -= 3;
+            Stats._hpPlayer -= 1; AnimationStats._hpAnim -= 1;
             _description.text = _cardDataRiver[_cardIndex]._description;
             _cardDataRiver.RemoveAt(_cardIndex);
         }
@@ -167,8 +179,14 @@ public class Card : MonoBehaviour
         else
         {
             Stats._goldPlayer += _cardDataRiver[_cardIndex]._gold;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
+
             Stats._hpPlayer += _cardDataRiver[_cardIndex]._hp;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._hp;
+
             Stats._bulletPlayer += _cardDataRiver[_cardIndex]._bullet;
+            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._bullet;
+
             _theHorde += _cardDataRiver[_cardIndex]._horde;
             _description.text = _cardDataRiver[_cardIndex]._description;
             _cardDataRiver.RemoveAt(_cardIndex);
