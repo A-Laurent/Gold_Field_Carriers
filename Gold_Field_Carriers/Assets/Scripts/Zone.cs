@@ -7,19 +7,29 @@ public class Zone : MonoBehaviour
     public static bool draw;
     public void SetDesert()
     {
-        Card._zone = "Desert";
-        draw = true;
+        if (!CardChoice._choice)
+        {
+            Card._zone = "Desert";
+            draw = true;
+        }
+        
     }
 
     public void SetRiver()
     {
-        Card._zone = "River";
-        draw = true;
+        if (!CardChoice._choice)
+        {
+            Card._zone = "River";
+            draw = true;
+        }
     }
 
     public void SetMountain()
     {
-        Card._zone = "Mountain";
-        draw = true;
+        if (!CardChoice._choice)
+        {
+            Card._zone = "Mountain";
+            draw = true;
+        }
     }
 }

@@ -13,13 +13,13 @@ public class Card : MonoBehaviour
     public Text _zoneText;
     public Text _description;
 
-    public List<CardData> _cardDataMountain = new List<CardData>();
-    public List<CardData> _cardDataRiver = new List<CardData>();
-    public List<CardData> _cardDataDesert = new List<CardData>();
+    public List<CardData> _cardDataMountain = new();
+    public List<CardData> _cardDataRiver = new();
+    public List<CardData> _cardDataDesert = new();
 
-    public List<CardData> _cardDataBackupMountain = new List<CardData>();
-    public List<CardData> _cardDataBackupRiver = new List<CardData>();
-    public List<CardData> _cardDataBackupDesert = new List<CardData>();
+    public List<CardData> _cardDataBackupMountain = new();
+    public List<CardData> _cardDataBackupRiver = new();
+    public List<CardData> _cardDataBackupDesert = new();
 
     public static string _zone;
     public int _theHorde;
@@ -48,9 +48,14 @@ public class Card : MonoBehaviour
         _bulletText.text = "Bullet : " + Stats._bulletPlayer.ToString();
         _goldText.text = "Gold : " + Stats._goldPlayer.ToString();
         _zoneText.text = "Zone : " + _theHorde.ToString(); ;
-        if (Zone.draw)
+
+        if (Zone.draw && !CardChoice._choice)
         {
             DrawCard();
+            Zone.draw = false;
+        }
+        else
+        {
             Zone.draw = false;
         }
         Shuffle();
