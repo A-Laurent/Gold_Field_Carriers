@@ -266,8 +266,6 @@ MonoBehaviour:
   _goldText: {fileID: 319999870}
   _zoneText: {fileID: 1208537107}
   _description: {fileID: 2077196587}
-  _choice1: {fileID: 76763528}
-  _choice2: {fileID: 344967294}
   _cardDataMountain:
   - {fileID: 11400000, guid: 066b8b3a6b0d31a4a9dbe4b7eb026dde, type: 2}
   - {fileID: 11400000, guid: 91f353f99615e734cadc2fe0a2cda50c, type: 2}
@@ -283,6 +281,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8943eb67a8ee8db42942ffad70a3f87b, type: 2}
   - {fileID: 11400000, guid: fc1aaa7d8ce5a204ea0527db56d9c287, type: 2}
   - {fileID: 11400000, guid: 3df0ce06003128a4ca6f0985477f48a9, type: 2}
+  - {fileID: 11400000, guid: d43858a0a4fbbab4aaaf9567941c51fa, type: 2}
   _cardDataRiver:
   - {fileID: 11400000, guid: da61e19cf51ff3a4c86ace632076efe1, type: 2}
   - {fileID: 11400000, guid: 0143a1b43b4148e49bc4249b50599ca9, type: 2}
@@ -312,12 +311,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 754cf7e5c00350443bbe4602dc34d5f3, type: 2}
   - {fileID: 11400000, guid: 77a9c454160039044a0f406da40aae47, type: 2}
   - {fileID: 11400000, guid: 8ee3ba5f0677f2b4c82d0c93f64a6276, type: 2}
+  - {fileID: 11400000, guid: 8ac0e3f893196d444a83906ebf5e5cf2, type: 2}
   _cardDataBackupMountain: []
   _cardDataBackupRiver: []
   _cardDataBackupDesert: []
   _theHorde: 0
-  _choiceCard: 0
-  _gameObject: {fileID: 64612951}
+  _uiChoice: {fileID: 64612951}
 --- !u!114 &63969157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,6 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c17b4a76ca2d6944a6b8e06824d30b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _card: {fileID: 63969156}
 --- !u!1 &1082252007
 GameObject:
   m_ObjectHideFlags: 0

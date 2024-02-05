@@ -4,14 +4,41 @@ using UnityEngine;
 
 public class CardChoice : MonoBehaviour
 {
-    public static bool choice1;
-    public static bool choice2;
+    public static bool _choice;
+    public Card _card;
    public void Choice1()
     {
-        choice1 = true;
+        switch (Card._zone)
+        {
+            case "Desert":
+                Stats._bulletPlayer += _card._cardDataDesert[_card._cardIndex]._bullet;
+                _card._cardDataDesert.RemoveAt(_card._cardIndex); break;
+            case "River":
+                Stats._hpPlayer += _card._cardDataRiver[_card._cardIndex]._hp;
+                _card._cardDataRiver.RemoveAt(_card._cardIndex); break;
+            case "Mountain":
+                Stats._goldPlayer += _card._cardDataMountain[_card._cardIndex]._gold;
+                _card._cardDataMountain.RemoveAt(_card._cardIndex); break;
+        }
+        _card._uiChoice.SetActive(false);
     }
     public void Choice2() 
     {
-        choice2 = true;
+        switch (Card._zone)
+        {
+            case "Desert":
+                Stats._bulletPlayer += _card._cardDataDesert[_card._cardIndex]._bullet + 1;
+                Stats._hpPlayer += _card._cardDataDesert[_card._cardIndex]._hp;
+                _card._cardDataDesert.RemoveAt(_card._cardIndex); break;
+            case "River":
+                Stats._hpPlayer += _card._cardDataRiver[_card._cardIndex]._hp + 1;
+                Stats._goldPlayer += _card._cardDataRiver[_card._cardIndex]._gold;
+                _card._cardDataRiver.RemoveAt(_card._cardIndex); break;
+            case "Mountain":
+                Stats._goldPlayer += _card._cardDataMountain[_card._cardIndex]._gold + 3;
+                Stats._bulletPlayer += _card._cardDataMountain[_card._cardIndex]._bullet;
+                _card._cardDataMountain.RemoveAt(_card._cardIndex); break;
+        }
+        _card._uiChoice.SetActive(false);
     }
 }

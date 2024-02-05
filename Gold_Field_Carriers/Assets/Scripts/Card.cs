@@ -13,9 +13,6 @@ public class Card : MonoBehaviour
     public Text _zoneText;
     public Text _description;
 
-    public Text _choice1;
-    public Text _choice2;
-
     public List<CardData> _cardDataMountain = new List<CardData>();
     public List<CardData> _cardDataRiver = new List<CardData>();
     public List<CardData> _cardDataDesert = new List<CardData>();
@@ -26,8 +23,7 @@ public class Card : MonoBehaviour
 
     public static string _zone;
     public int _theHorde;
-    public bool _choiceCard;
-    public GameObject _gameObject;
+    public GameObject _uiChoice;
 
     public void Start()
     {
@@ -58,11 +54,6 @@ public class Card : MonoBehaviour
             Zone.draw = false;
         }
         Shuffle();
-
-        if (CardChoice.choice1 || CardChoice.choice2)
-        {
-            Choice();
-        }
     }
     public void DrawCard()
     {
@@ -71,8 +62,7 @@ public class Card : MonoBehaviour
             case "Desert": Desert(); break;
             case "River": River(); break;
             case "Mountain": Mountain(); break;
-        }
-        
+        }      
     }
 
     public void Shuffle()
@@ -104,6 +94,14 @@ public class Card : MonoBehaviour
         {
             Stats._goldPlayer -= 3;
             Stats._hpPlayer -= 1;
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _cardDataDesert.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataDesert[_cardIndex]._name == "Choice")
+        {
+            CardChoice._choice = true;
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
@@ -111,10 +109,9 @@ public class Card : MonoBehaviour
             Stats._hpPlayer += _cardDataDesert[_cardIndex]._hp;
             Stats._bulletPlayer += _cardDataDesert[_cardIndex]._bullet;
             _theHorde += _cardDataDesert[_cardIndex]._horde;
-            
-        }
-        _description.text = _cardDataDesert[_cardIndex]._description;
-        _cardDataDesert.RemoveAt(_cardIndex);
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _cardDataDesert.RemoveAt(_cardIndex);
+        }     
     }
 
     public void Mountain()
@@ -125,6 +122,14 @@ public class Card : MonoBehaviour
         {
             Stats._goldPlayer -= 3;
             Stats._hpPlayer -= 1;
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _cardDataMountain.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataMountain[_cardIndex]._name == "Choice")
+        {
+            CardChoice._choice = true;
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
@@ -132,9 +137,9 @@ public class Card : MonoBehaviour
             Stats._hpPlayer += _cardDataMountain[_cardIndex]._hp;
             Stats._bulletPlayer += _cardDataMountain[_cardIndex]._bullet;
             _theHorde += _cardDataMountain[_cardIndex]._horde;
-        }
-        _description.text = _cardDataMountain[_cardIndex]._description;
-        _cardDataMountain.RemoveAt(_cardIndex);
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _cardDataMountain.RemoveAt(_cardIndex);
+        }      
     }
 
     public void River()
@@ -145,12 +150,14 @@ public class Card : MonoBehaviour
         {
             Stats._goldPlayer -= 3;
             Stats._hpPlayer -= 1;
+            _description.text = _cardDataRiver[_cardIndex]._description;
             _cardDataRiver.RemoveAt(_cardIndex);
         }
-        else if (_cardDataRiver[_cardIndex]._name == "Choice 1")
+        else if (_cardDataRiver[_cardIndex]._name == "Choice")
         {
-            Stats._hpPlayer += 1;
-            _gameObject.SetActive(true);
+            CardChoice._choice = true;
+            _description.text = _cardDataRiver[_cardIndex]._description;
+            _uiChoice.SetActive(true);
         }
         else
         {
@@ -158,29 +165,8 @@ public class Card : MonoBehaviour
             Stats._hpPlayer += _cardDataRiver[_cardIndex]._hp;
             Stats._bulletPlayer += _cardDataRiver[_cardIndex]._bullet;
             _theHorde += _cardDataRiver[_cardIndex]._horde;
+            _description.text = _cardDataRiver[_cardIndex]._description;
             _cardDataRiver.RemoveAt(_cardIndex);
         }
-        _description.text = _cardDataRiver[_cardIndex]._description;
-        
-    }
-
-    public void Choice()
-    {
-         
-        if (CardChoice.choice1)
-        {
-            Stats._goldPlayer += _cardDataRiver[_cardIndex]._gold;
-            Stats._hpPlayer += _cardDataRiver[_cardIndex]._hp;
-            Stats._bulletPlayer += _cardDataRiver[_cardIndex]._bullet;
-            CardChoice.choice1 = false;
-            _cardDataRiver.RemoveAt(_cardIndex);
-            _gameObject.SetActive(false);
-        }
-        if (CardChoice.choice2)
-        {
-            CardChoice.choice2 = false;
-            _cardDataRiver.RemoveAt(_cardIndex);
-            _gameObject.SetActive(false);
-        }
-    }
+    } 
 }
