@@ -14,8 +14,9 @@ public class Sc_SpritesCharacters : MonoBehaviour
     [Header("Button")] 
     public List<Button> _selectCharacterButton = new List<Button>();
     public List<Button> _undoCharacterButton = new List<Button>();
+    public Button _startButton;
     
-    [SerializeField] private int _characterIndex = 2;
+    private int _characterIndex = 2;
     
     public static Sc_SpritesCharacters Instance;
 
@@ -44,7 +45,7 @@ public class Sc_SpritesCharacters : MonoBehaviour
         }
     }
 
-    public void RightArrow()
+    public void LeftArrow()
     {
         Vector3 pos = _charactersSelection[0].GetComponent<RectTransform>().position;
         Vector2 size = _charactersSelection[0].GetComponent<RectTransform>().sizeDelta;
@@ -86,7 +87,7 @@ public class Sc_SpritesCharacters : MonoBehaviour
         _characterToSelect = _charactersSelection[_characterIndex];
     }
 
-    public void LeftArrow()
+    public void RightArrow()
     {
         Vector3 pos = _charactersSelection[_charactersSelection.Count - 1].GetComponent<RectTransform>().position;
         Vector2 size = _charactersSelection[_charactersSelection.Count - 1].GetComponent<RectTransform>().sizeDelta;
