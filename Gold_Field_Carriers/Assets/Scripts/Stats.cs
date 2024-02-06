@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Stats : MonoBehaviour
 
     public static int _turnPlayer = 0;
     public static int _nbPlayer = 3;
+    public Text _zoneText;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class Stats : MonoBehaviour
     }
     void Update()
     {
+        _zoneText.text = "Zone : " + _zonePlayer[0] + " " + _zonePlayer[1] + " " + _zonePlayer[2];
         StatLimit();
     }
     public void StatLimit()
