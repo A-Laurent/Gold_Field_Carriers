@@ -56,6 +56,13 @@ public class AnimationCard : MonoBehaviour
                 Stats._turnPlayer += 1;
                 if (Stats._turnPlayer == Stats._nbPlayer)
                     Stats._turnPlayer = 0;
+                if (Card._skipTurn[Stats._turnPlayer])
+                {
+                    Card._skipTurn[Stats._turnPlayer] = false;
+                    Stats._turnPlayer += 1;
+                    if (Stats._turnPlayer == Stats._nbPlayer)
+                        Stats._turnPlayer = 0;
+                }
             }
         }
     }

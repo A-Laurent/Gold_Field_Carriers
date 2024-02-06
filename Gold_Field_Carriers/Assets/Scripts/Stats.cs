@@ -19,6 +19,7 @@ public class Stats : MonoBehaviour
             _goldPlayer.Add(25);
             _bulletPlayer.Add(2);
             _hpPlayer.Add(3);
+            _zonePlayer.Add("Start");
         }
     }
     void Update()

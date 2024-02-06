@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
     public static string _zone;
     public int _theHorde;
     public GameObject _uiChoice;
-    public List<bool> _skipTurn = new();
+    public static List<bool> _skipTurn = new();
 
     public void Start()
     {
@@ -61,15 +61,6 @@ public class Card : MonoBehaviour
                                      Stats._goldPlayer[2].ToString();
         _hordeText.text = "The Horde : " + _theHorde.ToString();
         _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
-
-        if (_skipTurn[Stats._turnPlayer])
-        {
-            _skipTurn[Stats._turnPlayer] = false;
-            Stats._turnPlayer += 1;
-            if (Stats._turnPlayer == Stats._nbPlayer)
-                Stats._turnPlayer = 0;
-        }
-        print(_skipTurn[0].ToString() + _skipTurn[1].ToString() + _skipTurn[2].ToString());
 
         if (Zone._draw && !CardChoice._choice)
         {
@@ -127,8 +118,17 @@ public class Card : MonoBehaviour
         }
         else if (_cardDataDesert[_cardIndex]._name == "Skip your turn")
         {
-            print("enter");
             _skipTurn[Stats._turnPlayer] = true;
+            _description.text = _cardDataDesert[_cardIndex]._description;
+            _cardDataDesert.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataDesert[_cardIndex]._name == "AllPlayer")
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (Stats._zonePlayer[i] == "Desert")
+                    Stats._goldPlayer[i] += _cardDataDesert[_cardIndex]._gold;
+            }
             _description.text = _cardDataDesert[_cardIndex]._description;
             _cardDataDesert.RemoveAt(_cardIndex);
         }
@@ -173,6 +173,16 @@ public class Card : MonoBehaviour
             _description.text = _cardDataMountain[_cardIndex]._description;
             _cardDataMountain.RemoveAt(_cardIndex);
         }
+        else if (_cardDataMountain[_cardIndex]._name == "AllPlayer")
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (Stats._zonePlayer[i] == "Mountain")
+                    Stats._hpPlayer[i] += _cardDataMountain[_cardIndex]._hp; ;
+            }
+            _description.text = _cardDataMountain[_cardIndex]._description;
+            _cardDataMountain.RemoveAt(_cardIndex);
+        }
         else
         {
             Stats._goldPlayer[Stats._turnPlayer] += _cardDataMountain[_cardIndex]._gold;
@@ -211,6 +221,16 @@ public class Card : MonoBehaviour
         {
             print("enter");
             _skipTurn[Stats._turnPlayer] = true;
+            _description.text = _cardDataRiver[_cardIndex]._description;
+            _cardDataRiver.RemoveAt(_cardIndex);
+        }
+        else if (_cardDataRiver[_cardIndex]._name == "AllPlayer")
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (Stats._zonePlayer[i] == "River")
+                    Stats._hpPlayer[i] += _cardDataRiver[_cardIndex]._hp; ;
+            }
             _description.text = _cardDataRiver[_cardIndex]._description;
             _cardDataRiver.RemoveAt(_cardIndex);
         }

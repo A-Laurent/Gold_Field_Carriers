@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 759f3d9bd8c57214ba678cfd4291e963, type: 3}
-  m_Name: SkipTurn
+  m_Name: AllPlayer
   m_EditorClassIdentifier: 
-  _gold: 0
+  _gold: -3
   _hp: 0
   _bullet: 0
-  _description: 'Lunch break : Skip your next turn'
+  _description: All players in the desert zone lose 3 gold
   _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
-  _name: Skip your turn
+  _name: AllPlayer
   _horde: 0
-  _zone: Mountain
+  _zone: Desert

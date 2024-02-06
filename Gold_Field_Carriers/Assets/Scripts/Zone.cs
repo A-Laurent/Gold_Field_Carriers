@@ -13,6 +13,7 @@ public class Zone : MonoBehaviour
             if (Card._zone == "Desert")
                 _turn += 1;
             Card._zone = "Desert";
+            Stats._zonePlayer[Stats._turnPlayer] = "Desert";
             _draw = true;
         }
         
@@ -25,6 +26,7 @@ public class Zone : MonoBehaviour
             if (Card._zone == "River")
                 _turn += 1;
             Card._zone = "River";
+            Stats._zonePlayer[Stats._turnPlayer] = "River";
             _draw = true;
         }
     }
@@ -36,6 +38,7 @@ public class Zone : MonoBehaviour
             if (Card._zone == "Mountain")
                 _turn += 1;
             Card._zone = "Mountain";
+            Stats._zonePlayer[Stats._turnPlayer] = "Mountain";
             _draw = true;
         }
     }
