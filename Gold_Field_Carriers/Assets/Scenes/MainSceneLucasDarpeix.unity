@@ -281,7 +281,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8943eb67a8ee8db42942ffad70a3f87b, type: 2}
   - {fileID: 11400000, guid: fc1aaa7d8ce5a204ea0527db56d9c287, type: 2}
   - {fileID: 11400000, guid: 3df0ce06003128a4ca6f0985477f48a9, type: 2}
-  - {fileID: 11400000, guid: d43858a0a4fbbab4aaaf9567941c51fa, type: 2}
+  - {fileID: 11400000, guid: 7b0a5da20f238da48bf235f8aaad9643, type: 2}
   _cardDataRiver:
   - {fileID: 11400000, guid: da61e19cf51ff3a4c86ace632076efe1, type: 2}
   - {fileID: 11400000, guid: 0143a1b43b4148e49bc4249b50599ca9, type: 2}
@@ -311,7 +311,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 754cf7e5c00350443bbe4602dc34d5f3, type: 2}
   - {fileID: 11400000, guid: 77a9c454160039044a0f406da40aae47, type: 2}
   - {fileID: 11400000, guid: 8ee3ba5f0677f2b4c82d0c93f64a6276, type: 2}
-  - {fileID: 11400000, guid: 8ac0e3f893196d444a83906ebf5e5cf2, type: 2}
+  - {fileID: 11400000, guid: f68529ce24e779440a5d1de6225f70bc, type: 2}
   _cardDataBackupMountain: []
   _cardDataBackupRiver: []
   _cardDataBackupDesert: []
