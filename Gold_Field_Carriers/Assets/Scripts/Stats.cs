@@ -7,6 +7,7 @@ public class Stats : MonoBehaviour
     public static List<int> _goldPlayer = new();
     public static List<int> _bulletPlayer = new();
     public static List<int> _hpPlayer = new();
+    public static List<string> _zonePlayer = new();
 
     public static int _turnPlayer = 0;
     public static int _nbPlayer = 3;
