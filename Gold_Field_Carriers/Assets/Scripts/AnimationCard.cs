@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,21 +36,27 @@ public class AnimationCard : MonoBehaviour
                                                        _cardAnim.transform.position.z);
             _cardAnim.transform.Rotate(0, 100 * Time.deltaTime, 0);
         }
-        if (_cardAnim.transform.rotation.y <= 0)
+        if (_cardAnim.transform.rotation.y <= 0 && !CardChoice._choice)
         {
+            _timer += Time.deltaTime;
             AnimationStats._animation = true;
             if (Input.GetMouseButtonDown(0))
-                _timer = 2;
-            _timer += Time.deltaTime;
-            if (_timer >= 2 && !CardChoice._choice)
+                _timer = 15;
+            if (_timer >= 15 && !CardChoice._choice)
             {
                 _animation = false;
-                _timer = 0;
+                _timer = 0.0f;
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
                 _cardAnim.transform.position = new Vector3(1400, 300, 0);
                 Zone._draw = false;
-            }           
+                AnimationStats._hpAnim = 0;
+                AnimationStats._bulletAnim = 0;
+                AnimationStats._goldAnim = 0;
+                Stats._turnPlayer += 1;
+                if (Stats._turnPlayer == Stats._nbPlayer)
+                    Stats._turnPlayer = 0;
+            }
         }
     }
 }
