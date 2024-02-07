@@ -15,6 +15,9 @@ public class Sc_SpritesCharacters : MonoBehaviour
     public List<Button> _selectCharacterButton = new List<Button>();
     public List<Button> _undoCharacterButton = new List<Button>();
     public Button _startButton;
+
+    [Header("ID")] 
+    public List<int> _ID = new List<int>();
     
     private int _characterIndex = 2;
     

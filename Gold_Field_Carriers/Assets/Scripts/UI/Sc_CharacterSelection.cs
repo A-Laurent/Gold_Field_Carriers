@@ -142,6 +142,8 @@ public class Sc_CharacterSelection : MonoBehaviour
                 {
                     _spritesCharacters._startButton.interactable = false;     
                 }
+
+                _spritesCharacters._ID[0] = _spritesCharacters._characterToSelect.GetComponent<Sc_CanSelect>()._id;
             }
             else if (_spritesCharacters._selectCharacterButton[1].interactable == true)
             {
@@ -167,6 +169,8 @@ public class Sc_CharacterSelection : MonoBehaviour
                 {
                     _spritesCharacters._startButton.interactable = false;     
                 }
+                
+                _spritesCharacters._ID[1] = _spritesCharacters._characterToSelect.GetComponent<Sc_CanSelect>()._id;
             }
             else
             {
@@ -193,6 +197,8 @@ public class Sc_CharacterSelection : MonoBehaviour
                 {
                     _spritesCharacters._startButton.interactable = false;     
                 }
+                
+                _spritesCharacters._ID[2] = _spritesCharacters._characterToSelect.GetComponent<Sc_CanSelect>()._id;
             }
         }
     }
