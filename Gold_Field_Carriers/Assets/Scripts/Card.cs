@@ -15,6 +15,7 @@ public class Card : MonoBehaviour
     public Text _description;
     public Text _turnText;
     public Text _lineText;
+    public Text _nbTurnText;
 
     public List<CardData> _cardDataMountain = new();
     public List<CardData> _cardDataRiver = new();
@@ -63,7 +64,9 @@ public class Card : MonoBehaviour
                                      Stats._goldPlayer[2].ToString();
         _hordeText.text = "The Horde : " + _theHorde.ToString();
         _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
-        _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
+        _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
+                                     + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
+        _nbTurnText.text = "Nb turn :  " + Zone._turn.ToString();
 
         if (Zone._draw && !CardChoice._choice)
         {
@@ -107,7 +110,7 @@ public class Card : MonoBehaviour
         _cardIndex = Random.Range(0, _cardDataDesert.Count);
         _card = _cardDataDesert[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
             _cardDataDesert.RemoveAt(_cardIndex);
     }
 
@@ -116,7 +119,7 @@ public class Card : MonoBehaviour
         _cardIndex = Random.Range(0, _cardDataMountain.Count);
         _card = _cardDataMountain[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
             _cardDataMountain.RemoveAt(_cardIndex);
     }
 
@@ -125,28 +128,26 @@ public class Card : MonoBehaviour
         _cardIndex = Random.Range(0, _cardDataRiver.Count);
         _card = _cardDataRiver[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
             _cardDataRiver.RemoveAt(_cardIndex);
     } 
 
     public void EffectCard()
     {
+        _description.text = _card._description;
         if (_card._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
         {
             Stats._goldPlayer[Stats._turnPlayer] -= 3; AnimationStats._goldAnim -= 3;
             Stats._hpPlayer[Stats._turnPlayer] -= 1; AnimationStats._hpAnim -= 1;
-            _description.text = _card._description;
         }
         else if (_card._name == "Choice")
         {
             CardChoice._choice = true;
-            _description.text = _card._description;
             _uiChoice.SetActive(true);
         }
         else if (_card._name == "Skip your turn")
         {
             _skipTurn[Stats._turnPlayer] = true;
-            _description.text = _card._description;
         }
         else if (_card._name == "AllPlayer")
         {
@@ -155,18 +156,15 @@ public class Card : MonoBehaviour
                 if (Stats._zonePlayer[i] == "River")
                     Stats._hpPlayer[i] += _card._hp; ;
             }
-            _description.text = _card._description;
         }
         else if (_card._name == "TradePlayer")
         {
             CardChoice._cardTrade = true;
-            _description.text = _card._description;
             _uiChoice.SetActive(true);
             _uiTrade.SetActive(true);
         }
         else if (_card._name == "Change of zone")
         {
-            _description.text = _card._description;
             if (_card._zone == "River")
             {
 
@@ -183,8 +181,13 @@ public class Card : MonoBehaviour
                         }
                 }
                 Stats._zonePlayer[Stats._turnPlayer] = "River";
-
             }
+        }
+        else if (_card._name == "Donation")
+        {
+            CardChoice._cardDonation = true;
+            _uiChoice.SetActive(true);
+            _uiTrade.SetActive(true);
         }
         else
         {
@@ -196,9 +199,8 @@ public class Card : MonoBehaviour
 
             Stats._bulletPlayer[Stats._turnPlayer] += _card._bullet;
             AnimationStats._bulletAnim += _card._bullet;
-
-            _theHorde += _card._horde;
-            _description.text = _card._description;
+            if (Zone._turn > 2)
+                _theHorde += _card._horde;
         }
     }
 }
