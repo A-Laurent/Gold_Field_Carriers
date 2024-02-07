@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainSceneLucasDarpeix.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Devroom.unity
     guid: dbd29f5558ed2a04b9c47e2b5d9ccd8b
   - enabled: 1
