@@ -164,6 +164,28 @@ public class Card : MonoBehaviour
             _uiChoice.SetActive(true);
             _uiTrade.SetActive(true);
         }
+        else if (_card._name == "Change of zone")
+        {
+            _description.text = _card._description;
+            if (_card._zone == "River")
+            {
+
+            }
+            else
+            {
+                for (int i = 0; i < Stats._nbPlayer; i++)
+                {
+                    if (i != Stats._turnPlayer)
+                        if (Zone._line[i] == Zone._line[Stats._turnPlayer] && Stats._zonePlayer[i] == "River")
+                        {
+                            Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
+                            return;
+                        }
+                }
+                Stats._zonePlayer[Stats._turnPlayer] = "River";
+
+            }
+        }
         else
         {
             Stats._goldPlayer[Stats._turnPlayer] += _card._gold;

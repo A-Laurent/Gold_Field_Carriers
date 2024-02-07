@@ -15,8 +15,8 @@ MonoBehaviour:
   _gold: 0
   _hp: 0
   _bullet: 0
-  _description: 
-  _cardImage: {fileID: 0}
-  _name: 
+  _description: Gain 1 HP or give 1 HP to another player
+  _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
+  _name: TradePlayer
   _horde: 0
-  _zone: 
+  _zone: River
