@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    public int _cardIndex;
+    public int _cardIndex = 0;
     public static CardData _card;
 
     public Text _hpText;
@@ -48,20 +48,23 @@ public class Card : MonoBehaviour
         {
             _skipTurn.Add(false);
         }
+        ShuffleDeck(_cardDataDesert);
+        ShuffleDeck(_cardDataMountain);
+        ShuffleDeck(_cardDataRiver);
     }
     
     private void Update()
     {
         
         _hpText.text = "HP :   " + Stats._hpPlayer[0].ToString() + "    " +
-                                 Stats._hpPlayer[1].ToString() + "    " + 
-                                 Stats._hpPlayer[2].ToString();
+                                   Stats._hpPlayer[1].ToString() + "    " + 
+                                   Stats._hpPlayer[2].ToString();
         _bulletText.text = "Bullet :   " + Stats._bulletPlayer[0].ToString() + "    " + 
-                                         Stats._bulletPlayer[1].ToString() + "    " + 
-                                         Stats._bulletPlayer[2].ToString();
+                                           Stats._bulletPlayer[1].ToString() + "    " + 
+                                           Stats._bulletPlayer[2].ToString();
         _goldText.text = "Gold :   " + Stats._goldPlayer[0].ToString() + "  " + 
-                                     Stats._goldPlayer[1].ToString() + "  " + 
-                                     Stats._goldPlayer[2].ToString();
+                                       Stats._goldPlayer[1].ToString() + "  " + 
+                                       Stats._goldPlayer[2].ToString();
         _hordeText.text = "The Horde : " + _theHorde.ToString();
         _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
         _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
@@ -83,52 +86,69 @@ public class Card : MonoBehaviour
             case "Mountain": Mountain(); break;
         }      
     }
+    public void ShuffleDeck<T>(IList<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int rand = Random.Range(i, list.Count);
+            list[i] = list[rand];
+            list[rand] = temp;
+        }
+    }
 
     public void Shuffle()
     {
         if (_cardDataDesert.Count == 0)
+        {
             for (int i = 0; i < _cardDataBackupDesert.Count; i++)
             {
                 _cardDataDesert.Add(_cardDataBackupDesert[i]);
             }
-
+            ShuffleDeck(_cardDataDesert);
+        }
+            
         if (_cardDataRiver.Count == 0)
+        {
             for (int i = 0; i < _cardDataBackupRiver.Count; i++)
             {
                 _cardDataRiver.Add(_cardDataBackupRiver[i]);
             }
+            ShuffleDeck(_cardDataRiver);
+        }
+            
 
         if (_cardDataMountain.Count == 0)
+        {
             for (int i = 0; i < _cardDataBackupMountain.Count; i++)
             {
                 _cardDataMountain.Add(_cardDataBackupMountain[i]);
             }
+            ShuffleDeck(_cardDataMountain);
+        }
     }
 
     public void Desert()
     {
-        _cardIndex = Random.Range(0, _cardDataDesert.Count);
         _card = _cardDataDesert[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
             _cardDataDesert.RemoveAt(_cardIndex);
     }
 
     public void Mountain()
     {
-        _cardIndex = Random.Range(0, _cardDataMountain.Count);
         _card = _cardDataMountain[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
             _cardDataMountain.RemoveAt(_cardIndex);
     }
 
     public void River()
     {
-        _cardIndex = Random.Range(0, _cardDataRiver.Count);
         _card = _cardDataRiver[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
             _cardDataRiver.RemoveAt(_cardIndex);
     } 
 
@@ -167,7 +187,13 @@ public class Card : MonoBehaviour
         {
             if (_card._zone == "River")
             {
-
+                if (Zone._line[0] == Zone._line[1] && Zone._line[1] == Zone._line[2])
+                {
+                    Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
+                    return;
+                }
+                CardChoice._changeZoneRiver = true;
+                _uiChoice.SetActive(true);
             }
             else
             {
@@ -186,6 +212,12 @@ public class Card : MonoBehaviour
         else if (_card._name == "Donation")
         {
             CardChoice._cardDonation = true;
+            _uiChoice.SetActive(true);
+            _uiTrade.SetActive(true);
+        }
+        else if (_card._name == "Medium")
+        {
+            CardChoice._medium = true;
             _uiChoice.SetActive(true);
             _uiTrade.SetActive(true);
         }

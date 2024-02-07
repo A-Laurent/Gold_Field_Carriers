@@ -290,6 +290,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5435f6a9880904443804ccd23a25ce2f, type: 2}
   - {fileID: 11400000, guid: 5a79cdc03a7c2b94382140e92362a40f, type: 2}
   - {fileID: 11400000, guid: 253240ef6c361934e85254b030dcecfb, type: 2}
+  - {fileID: 11400000, guid: 9b41cdb5ad83e0f47af54cace0a7c334, type: 2}
   _cardDataRiver:
   - {fileID: 11400000, guid: da61e19cf51ff3a4c86ace632076efe1, type: 2}
   - {fileID: 11400000, guid: 0143a1b43b4148e49bc4249b50599ca9, type: 2}
@@ -310,6 +311,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 159a3665c08065244b48438368d939f5, type: 2}
   - {fileID: 11400000, guid: 4e17a64fc50f6f04faf628f2e9bd41dd, type: 2}
   - {fileID: 11400000, guid: 1a7beebfde8d26043a6ebf7d726e2a25, type: 2}
+  - {fileID: 11400000, guid: a4847f5ce83954b4a83f35ca2901827e, type: 2}
   _cardDataDesert:
   - {fileID: 11400000, guid: 914da94f803956a42b05acfa7d8ebe3d, type: 2}
   - {fileID: 11400000, guid: 0c5bc4bc49e5e5c408b66c39302804e4, type: 2}
@@ -1781,6 +1783,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c17b4a76ca2d6944a6b8e06824d30b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _choiceDesert: 0
+  _choiceMountain: 0
+  _choiceRiver: 0
   _choiceBullet: 0
   _choiceGold: 0
   _card: {fileID: 63969156}

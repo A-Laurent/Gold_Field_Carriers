@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +6,12 @@ public class CardChoice : MonoBehaviour
     public static bool _choice;
     public static bool _cardTrade;
     public static bool _cardDonation;
+    public static bool _changeZoneRiver;
+    public static bool _medium;
 
+    public bool _choiceDesert;
+    public bool _choiceMountain;
+    public bool _choiceRiver;
     public bool _choiceBullet;
     public bool _choiceGold;
 
@@ -20,6 +23,35 @@ public class CardChoice : MonoBehaviour
 
     public void Update()
     {
+        if (_medium)
+        {
+            if (_choiceDesert && _card._cardDataDesert.Count > 1)
+            {
+                _textChoice1.text = "First : " + _card._cardDataDesert[0]._description;
+                _textChoice2.text = "First : " + _card._cardDataDesert[1]._description;
+            }
+            else if (_choiceRiver && _card._cardDataRiver.Count > 1)
+            {
+                _textChoice1.text = "First : " + _card._cardDataRiver[0]._description;
+                _textChoice2.text = "First : " + _card._cardDataRiver[1]._description;
+            }
+            else if (_choiceMountain && _card._cardDataMountain.Count > 1)
+            {
+                _textChoice1.text = "First : " + _card._cardDataMountain[1]._description;
+                _textChoice2.text = "First : " + _card._cardDataMountain[2]._description;
+            }
+            else
+            {
+                _textChoice1.text = "Mountain";
+                _textChoice2.text = "River";
+                _textChoice3.text = "Desert";
+            }       
+        }
+        if (_changeZoneRiver)
+        {
+            _textChoice1.text = "Mountain";
+            _textChoice2.text = "Desert";
+        }
         if (_choice)
         {
             _textChoice1.text = "Choice 1";
@@ -126,10 +158,37 @@ public class CardChoice : MonoBehaviour
             _card._uiChoice.SetActive(false);
             DestroyCard();
         }
-        
+        if (_changeZoneRiver)
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (i != Stats._turnPlayer)
+                {
+                    if (Stats._zonePlayer[i] == "Mountain")
+                        return;
+                }
+            }
+            DestroyCard();
+            _card._uiTrade.SetActive(false);
+            _card._uiChoice.SetActive(false);
+            _changeZoneRiver = false;
+        }
+        if (_choiceDesert || _choiceMountain || _choiceRiver)
+        {
+            _card._uiTrade.SetActive(false);
+            _card._uiChoice.SetActive(false);
+            _changeZoneRiver = false;
+            DestroyCard();
+        }
+        if (_medium)
+        {
+            _card._uiTrade.SetActive(false);
+            _choiceMountain = true;
+        }
     }
     public void Choice2() 
     {
+        //Card Choice
         if (_choice)
         {
             switch (Stats._zonePlayer[Stats._turnPlayer])
@@ -175,6 +234,8 @@ public class CardChoice : MonoBehaviour
             _card._uiChoice.SetActive(false);
             _choice = false;
         }
+
+        //CardTrade
         if (_cardTrade)
         {
             ChoiceTrade1();
@@ -192,6 +253,79 @@ public class CardChoice : MonoBehaviour
         }
         else if (_cardDonation && !_choiceBullet)
             _choiceBullet = true;
+
+        //CardChangezone River
+        if (_changeZoneRiver)
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (i != Stats._turnPlayer)
+                {
+                    if (Stats._zonePlayer[i] == "Desert")
+                        return;
+                }
+            }
+            DestroyCard();
+            _card._uiTrade.SetActive(false);
+            _card._uiChoice.SetActive(false);
+            _changeZoneRiver = false;
+        }
+
+        //Card Medium
+        if (_choiceDesert)
+        {
+            if (_card._cardDataDesert.Count > 1)
+            {
+                (_card._cardDataDesert[1], _card._cardDataDesert[0]) = (_card._cardDataDesert[0], _card._cardDataDesert[1]);
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            else
+            {
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            _choiceDesert = false;
+            DestroyCard();
+        }
+        if (_choiceRiver)
+        {
+            if (_card._cardDataRiver.Count > 1)
+            {
+                (_card._cardDataRiver[1], _card._cardDataRiver[0]) = (_card._cardDataRiver[0], _card._cardDataRiver[1]);
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            else
+            {
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            _choiceRiver = false;
+            DestroyCard();
+        }
+        if (_choiceMountain)
+        {
+            if (_card._cardDataMountain.Count > 1)
+            {
+                (_card._cardDataMountain[2], _card._cardDataMountain[1]) = (_card._cardDataMountain[1], _card._cardDataMountain[2]);
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            else
+            {
+                _medium = false;
+                _card._uiChoice.SetActive(false);
+            }
+            _choiceMountain = false;
+            DestroyCard();
+        }
+
+        if (_medium)
+        {
+            _card._uiTrade.SetActive(false);
+            _choiceRiver = true;
+        }
     }
 
     public void Choice3()
@@ -213,6 +347,12 @@ public class CardChoice : MonoBehaviour
         }
         else if ( _cardDonation && !_choiceGold)
             _choiceGold = true;
+
+        if (_medium)
+        {
+            _card._uiTrade.SetActive(false);
+            _choiceDesert = true;
+        }
     }
 
     public void ChoiceTrade1()

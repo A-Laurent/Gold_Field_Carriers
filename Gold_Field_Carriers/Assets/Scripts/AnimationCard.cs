@@ -42,7 +42,7 @@ public class AnimationCard : MonoBehaviour
             AnimationStats._animation = true;
             if (Input.GetMouseButtonDown(0))
                 _timer = 15;
-            if (_timer >= 15 && !CardChoice._choice && !CardChoice._cardTrade && !CardChoice._cardDonation)
+            if (_timer >= 15 && !CardChoice._choice && !CardChoice._cardTrade && !CardChoice._cardDonation && !CardChoice._changeZoneRiver && !CardChoice._medium)
             {
                 _animation = false;
                 _timer = 0.0f;
