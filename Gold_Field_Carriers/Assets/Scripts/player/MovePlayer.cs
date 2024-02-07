@@ -1,39 +1,47 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
     [SerializeField] Graph graph;
-    [SerializeField] GameObject Player;
-    [SerializeField] Movement_Raycast move;
+     GameObject PlayerBody;
+    [SerializeField] PlayerTurn pTurn;
 
+
+    public bool canMove;
     private Vector3 start_pos, end_pos;
 
-    public bool canMove = true;
     private IEnumerator CharacterMove(float total_time)
     {
+        foreach(var a in graph._sommets)
+        {
+            if(a.Obj.transform.position == pTurn.currentPlayer.transform.position)
+            {
+                a.Obj.tag = "Path";
+            }
+        }
+        PlayerBody = pTurn.currentPlayer;
         canMove = false;
         float time = 0f;
         end_pos = graph.SetEndPos();
-        start_pos = Player.transform.position;
-
-        Debug.Log(" start : " + start_pos + " to end : " + end_pos);
+        start_pos = PlayerBody.transform.position;
 
         while (time / total_time < 1)
         {
             time += Time.deltaTime;
-            Player.transform.position = Vector3.Lerp(start_pos, end_pos, time / total_time);
+            PlayerBody.transform.position = Vector3.Lerp(start_pos, end_pos, time / total_time);
 
             yield return null;
         }
-
         graph.neighborsSommetPos.Clear();
 
-        if (Player.transform.position == end_pos)
+        if (PlayerBody.transform.position == end_pos)
         {
-            graph.recupPos();
+            graph.CheckOccupedPath();
             canMove = true;
+            pTurn.endTurn = true;       //a retirer
         }
     }
 
