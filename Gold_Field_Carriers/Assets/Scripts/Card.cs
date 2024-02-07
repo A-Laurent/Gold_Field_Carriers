@@ -221,6 +221,52 @@ public class Card : MonoBehaviour
             _uiChoice.SetActive(true);
             _uiTrade.SetActive(true);
         }
+        else if (_card._name == "Overflow")
+        {
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                int dé = Random.Range(0, 1);
+                if (dé == 0)
+                {
+                    if (Stats._zonePlayer[i] == "River")
+                    {
+                        for (int j = 0; j < Stats._nbPlayer; j++)
+                        {
+                            if (j != i)
+                            {
+                                if (Zone._line[i] == Zone._line[j] && Stats._zonePlayer[j] == "Desert")
+                                {
+                                    Stats._hpPlayer[i] += _card._hp;
+                                }
+                                else
+                                    Stats._zonePlayer[i] = "Desert";
+                                j = 4;
+                            }
+                        }
+                        
+                    }                                     
+                }
+                else
+                {
+                    if (Stats._zonePlayer[i] == "River")
+                    {
+                        for (int j = 0; j < Stats._nbPlayer; j++)
+                        {
+                            if (j != i)
+                            {
+                                if (Zone._line[i] == Zone._line[j] && Stats._zonePlayer[j] == "Mountain")
+                                {
+                                    Stats._hpPlayer[i] += _card._hp;
+                                }
+                                else
+                                    Stats._zonePlayer[i] = "Mountain";
+                                j = 4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         else
         {
             Stats._goldPlayer[Stats._turnPlayer] += _card._gold;
