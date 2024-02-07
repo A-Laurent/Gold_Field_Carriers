@@ -1,119 +1,210 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class Graph : MonoBehaviour
 {
 
+    [SerializeField] GameObject step;
+    [SerializeField] GameObject StartTown;
+    [SerializeField] GameObject EndTown;
+    [SerializeField] GameObject Line;
+
+    [SerializeField] GameObject GridParent;
+
+    [SerializeField] GameObject Player;
+
     List<Sommets> _sommets = new List<Sommets>();
     List<Aretes> _aretes = new List<Aretes>();
+    public List<GameObject> sommetNeighbors = new List<GameObject>();
+    public List<Vector3> neighborsSommetPos = new List<Vector3>();
 
-    class Aretes
+    public class Sommets
     {
-        public char _origine;
-        public List<char> _extremite;
+        public int id;
+        public int zone;
+        public List<Aretes> neighbors;
+        public Vector3 StepPos;
 
-        public Aretes(char origine, List<char> extremite)
+        public Sommets(int id, int zone, Vector3 stepPos)
         {
-            _origine = origine;
-            _extremite = extremite;
+            this.id = id;
+            this.zone = zone;
+            neighbors = new List<Aretes>();
+            StepPos = stepPos;
         }
     }
 
-    class Sommets
+    public class Aretes
     {
-        public char _ID;
-        public char _Zone;
-        public bool _Occuped;
+        public Sommets startSommets;
+        public Sommets endSommets;
+        public GameObject obj;
 
-        public Sommets(char ID, char Zone, bool Occuped = false)
+        public Aretes(Sommets start, Sommets end, GameObject obj)
         {
-            _ID = ID;
-            _Zone = Zone;
-            _Occuped = Occuped;
+            startSommets = start;
+            endSommets = end;
+            this.obj = obj;
         }
     }
 
-    private void AddSommet()
-    {                         // 'ID 'Zone'
-        _sommets.Add(new Sommets('A', 'D')); //Start town            //  D = départ
-                                                                      
-        _sommets.Add(new Sommets('B', 'M'));                         //  M = montagne
-        _sommets.Add(new Sommets('C', 'R'));                         //  R = riviere
-        _sommets.Add(new Sommets('D', 'D'));                         //  D = desert
-                                            
-        _sommets.Add(new Sommets('E', 'M'));                         //  F = Fin
-        _sommets.Add(new Sommets('F', 'R'));
-        _sommets.Add(new Sommets('G', 'D'));
-                                            
-        _sommets.Add(new Sommets('H', 'M'));
-        _sommets.Add(new Sommets('I', 'R'));
-        _sommets.Add(new Sommets('J', 'D'));
-                                            
-        _sommets.Add(new Sommets('K', 'M'));
-        _sommets.Add(new Sommets('L', 'R'));
-        _sommets.Add(new Sommets('M', 'D'));
-                                            
-        _sommets.Add(new Sommets('N', 'M'));
-        _sommets.Add(new Sommets('O', 'R'));
-        _sommets.Add(new Sommets('P', 'D'));
-                                            
-        _sommets.Add(new Sommets('Q', 'M'));
-        _sommets.Add(new Sommets('R', 'R'));
-        _sommets.Add(new Sommets('S', 'D'));
-                                            
-        _sommets.Add(new Sommets('T', 'M'));
-        _sommets.Add(new Sommets('U', 'R'));
-        _sommets.Add(new Sommets('V', 'D'));
-                                            
-        _sommets.Add(new Sommets('W', 'M'));
-        _sommets.Add(new Sommets('X', 'R'));
-        _sommets.Add(new Sommets('Y', 'D'));
 
-        _sommets.Add(new Sommets('Z', 'F'));     //End town
+    private void InitializeGraph()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                GameObject newStep = Instantiate(step, new Vector3(j * 2, i * 2, 0), Quaternion.identity);
+                Sommets sommet = new Sommets(i * 8 + j, i, newStep.transform.position) ;
+                _sommets.Add(sommet);
+
+                if (j > 0)
+                {
+                    GameObject newLine = Instantiate(Line, new Vector3(j * 2 - 1, i * 2, 0), Quaternion.Euler(0, 0, 90));
+
+                    Aretes arete1 = new Aretes(sommet, _sommets[sommet.id - 1], newLine);
+                    _aretes.Add(arete1);
+                }
+                if (i > 0)
+                {
+                    GameObject newLine = Instantiate(Line, new Vector3(j * 2, i * 2 - 1, 0), Quaternion.identity);
+
+                    if (sommet.id - 8 >= 0)
+                    {
+                        Aretes arete2 = new Aretes(sommet, _sommets[sommet.id - 8], newLine);
+                        _aretes.Add(arete2);
+                    }
+                }
+            }
+
+        }
+
+        //create SpawnPoint
+        GameObject _startTown = Instantiate(StartTown, new Vector3(-2, 2, 0), Quaternion.identity);
+        Sommets entrySommet = new Sommets(-1, 5, _startTown.transform.position);
+        _sommets.Add(entrySommet);
+
+        //create Endpoint
+        GameObject _endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
+        Sommets exitSommet = new Sommets(3 * 8, 5, _endTown.transform.position);
+        _sommets.Add(exitSommet);
+
+        for(int i = 0; i <  3; i++)
+        {
+            GameObject newLine = Instantiate(Line,new Vector3(0 - 1,i * 2,0),Quaternion.Euler(0, 0, 90));
+            Aretes entryArete = new Aretes(entrySommet, _sommets[i * 8], newLine);
+            _aretes.Add(entryArete);
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            GameObject newLine = Instantiate(Line, new Vector3(0 + 15, i * 2, 0), Quaternion.Euler(0,0,90));
+            Aretes exitArete = new Aretes(_sommets[7 + 8 * i], exitSommet, newLine);
+            _aretes.Add(exitArete);
+        }
+        AddNeighbors();
     }
 
-    void AddArete()
+     public void recupPos()
     {
-        _aretes.Add(new Aretes('A', new List<char> {'B', 'C', 'D'}));       //Start town
+        foreach (var arete in _aretes)
+        {
+            if (arete.endSommets.StepPos == Player.transform.position || arete.startSommets.StepPos == Player.transform.position)
+            {
+                neighborsSommetPos.Add(arete.startSommets.StepPos);
+                neighborsSommetPos.Add(arete.endSommets.StepPos);
+            }
+        }
+        Debug.Log("Count : " + neighborsSommetPos.Count);
+    }
 
-        _aretes.Add(new Aretes('B', new List<char> { 'A', 'C', 'E'}));
-        _aretes.Add(new Aretes('C', new List<char> { 'B', 'A', 'D', 'F' }));
-        _aretes.Add(new Aretes('D', new List<char> { 'C', 'A', 'G' }));
-
-        _aretes.Add(new Aretes('E', new List<char> { 'B', 'F', 'H' }));
-        _aretes.Add(new Aretes('F', new List<char> { 'E', 'C', 'G', 'I' }));
-        _aretes.Add(new Aretes('G', new List<char> { 'F', 'D', 'J' }));
-
-        _aretes.Add(new Aretes('H', new List<char> { 'E', 'I', 'K' }));
-        _aretes.Add(new Aretes('I', new List<char> { 'H', 'F', 'J', 'L' }));
-        _aretes.Add(new Aretes('J', new List<char> { 'I', 'G', 'M' }));
-
-        _aretes.Add(new Aretes('K', new List<char> { 'H', 'L', 'N' }));
-        _aretes.Add(new Aretes('L', new List<char> { 'K', 'I', 'M', 'O' }));
-        _aretes.Add(new Aretes('M', new List<char> { 'L', 'J', 'P' }));
-
-        _aretes.Add(new Aretes('N', new List<char> { 'K', 'O', 'Q' }));
-        _aretes.Add(new Aretes('O', new List<char> { 'N', 'L', 'P', 'R' }));
-        _aretes.Add(new Aretes('P', new List<char> { 'O', 'M', 'S' }));
-
-        _aretes.Add(new Aretes('Q', new List<char> { 'N', 'R', 'T' }));
-        _aretes.Add(new Aretes('R', new List<char> { 'Q', 'O', 'S', 'U' }));
-        _aretes.Add(new Aretes('S', new List<char> { 'R', 'P', 'V' }));
-
-        _aretes.Add(new Aretes('T', new List<char> { 'Q', 'U', 'W' }));
-        _aretes.Add(new Aretes('U', new List<char> { 'T', 'R', 'V', 'X' }));
-        _aretes.Add(new Aretes('V', new List<char> { 'U', 'S', 'Y' }));
-
-        _aretes.Add(new Aretes('W', new List<char> { 'T', 'X', 'Z' }));           // Path to the end town
-        _aretes.Add(new Aretes('X', new List<char> { 'W', 'U', 'Y', 'Z' }));      // Path to the end town
-        _aretes.Add(new Aretes('Y', new List<char> { 'X', 'V', 'Z' }));           // Path to the end town
+    void AddNeighbors()
+    {
+        foreach (var sommet in _sommets)
+        {
+            foreach (var arete in _aretes)
+            {
+                if (arete.startSommets == sommet || arete.endSommets == sommet)
+                {
+                    sommet.neighbors.Add(arete);
+                }
+            }
+        }
+        recupPos();
     }
     private void Start()
     {
-        AddSommet();
-        AddArete();
+        InitializeGraph();
+
     }
+
+
+
+
+
+
+    float _rayDistance = 100f;
+    [SerializeField] Camera _camera;
+    [SerializeField] MovePlayer move;
+    RaycastHit2D ballRaycastHit2D;
+    public bool CanMove = true;
+
+    void startraycast()
+    {
+        Vector2 _mousePosition = Input.mousePosition;
+
+        Ray cursorToBallRay = _camera.ScreenPointToRay(_mousePosition);
+
+        Debug.DrawRay(cursorToBallRay.origin, cursorToBallRay.direction * _rayDistance, Color.yellow);
+
+        ballRaycastHit2D = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+    }
+
+
+    void CheckRay()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (ballRaycastHit2D.collider != null && ballRaycastHit2D.collider.tag == "Path")
+            {
+                Debug.Log(ballRaycastHit2D.transform.position);
+                for ( int i = 0; i < neighborsSommetPos.Count; i++ )
+                {
+                    if (ballRaycastHit2D.transform.position == neighborsSommetPos[i])
+                    {
+                        move.StartMoving();
+                        //recupPos();
+                    }
+                }
+            }
+        }
+    }
+    public Vector3 SetEndPos()
+    {
+        return ballRaycastHit2D.transform.position;
+    }
+
+    private void Update()
+    {
+        startraycast();
+        CheckRay();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
