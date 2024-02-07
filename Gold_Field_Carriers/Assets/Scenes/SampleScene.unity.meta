@@ -1,7 +1,13 @@
 fileFormatVersion: 2
-guid: 8c9cfa26abfee488c85f1582747f6a02
+<<<<<<<< HEAD:Gold_Field_Carriers/Assets/Scenes/SampleScene.unity.meta
+guid: f3f8261bfc982234ba4ff01518c02960
 DefaultImporter:
+========
+guid: d43858a0a4fbbab4aaaf9567941c51fa
+NativeFormatImporter:
+>>>>>>>> Lucas:Gold_Field_Carriers/Assets/Scripts/Mountain/Choice.asset.meta
   externalObjects: {}
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

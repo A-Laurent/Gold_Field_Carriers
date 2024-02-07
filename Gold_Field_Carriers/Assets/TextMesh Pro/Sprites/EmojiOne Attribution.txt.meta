@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Gold_Field_Carriers/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta
 guid: 381dcb09d5029d14897e55f98031fca5
 TextScriptImporter:
+========
+guid: b36f2bd32cff6fb42b1708c62ec4ddc6
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> Mathis:Gold_Field_Carriers/Assets/Prefab/player.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
