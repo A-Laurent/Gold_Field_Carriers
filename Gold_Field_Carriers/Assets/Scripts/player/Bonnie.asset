@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5891bb649543be543b19f226e3ed3a3b, type: 3}
   m_Name: Bonnie
   m_EditorClassIdentifier: 
-  _name: Bonnie "La Tempete"
+  _name: Bonnie<br>"La Tempete"
   _desc: 
   _sprite: {fileID: 21300000, guid: ef6b5996ddd04e14dacea34c64612d66, type: 3}
   _isAlive: 1
