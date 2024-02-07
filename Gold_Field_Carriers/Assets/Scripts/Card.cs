@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour
 {
     public int _cardIndex;
+    public static CardData _card;
 
     public Text _hpText;
     public Text _bulletText;
@@ -13,6 +14,7 @@ public class Card : MonoBehaviour
     public Text _hordeText;
     public Text _description;
     public Text _turnText;
+    public Text _lineText;
 
     public List<CardData> _cardDataMountain = new();
     public List<CardData> _cardDataRiver = new();
@@ -22,9 +24,9 @@ public class Card : MonoBehaviour
     public List<CardData> _cardDataBackupRiver = new();
     public List<CardData> _cardDataBackupDesert = new();
 
-    public static string _zone;
     public int _theHorde;
     public GameObject _uiChoice;
+    public GameObject _uiTrade;
     public static List<bool> _skipTurn = new();
 
     public void Start()
@@ -61,6 +63,7 @@ public class Card : MonoBehaviour
                                      Stats._goldPlayer[2].ToString();
         _hordeText.text = "The Horde : " + _theHorde.ToString();
         _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
+        _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
 
         if (Zone._draw && !CardChoice._choice)
         {
@@ -70,7 +73,7 @@ public class Card : MonoBehaviour
     }
     public void DrawCard()
     {
-        switch (_zone)
+        switch (Stats._zonePlayer[Stats._turnPlayer])
         {
             case "Desert": Desert(); break;
             case "River": River(); break;
@@ -102,152 +105,78 @@ public class Card : MonoBehaviour
     public void Desert()
     {
         _cardIndex = Random.Range(0, _cardDataDesert.Count);
-
-        if (_cardDataDesert[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
-        {
-            Stats._goldPlayer[Stats._turnPlayer] -= 3; AnimationStats._goldAnim -= 3;
-            Stats._hpPlayer[Stats._turnPlayer] -= 1; AnimationStats._hpAnim -= 1;
-            _description.text = _cardDataDesert[_cardIndex]._description;
+        _card = _cardDataDesert[_cardIndex];
+        EffectCard();
+        if (_card._name != "Choice" && _card._name != "TradePlayer")
             _cardDataDesert.RemoveAt(_cardIndex);
-        }
-        else if (_cardDataDesert[_cardIndex]._name == "Choice")
-        {
-            CardChoice._choice = true;
-            _description.text = _cardDataDesert[_cardIndex]._description;
-            _uiChoice.SetActive(true);
-        }
-        else if (_cardDataDesert[_cardIndex]._name == "Skip your turn")
-        {
-            _skipTurn[Stats._turnPlayer] = true;
-            _description.text = _cardDataDesert[_cardIndex]._description;
-            _cardDataDesert.RemoveAt(_cardIndex);
-        }
-        else if (_cardDataDesert[_cardIndex]._name == "AllPlayer")
-        {
-            for (int i = 0; i < Stats._nbPlayer; i++)
-            {
-                if (Stats._zonePlayer[i] == "Desert")
-                    Stats._goldPlayer[i] += _cardDataDesert[_cardIndex]._gold;
-            }
-            _description.text = _cardDataDesert[_cardIndex]._description;
-            _cardDataDesert.RemoveAt(_cardIndex);
-        }
-        else
-        {
-            Stats._goldPlayer[Stats._turnPlayer] += _cardDataDesert[_cardIndex]._gold;
-            AnimationStats._goldAnim += _cardDataDesert[_cardIndex]._gold;
-
-            Stats._hpPlayer[Stats._turnPlayer] += _cardDataDesert[_cardIndex]._hp;
-            AnimationStats._hpAnim += _cardDataDesert[_cardIndex]._hp;
-
-            Stats._bulletPlayer[Stats._turnPlayer] += _cardDataDesert[_cardIndex]._bullet;
-            AnimationStats._bulletAnim += _cardDataDesert[_cardIndex]._bullet;
-
-            _theHorde += _cardDataDesert[_cardIndex]._horde;
-            _description.text = _cardDataDesert[_cardIndex]._description;
-            _cardDataDesert.RemoveAt(_cardIndex);
-        }     
     }
 
     public void Mountain()
     {
         _cardIndex = Random.Range(0, _cardDataMountain.Count);
-
-        if (_cardDataMountain[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
-        {
-            Stats._goldPlayer[Stats._turnPlayer] -= 3; AnimationStats._goldAnim -= 3;
-            Stats._hpPlayer[Stats._turnPlayer] -= 1; AnimationStats._hpAnim -= 1;
-            _description.text = _cardDataMountain[_cardIndex]._description;
+        _card = _cardDataMountain[_cardIndex];
+        EffectCard();
+        if (_card._name != "Choice" && _card._name != "TradePlayer")
             _cardDataMountain.RemoveAt(_cardIndex);
-        }
-        else if (_cardDataMountain[_cardIndex]._name == "Choice")
-        {
-            CardChoice._choice = true;
-            _description.text = _cardDataMountain[_cardIndex]._description;
-            _uiChoice.SetActive(true);
-        }
-        else if (_cardDataMountain[_cardIndex]._name == "Skip your turn")
-        {
-            print("enter");
-            _skipTurn[Stats._turnPlayer] = true;
-            _description.text = _cardDataMountain[_cardIndex]._description;
-            _cardDataMountain.RemoveAt(_cardIndex);
-        }
-        else if (_cardDataMountain[_cardIndex]._name == "AllPlayer")
-        {
-            for (int i = 0; i < Stats._nbPlayer; i++)
-            {
-                if (Stats._zonePlayer[i] == "Mountain")
-                    Stats._hpPlayer[i] += _cardDataMountain[_cardIndex]._hp; ;
-            }
-            _description.text = _cardDataMountain[_cardIndex]._description;
-            _cardDataMountain.RemoveAt(_cardIndex);
-        }
-        else
-        {
-            Stats._goldPlayer[Stats._turnPlayer] += _cardDataMountain[_cardIndex]._gold;
-            AnimationStats._goldAnim += _cardDataMountain[_cardIndex]._gold;
-
-            Stats._hpPlayer[Stats._turnPlayer] += _cardDataMountain[_cardIndex]._hp;
-            AnimationStats._hpAnim += _cardDataMountain[_cardIndex]._hp;
-
-            Stats._bulletPlayer[Stats._turnPlayer] += _cardDataMountain[_cardIndex]._bullet;
-            AnimationStats._bulletAnim += _cardDataMountain[_cardIndex]._bullet;
-
-            _theHorde += _cardDataMountain[_cardIndex]._horde;
-            _description.text = _cardDataMountain[_cardIndex]._description;
-            _cardDataMountain.RemoveAt(_cardIndex);
-        }      
     }
 
     public void River()
     {
         _cardIndex = Random.Range(0, _cardDataRiver.Count);
+        _card = _cardDataRiver[_cardIndex];
+        EffectCard();
+        if (_card._name != "Choice" && _card._name != "TradePlayer")
+            _cardDataRiver.RemoveAt(_cardIndex);
+    } 
 
-        if (_cardDataRiver[_cardIndex]._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
+    public void EffectCard()
+    {
+        if (_card._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
         {
             Stats._goldPlayer[Stats._turnPlayer] -= 3; AnimationStats._goldAnim -= 3;
             Stats._hpPlayer[Stats._turnPlayer] -= 1; AnimationStats._hpAnim -= 1;
-            _description.text = _cardDataRiver[_cardIndex]._description;
-            _cardDataRiver.RemoveAt(_cardIndex);
+            _description.text = _card._description;
         }
-        else if (_cardDataRiver[_cardIndex]._name == "Choice")
+        else if (_card._name == "Choice")
         {
             CardChoice._choice = true;
-            _description.text = _cardDataRiver[_cardIndex]._description;
+            _description.text = _card._description;
             _uiChoice.SetActive(true);
         }
-        else if (_cardDataRiver[_cardIndex]._name == "Skip your turn")
+        else if (_card._name == "Skip your turn")
         {
-            print("enter");
             _skipTurn[Stats._turnPlayer] = true;
-            _description.text = _cardDataRiver[_cardIndex]._description;
-            _cardDataRiver.RemoveAt(_cardIndex);
+            _description.text = _card._description;
         }
-        else if (_cardDataRiver[_cardIndex]._name == "AllPlayer")
+        else if (_card._name == "AllPlayer")
         {
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
                 if (Stats._zonePlayer[i] == "River")
-                    Stats._hpPlayer[i] += _cardDataRiver[_cardIndex]._hp; ;
+                    Stats._hpPlayer[i] += _card._hp; ;
             }
-            _description.text = _cardDataRiver[_cardIndex]._description;
-            _cardDataRiver.RemoveAt(_cardIndex);
+            _description.text = _card._description;
+        }
+        else if (_card._name == "TradePlayer")
+        {
+            CardChoice._cardTrade = true;
+            _description.text = _card._description;
+            _uiChoice.SetActive(true);
+            _uiTrade.SetActive(true);
         }
         else
         {
-            Stats._goldPlayer[Stats._turnPlayer] += _cardDataRiver[_cardIndex]._gold;
-            AnimationStats._goldAnim += _cardDataRiver[_cardIndex]._gold;
+            Stats._goldPlayer[Stats._turnPlayer] += _card._gold;
+            AnimationStats._goldAnim += _card._gold;
 
-            Stats._hpPlayer[Stats._turnPlayer] += _cardDataRiver[_cardIndex]._hp;
-            AnimationStats._hpAnim += _cardDataRiver[_cardIndex]._hp;
+            Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
+            AnimationStats._hpAnim += _card._hp;
 
-            Stats._bulletPlayer[Stats._turnPlayer] += _cardDataRiver[_cardIndex]._bullet;
-            AnimationStats._bulletAnim += _cardDataRiver[_cardIndex]._bullet;
+            Stats._bulletPlayer[Stats._turnPlayer] += _card._bullet;
+            AnimationStats._bulletAnim += _card._bullet;
 
-            _theHorde += _cardDataRiver[_cardIndex]._horde;
-            _description.text = _cardDataRiver[_cardIndex]._description;
-            _cardDataRiver.RemoveAt(_cardIndex);
+            _theHorde += _card._horde;
+            _description.text = _card._description;
         }
-    } 
+    }
 }

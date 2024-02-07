@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Zone : MonoBehaviour
 {
     public static bool _draw;
-    public static int _turn = 1;
+    public static List<int> _line = new();
+
+    private void Start()
+    {
+        for (int i = 0; i < Stats._nbPlayer; i++)
+        {
+            _line.Add(0);
+        }
+    }
     public void SetDesert()
     {
-        if (!CardChoice._choice && !AnimationCard._animation)
+        if (!CardChoice._choice && !AnimationCard._animation && Stats._zonePlayer[Stats._turnPlayer] != "Mountain")
         {
-            if (Card._zone == "Desert")
-                _turn += 1;
-            Card._zone = "Desert";
+            for (int i = 0; i < Stats._nbPlayer;i++)
+            {
+                if (i != Stats._turnPlayer)
+                    if ((_line[i] == _line[Stats._turnPlayer] || Stats._zonePlayer[Stats._turnPlayer] == "Start") && Stats._zonePlayer[i] == "Desert")
+                        return;
+            }
+            if (Stats._zonePlayer[Stats._turnPlayer] == "Desert" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
+                _line[Stats._turnPlayer] += 1;
             Stats._zonePlayer[Stats._turnPlayer] = "Desert";
             _draw = true;
         }
@@ -23,9 +37,14 @@ public class Zone : MonoBehaviour
     {
         if (!CardChoice._choice && !AnimationCard._animation)
         {
-            if (Card._zone == "River")
-                _turn += 1;
-            Card._zone = "River";
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (i != Stats._turnPlayer)
+                    if ((_line[i] == _line[Stats._turnPlayer] || Stats._zonePlayer[Stats._turnPlayer] == "Start") && Stats._zonePlayer[i] == "River")
+                        return;
+            }
+            if (Stats._zonePlayer[Stats._turnPlayer] == "River" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
+                _line[Stats._turnPlayer] += 1;
             Stats._zonePlayer[Stats._turnPlayer] = "River";
             _draw = true;
         }
@@ -33,11 +52,16 @@ public class Zone : MonoBehaviour
 
     public void SetMountain()
     {
-        if (!CardChoice._choice && !AnimationCard._animation)
+        if (!CardChoice._choice && !AnimationCard._animation && Stats._zonePlayer[Stats._turnPlayer] != "Desert")
         {
-            if (Card._zone == "Mountain")
-                _turn += 1;
-            Card._zone = "Mountain";
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (i != Stats._turnPlayer)
+                    if ((_line[i] == _line[Stats._turnPlayer] || Stats._zonePlayer[Stats._turnPlayer] == "Start") && Stats._zonePlayer[i] == "Mountain")
+                        return;
+            }
+            if (Stats._zonePlayer[Stats._turnPlayer] == "Mountain" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
+                _line[Stats._turnPlayer] += 1;
             Stats._zonePlayer[Stats._turnPlayer] = "Mountain";
             _draw = true;
         }
