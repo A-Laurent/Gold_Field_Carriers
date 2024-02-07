@@ -13,4 +13,9 @@ public class Sc_SettingsManager : MonoBehaviour
     {
         Screen.fullScreen = transform.GetChild(3).GetComponent<Toggle>().isOn;
     }
+
+    public void BackInPause()
+    {
+        gameObject.SetActive(false);
+    }
 }
