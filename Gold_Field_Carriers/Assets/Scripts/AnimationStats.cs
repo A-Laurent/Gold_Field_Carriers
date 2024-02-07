@@ -30,7 +30,6 @@ public class AnimationStats : MonoBehaviour
         }
         if (_textGold.color.a <= 0.001)
         {
-            print("c");
             _animation = false;
             _textHp.color = new Color(_textHp.color.r, _textHp.color.g, _textHp.color.b, 1);
             _textBullet.color = new Color(_textBullet.color.r, _textBullet.color.g, _textBullet.color.b, 1);
