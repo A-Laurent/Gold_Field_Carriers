@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Graph : MonoBehaviour
@@ -13,10 +15,11 @@ public class Graph : MonoBehaviour
 
     [SerializeField] GameObject Player;
 
-    List<Sommets> _sommets = new List<Sommets>();
+   public List<Sommets> _sommets = new List<Sommets>();
     List<Aretes> _aretes = new List<Aretes>();
-    public List<GameObject> sommetNeighbors = new List<GameObject>();
     public List<Vector3> neighborsSommetPos = new List<Vector3>();
+
+    [SerializeField] PlayerTurn pTurn;
 
     public class Sommets
     {
@@ -24,13 +27,17 @@ public class Graph : MonoBehaviour
         public int zone;
         public List<Aretes> neighbors;
         public Vector3 StepPos;
+        public bool IsOccuped = false;
+        public GameObject Obj;
 
-        public Sommets(int id, int zone, Vector3 stepPos)
+        public Sommets(int id, int zone, Vector3 stepPos, GameObject obj, bool isOccuped = false)
         {
             this.id = id;
             this.zone = zone;
             neighbors = new List<Aretes>();
             StepPos = stepPos;
+            IsOccuped = isOccuped;
+            Obj = obj;
         }
     }
 
@@ -38,13 +45,11 @@ public class Graph : MonoBehaviour
     {
         public Sommets startSommets;
         public Sommets endSommets;
-        public GameObject obj;
 
-        public Aretes(Sommets start, Sommets end, GameObject obj)
+        public Aretes(Sommets start, Sommets end)
         {
             startSommets = start;
             endSommets = end;
-            this.obj = obj;
         }
     }
 
@@ -56,14 +61,14 @@ public class Graph : MonoBehaviour
             for (int j = 0; j < 8; j++)
             {
                 GameObject newStep = Instantiate(step, new Vector3(j * 2, i * 2, 0), Quaternion.identity);
-                Sommets sommet = new Sommets(i * 8 + j, i, newStep.transform.position) ;
+                Sommets sommet = new Sommets(i * 8 + j, i, newStep.transform.position, newStep) ;
                 _sommets.Add(sommet);
 
                 if (j > 0)
                 {
                     GameObject newLine = Instantiate(Line, new Vector3(j * 2 - 1, i * 2, 0), Quaternion.Euler(0, 0, 90));
 
-                    Aretes arete1 = new Aretes(sommet, _sommets[sommet.id - 1], newLine);
+                    Aretes arete1 = new Aretes(sommet, _sommets[sommet.id - 1]);
                     _aretes.Add(arete1);
                 }
                 if (i > 0)
@@ -72,7 +77,7 @@ public class Graph : MonoBehaviour
 
                     if (sommet.id - 8 >= 0)
                     {
-                        Aretes arete2 = new Aretes(sommet, _sommets[sommet.id - 8], newLine);
+                        Aretes arete2 = new Aretes(sommet, _sommets[sommet.id - 8]);
                         _aretes.Add(arete2);
                     }
                 }
@@ -82,43 +87,75 @@ public class Graph : MonoBehaviour
 
         //create SpawnPoint
         GameObject _startTown = Instantiate(StartTown, new Vector3(-2, 2, 0), Quaternion.identity);
-        Sommets entrySommet = new Sommets(-1, 5, _startTown.transform.position);
+        Sommets entrySommet = new Sommets(-1, 5, _startTown.transform.position,_startTown);
         _sommets.Add(entrySommet);
 
         //create Endpoint
         GameObject _endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
-        Sommets exitSommet = new Sommets(3 * 8, 5, _endTown.transform.position);
+        Sommets exitSommet = new Sommets(3 * 8, 5, _endTown.transform.position, _endTown);
         _sommets.Add(exitSommet);
 
         for(int i = 0; i <  3; i++)
         {
             GameObject newLine = Instantiate(Line,new Vector3(0 - 1,i * 2,0),Quaternion.Euler(0, 0, 90));
-            Aretes entryArete = new Aretes(entrySommet, _sommets[i * 8], newLine);
+            Aretes entryArete = new Aretes(entrySommet, _sommets[i * 8]);
             _aretes.Add(entryArete);
         }
 
         for (int i = 0; i < 3; i++)
         {
             GameObject newLine = Instantiate(Line, new Vector3(0 + 15, i * 2, 0), Quaternion.Euler(0,0,90));
-            Aretes exitArete = new Aretes(_sommets[7 + 8 * i], exitSommet, newLine);
+            Aretes exitArete = new Aretes(_sommets[7 + 8 * i], exitSommet);
             _aretes.Add(exitArete);
         }
         AddNeighbors();
     }
 
-     public void recupPos()
+    public void recupPos(GameObject _player)
+    {
+        UpdateSommetIsOcupped(_player);
+        foreach (var arete in _aretes)
+        {
+            if (arete.endSommets.StepPos == _player.transform.position || arete.startSommets.StepPos == _player.transform.position)
+            {
+                if (arete.startSommets.IsOccuped == false)
+                {
+                    neighborsSommetPos.Add(arete.startSommets.StepPos);
+                }
+                if (arete.endSommets.IsOccuped == false)
+                {
+                    neighborsSommetPos.Add(arete.endSommets.StepPos);
+                }
+            }
+        }
+    }
+
+    public void UpdateSommetIsOcupped(GameObject _player)
     {
         foreach (var arete in _aretes)
         {
-            if (arete.endSommets.StepPos == Player.transform.position || arete.startSommets.StepPos == Player.transform.position)
+            if (arete.startSommets.StepPos == pTurn.currentPlayer.transform.position && arete.endSommets.StepPos != new Vector3(16,2,0))
             {
-                neighborsSommetPos.Add(arete.startSommets.StepPos);
-                neighborsSommetPos.Add(arete.endSommets.StepPos);
+                arete.startSommets.IsOccuped = true;
+            }
+            else
+            {
+                arete.startSommets.IsOccuped = false;
             }
         }
-        Debug.Log("Count : " + neighborsSommetPos.Count);
     }
 
+    public void CheckOccupedPath()
+    {
+        foreach (var sommet in _sommets)
+        {
+            if (sommet.Obj.transform.position == pTurn.currentPlayer.transform.position && sommet.id != _sommets[_sommets.Count - 1].id)
+            {
+                sommet.Obj.tag = "Occuped";
+            }
+        }
+
+    }
     void AddNeighbors()
     {
         foreach (var sommet in _sommets)
@@ -131,12 +168,16 @@ public class Graph : MonoBehaviour
                 }
             }
         }
-        recupPos();
+        recupPos(pTurn.currentPlayer);
     }
+
     private void Start()
     {
         InitializeGraph();
-
+        foreach(var sommet in _sommets)
+        {
+            sommet.Obj.tag = "Path";
+        }
     }
 
 
@@ -150,7 +191,7 @@ public class Graph : MonoBehaviour
     RaycastHit2D ballRaycastHit2D;
     public bool CanMove = true;
 
-    void startraycast()
+    void StartRaycast()
     {
         Vector2 _mousePosition = Input.mousePosition;
 
@@ -166,15 +207,19 @@ public class Graph : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (ballRaycastHit2D.collider != null && ballRaycastHit2D.collider.tag == "Path")
+            if (ballRaycastHit2D.collider != null)
             {
-                Debug.Log(ballRaycastHit2D.transform.position);
-                for ( int i = 0; i < neighborsSommetPos.Count; i++ )
+                if (ballRaycastHit2D.collider.tag == "Path")
                 {
-                    if (ballRaycastHit2D.transform.position == neighborsSommetPos[i])
+                    for (int i = 0; i < neighborsSommetPos.Count; i++)
                     {
-                        move.StartMoving();
-                        //recupPos();
+                        if (ballRaycastHit2D.transform.position == neighborsSommetPos[i])
+                        {
+                            if (move.canMove == true)
+                            {
+                                move.StartMoving();
+                            }
+                        }
                     }
                 }
             }
@@ -187,24 +232,7 @@ public class Graph : MonoBehaviour
 
     private void Update()
     {
-        startraycast();
+        StartRaycast();
         CheckRay();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

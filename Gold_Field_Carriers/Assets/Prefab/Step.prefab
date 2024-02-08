@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2977020129595534172}
   m_Layer: 0
   m_Name: Step
-  m_TagString: Path
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,5 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 5716562250334789519, guid: e98579d2881c4654fb80f2cd219e059b, type: 3}
-  Player: {fileID: 4340955653515504773, guid: 42f5780c657bf4643943a4171a03d9a2, type: 3}
-  move: {fileID: -7060953177897595767, guid: 42f5780c657bf4643943a4171a03d9a2, type: 3}
+  pTurn: {fileID: 0}
+  canMove: 1
