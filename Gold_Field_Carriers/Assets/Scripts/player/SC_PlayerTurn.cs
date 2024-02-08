@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerTurn : MonoBehaviour
+public class SC_PlayerTurn : MonoBehaviour
 {
     public int turn = 0;
     public int maxPlayer = 3;
@@ -15,7 +15,7 @@ public class PlayerTurn : MonoBehaviour
     public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
 
-    [SerializeField] Graph graph;
+    [SerializeField] SC_Graph graph;
 
     public void PlayerTurnLogic()
     {
@@ -29,7 +29,7 @@ public class PlayerTurn : MonoBehaviour
                         currentPlayer = _player[0];
                         if (recupPos == true)
                         {
-                            graph.recupPos(_player[turn]);
+                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)
@@ -49,7 +49,7 @@ public class PlayerTurn : MonoBehaviour
                         currentPlayer = _player[1];
                         if (recupPos == true)
                         {
-                            graph.recupPos(_player[turn]);
+                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)
@@ -69,7 +69,7 @@ public class PlayerTurn : MonoBehaviour
                         currentPlayer = _player[2];
                         if (recupPos == true)
                         {
-                            graph.recupPos(_player[turn]);
+                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)

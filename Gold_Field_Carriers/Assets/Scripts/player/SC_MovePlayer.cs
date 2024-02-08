@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovePlayer : MonoBehaviour
+public class SC_MovePlayer : MonoBehaviour
 {
-    [SerializeField] Graph graph;
+    [SerializeField] SC_Graph graph;
      GameObject PlayerBody;
-    [SerializeField] PlayerTurn pTurn;
+    [SerializeField] SC_PlayerTurn pTurn;
 
 
     public bool canMove;
@@ -36,7 +36,7 @@ public class MovePlayer : MonoBehaviour
             yield return null;
         }
 
-        graph.neighborsSommetPos.Clear();
+        graph._neighborsSommetPos.Clear();
 
         if (PlayerBody.transform.position == end_pos)
         {

@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Graph : MonoBehaviour
+public class SC_Graph : MonoBehaviour
 {
 
     [SerializeField] GameObject step;
@@ -11,18 +9,14 @@ public class Graph : MonoBehaviour
     [SerializeField] GameObject EndTown;
     [SerializeField] GameObject Line;
 
-    [SerializeField] GameObject GridParent;
+    [SerializeField] SC_PlayerTurn pTurn;
+    [SerializeField] SC_MovePlayer move;
 
-    [SerializeField] GameObject Player;
+    public List<Sommets> _sommets = new List<Sommets>();
+    public List<Vector3> _neighborsSommetPos = new List<Vector3>();
+    private List<Aretes> _aretes = new List<Aretes>();
 
-   public List<Sommets> _sommets = new List<Sommets>();
-    List<Aretes> _aretes = new List<Aretes>();
-    public List<Vector3> neighborsSommetPos = new List<Vector3>();
-
-    [SerializeField] PlayerTurn pTurn;
-
-
-     GameObject _endTown;
+    private GameObject endTown;
 
     public class Sommets
     {
@@ -56,7 +50,6 @@ public class Graph : MonoBehaviour
         }
     }
 
-
     private void InitializeGraph()
     {
         for (int i = 0; i < 3; i++)
@@ -86,36 +79,31 @@ public class Graph : MonoBehaviour
                     }
                 }
             }
-
         }
 
         //create SpawnPoint
-        GameObject _startTown = Instantiate(StartTown, new Vector3(-2, 2, 0), Quaternion.identity);
-        Sommets entrySommet = new Sommets(-1, 5, _startTown.transform.position,_startTown);
+        GameObject startTown = Instantiate(StartTown, new Vector3(-2, 2, 0), Quaternion.identity);
+        Sommets entrySommet = new Sommets(-1, 5, startTown.transform.position,startTown);
         _sommets.Add(entrySommet);
-
-        //create Endpoint
-         _endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
-        Sommets exitSommet = new Sommets(3 * 8, 5, _endTown.transform.position, _endTown);
-        _sommets.Add(exitSommet);
-
         for(int i = 0; i <  3; i++)
         {
-            //GameObject newLine = Instantiate(Line,new Vector3(0 - 1,i * 2,0),Quaternion.Euler(0, 0, 90));
             Aretes entryArete = new Aretes(entrySommet, _sommets[i * 8]);
             _aretes.Add(entryArete);
         }
 
+        //create Endpoint
+        endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
+        Sommets exitSommet = new Sommets(3 * 8, 5, endTown.transform.position, endTown);
+        _sommets.Add(exitSommet);
         for (int i = 0; i < 3; i++)
         {
-            //GameObject newLine = Instantiate(Line, new Vector3(0 + 15, i * 2, 0), Quaternion.Euler(0,0,90));
             Aretes exitArete = new Aretes(_sommets[7 + 8 * i], exitSommet);
             _aretes.Add(exitArete);
         }
         AddNeighbors();
     }
 
-    public void recupPos(GameObject _player)
+    public void RecupPos(GameObject _player)
     {
         UpdateSommetIsOcupped(_player);
         foreach (var arete in _aretes)
@@ -124,13 +112,13 @@ public class Graph : MonoBehaviour
             {
                 if (arete.startSommets.IsOccuped == false && arete.startSommets.Obj.tag == "Path")
                 {
-                    neighborsSommetPos.Add(arete.startSommets.StepPos);
+                    _neighborsSommetPos.Add(arete.startSommets.StepPos);
                     arete.startSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
                 }
             
                 if (arete.endSommets.IsOccuped == false && arete.endSommets.Obj.tag == "Path")
                 {
-                    neighborsSommetPos.Add(arete.endSommets.StepPos);
+                    _neighborsSommetPos.Add(arete.endSommets.StepPos);
                     arete.endSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
                 }
             }
@@ -146,7 +134,7 @@ public class Graph : MonoBehaviour
         }
     }
 
-    public void UpdateSommetIsOcupped(GameObject _player)
+    private void UpdateSommetIsOcupped(GameObject _player)
     {
         foreach (var arete in _aretes)
         {
@@ -182,7 +170,7 @@ public class Graph : MonoBehaviour
     }
 
 
-    void AddNeighbors()
+    private void AddNeighbors()
     {
         foreach (var sommet in _sommets)
         {
@@ -194,7 +182,7 @@ public class Graph : MonoBehaviour
                 }
             }
         }
-        recupPos(pTurn.currentPlayer);
+        RecupPos(pTurn.currentPlayer);
     }
 
     private void Start()
@@ -203,17 +191,12 @@ public class Graph : MonoBehaviour
     }
 
 
-
-
-
-
-    float _rayDistance = 100f;
+    private float _rayDistance = 100f;
     [SerializeField] Camera _camera;
-    [SerializeField] MovePlayer move;
     RaycastHit2D ballRaycastHit2D;
     public bool CanMove = true;
 
-    void StartRaycast()
+    private void StartRaycast()
     {
         Vector2 _mousePosition = Input.mousePosition;
 
@@ -225,7 +208,7 @@ public class Graph : MonoBehaviour
     }
 
 
-    void CheckRay()
+    private void CheckRay()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -233,9 +216,9 @@ public class Graph : MonoBehaviour
             {
                 if (ballRaycastHit2D.collider.tag == "Path")
                 {
-                    for (int i = 0; i < neighborsSommetPos.Count; i++)
+                    for (int i = 0; i < _neighborsSommetPos.Count; i++)
                     {
-                        if (ballRaycastHit2D.transform.position == neighborsSommetPos[i])
+                        if (ballRaycastHit2D.transform.position == _neighborsSommetPos[i])
                         {
                             if (move.canMove == true)
                             {
