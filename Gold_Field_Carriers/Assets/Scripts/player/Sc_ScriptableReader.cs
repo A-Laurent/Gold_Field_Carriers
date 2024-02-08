@@ -6,22 +6,21 @@ public class Sc_ScriptableReader : MonoBehaviour
 {
     public PlayerClass _playerClasse;
 
-    [HideInInspector] public string _name { get; private set; }
-    [HideInInspector] public string _desc { get; private set; }
-    [HideInInspector] public Sprite _sprite { get; private set; }
+    [HideInInspector] public string _name; 
+    [HideInInspector] public string _desc; 
+    [HideInInspector] public Sprite _sprite;
 
-    [HideInInspector] public bool _isAlive { get; private set; }
-    [HideInInspector] public bool _isInTheCity { get; private set; }
+    [HideInInspector] public bool _isAlive; 
+    [HideInInspector] public bool _isInTheCity;
 
-    [HideInInspector] public int _currentLife { get; private set; }
-    [HideInInspector] public int _maxLife { get; private set; }
+    [HideInInspector] public int _currentLife; 
+    [HideInInspector] public int _maxLife; 
 
-    [HideInInspector] public int _currentAmmount { get; private set; }
-    [HideInInspector] public int _maxAmmount { get; private set; }
+    [HideInInspector] public int _currentAmmount;
+    [HideInInspector] public int _maxAmmount;
 
-    [HideInInspector] public int _gold { get; private set; }
-    [HideInInspector] public int _id { get; private set; }
-
+    [HideInInspector] public int _gold; 
+    [HideInInspector] public int _id;
 
     private void Awake()
     {
@@ -45,7 +44,6 @@ public class Sc_ScriptableReader : MonoBehaviour
             }
 
             Sc_CharacterManager.Instance._canSetPlayerInfo = true;
-            //Sc_CharacterManager.Instance._selectedPlayer.Add(_playerClasse);
             Sc_CharacterManager.Instance._scriptableObject.Remove(_playerClasse);
         }
 
