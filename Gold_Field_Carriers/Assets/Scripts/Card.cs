@@ -30,6 +30,16 @@ public class Card : MonoBehaviour
     public GameObject _uiTrade;
     public static List<bool> _skipTurn = new();
     public bool _enter;
+    public static Card Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
+        Instance = this;
+    }
 
     public void Start()
     {
@@ -57,17 +67,17 @@ public class Card : MonoBehaviour
     private void Update()
     {
         
-        _hpText.text = "HP :   " + Stats._hpPlayer[0].ToString() + "    " +
-                                   Stats._hpPlayer[1].ToString() + "    " + 
-                                   Stats._hpPlayer[2].ToString();
-        _bulletText.text = "Bullet :   " + Stats._bulletPlayer[0].ToString() + "    " + 
-                                           Stats._bulletPlayer[1].ToString() + "    " + 
-                                           Stats._bulletPlayer[2].ToString();
-        _hordeText.text = "The Horde : " + _theHorde.ToString();
-        _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
-        _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
-                                     + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
-        _nbTurnText.text = "Nb turn :  " + Zone._turn.ToString();
+        //_hpText.text = "HP :   " + Stats._hpPlayer[0].ToString() + "    " +
+        //                           Stats._hpPlayer[1].ToString() + "    " + 
+        //                           Stats._hpPlayer[2].ToString();
+        //_bulletText.text = "Bullet :   " + Stats._bulletPlayer[0].ToString() + "    " + 
+        //                                   Stats._bulletPlayer[1].ToString() + "    " + 
+        //                                   Stats._bulletPlayer[2].ToString();
+        //_hordeText.text = "The Horde : " + _theHorde.ToString();
+        //_turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
+        //_lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
+        //                             + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
+        //_nbTurnText.text = "Nb turn :  " + Zone._turn.ToString();
 
         if (Zone._draw && !CardChoice._choice)
         {
@@ -152,7 +162,7 @@ public class Card : MonoBehaviour
 
     public void EffectCard()
     {
-        _description.text = _card._description;
+        //_description.text = _card._description;
         if (_card._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
         {
             Sc_CharacterManager.Instance._playerInfo[Stats._turnPlayer].GetComponent<Sc_ScriptableReader>()._gold -= 3; 
@@ -222,41 +232,42 @@ public class Card : MonoBehaviour
         }
         else if (_card._name == "Overflow")
         {
-            for (int i = 0; i < Stats._nbPlayer; i++)
-            {
-                if (Stats._zonePlayer[i] == "River")
-                {
-                    int de = Random.Range(0, 1);
-                    if (de == 0)
-                    {
-                        _enter = false;
-                        for (int j = 0; j < Stats._nbPlayer; j++)
-                        {
-                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Desert")
-                            {
-                                _enter = true;
-                                Stats._hpPlayer[i] += _card._hp;
-                            }                                    
-                        }
-                        if (!_enter)
-                            Stats._zonePlayer[i] = "Desert";
-                    }
-                    else
-                    {
-                        _enter = false;
-                        for (int j = 0; j < Stats._nbPlayer; j++)
-                        {
-                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Mountain")
-                            {
-                                _enter = true;
-                                Stats._hpPlayer[i] += _card._hp;
-                            }
-                        }
-                        if (!_enter)
-                            Stats._zonePlayer[i] = "Mountain";
-                    }
-                }
-            }
+            //for (int i = 0; i < Stats._nbPlayer; i++)
+            //{
+            //    if (Stats._zonePlayer[i] == "River")
+            //    {
+            //        int de = Random.Range(0, 1);
+            //        if (de == 0)
+            //        {
+            //            _enter = false;
+            //            for (int j = 0; j < Stats._nbPlayer; j++)
+            //            {
+            //                if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Desert")
+            //                {
+            //                    _enter = true;
+            //                    Stats._hpPlayer[i] += _card._hp;
+            //                }                                    
+            //            }
+            //            if (!_enter)
+            //                Stats._zonePlayer[i] = "Desert";
+            //        }
+            //        else
+            //        {
+            //            _enter = false;
+            //            for (int j = 0; j < Stats._nbPlayer; j++)
+            //            {
+            //                if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Mountain")
+            //                {
+            //                    _enter = true;
+            //                    Stats._hpPlayer[i] += _card._hp;
+            //                }
+            //            }
+            //            if (!_enter)
+            //                Stats._zonePlayer[i] = "Mountain";
+            //        }
+            //    }
+            //}
+            SC_PlayerTurn.Instance.OverFlow();
         }
         else
         {

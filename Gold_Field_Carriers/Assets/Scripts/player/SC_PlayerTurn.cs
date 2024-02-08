@@ -17,6 +17,13 @@ public class SC_PlayerTurn : MonoBehaviour
 
     [SerializeField] SC_Graph graph;
 
+    public static SC_PlayerTurn Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void PlayerTurnLogic()
     {
         if (_player.Count == maxPlayer)
@@ -101,5 +108,34 @@ public class SC_PlayerTurn : MonoBehaviour
     {
         PlayerTurnLogic();
     }
+    public void OverFlow()
+    {
+        foreach (var player in _player)
+        {
+            foreach (var sommet in graph._sommets)
+            {
+                if (player.transform.position == sommet.Obj.transform.position)
+                {
+                    if (sommet.zone == 1)
+                    {
+                        int RandNumber = Random.Range(0, 2);
 
+                        if (RandNumber == 0 && sommet.Obj.tag == "Path")
+                        {
+                            player.transform.position = graph._sommets[sommet.id + 8].Obj.transform.position;
+                            sommet.Obj.tag = "Path";
+                        }
+                        else if (sommet.Obj.tag == "Path")
+                        {
+                            player.transform.position = graph._sommets[sommet.id - 8].Obj.transform.position;
+                            sommet.Obj.tag = "Path";
+
+                        }
+                        else
+                            Debug.Log("dont move"); 
+                    }
+                }
+            }
+        }
+    }
 }

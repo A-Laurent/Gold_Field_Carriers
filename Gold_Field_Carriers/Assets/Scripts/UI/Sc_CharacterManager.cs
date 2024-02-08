@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Sc_CharacterManager : MonoBehaviour
 {
-    public List<PlayerClass> _scriptableObject = new List<PlayerClass>();
+    public List<SC_PlayerClass> _scriptableObject = new List<SC_PlayerClass>();
 
     public List<GameObject> _playerInfo = new List<GameObject>();
     public List<int> _ID = new List<int>();
 
-    public List<PlayerClass> _selectedPlayer = new List<PlayerClass>();
+    public List<SC_PlayerClass> _selectedPlayer = new List<SC_PlayerClass>();
 
     public bool _canSetPlayerInfo = true;
 

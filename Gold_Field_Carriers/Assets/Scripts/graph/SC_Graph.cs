@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro.SpriteAssetUtilities;
 using UnityEngine;
 
 public class SC_Graph : MonoBehaviour
@@ -17,6 +18,8 @@ public class SC_Graph : MonoBehaviour
     private List<Aretes> _aretes = new List<Aretes>();
 
     private GameObject endTown;
+
+    private Zone zone;
 
     public class Sommets
     {
@@ -239,5 +242,29 @@ public class SC_Graph : MonoBehaviour
     {
         StartRaycast();
         CheckRay();
+ 
+    }
+
+    public void DrawCard(GameObject _player)
+    {
+        foreach (var arete in _aretes)
+        {
+            if(arete.startSommets.Obj.transform.position == _player.transform.position)
+            {
+                switch (arete.startSommets.zone)
+                {
+                    case 0:
+                        Zone.SetDesert();
+                        break;
+                    case 1:
+                        Zone.SetRiver();
+                        break;
+                    case 2:
+                        Zone.SetMountain();
+                        break;
+
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,6 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class AnimationCard : MonoBehaviour
@@ -6,17 +8,21 @@ public class AnimationCard : MonoBehaviour
     public GameObject _cardAnim;
     public static bool _animation;
     public static float _timer = 0;
-    public Text _text;
+    public TextMeshProUGUI _text;
     public Card _card;
+    bool showtext = false;
 
     private void Start()
     {
-        _cardAnim.transform.position = new Vector3(1400, 300, 0);
+        _cardAnim.transform.position = new Vector3(813, -300, 0);
     }
     void Update()
     {
-        if (_cardAnim.transform.rotation.y <= 0.75)
-            _text.text = _card._description.text;
+        if (_cardAnim.transform.rotation.y <= 0.75 && !showtext && Card._card!=null)
+        {
+            _text.text = Card._card._description;
+            showtext = true;
+        }
 
         if (Zone._draw)
         {
@@ -31,7 +37,7 @@ public class AnimationCard : MonoBehaviour
         if (_animation && _cardAnim.transform.rotation.y > 0)
         {
             Zone._draw = false;
-            _cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 300 * Time.deltaTime,
+            _cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 3 * Time.deltaTime,
                                                        _cardAnim.transform.position.y,
                                                        _cardAnim.transform.position.z);
             _cardAnim.transform.Rotate(0, 100 * Time.deltaTime, 0);
@@ -48,7 +54,7 @@ public class AnimationCard : MonoBehaviour
                 _timer = 0.0f;
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
-                _cardAnim.transform.position = new Vector3(1400, 300, 0);
+                _cardAnim.transform.position = new Vector3(813, -300, 0);
                 Zone._draw = false;
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;

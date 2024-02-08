@@ -25,7 +25,7 @@ public class Stats : MonoBehaviour
     }
     void Update()
     {
-        _zoneText.text = "Zone : " + _zonePlayer[0] + " " + _zonePlayer[1] + " " + _zonePlayer[2];
+        //_zoneText.text = "Zone : " + _zonePlayer[0] + " " + _zonePlayer[1] + " " + _zonePlayer[2];
         StatLimit();
     }
     public void StatLimit()

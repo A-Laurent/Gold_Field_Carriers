@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sc_ScriptableReader : MonoBehaviour
 {
-    public PlayerClass _playerClasse;
+    public SC_PlayerClass _playerClasse;
 
     [HideInInspector] public string _name; 
     [HideInInspector] public string _desc; 

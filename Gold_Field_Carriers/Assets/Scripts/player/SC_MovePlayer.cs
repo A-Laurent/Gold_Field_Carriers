@@ -42,8 +42,9 @@ public class SC_MovePlayer : MonoBehaviour
         {
             graph.CheckOccupedPath();
             graph.EndTownCase(pTurn.currentPlayer);
+            graph.DrawCard(pTurn.currentPlayer);
             canMove = true;
-            pTurn.endTurn = true;//a retirer
+            pTurn.endTurn = true;//a 
         }
     }
 
@@ -51,4 +52,6 @@ public class SC_MovePlayer : MonoBehaviour
     {
         StartCoroutine(CharacterMove(1f));
     }
+
+    
 }
