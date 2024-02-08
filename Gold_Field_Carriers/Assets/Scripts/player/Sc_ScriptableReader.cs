@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Sc_ScriptableReader : MonoBehaviour
 {
-    [SerializeField] private List<PlayerClass> _scriptableObject = new List<PlayerClass>();
+    [SerializeField] private List<SC_PlayerClass> _scriptableObject = new List<SC_PlayerClass>();
 
-    public List<PlayerClass> _playerClasses = new List<PlayerClass>();
+    public List<SC_PlayerClass> _playerClasses = new List<SC_PlayerClass>();
     
     [HideInInspector] public string _name { get; private set; }
     [HideInInspector] public string _desc { get; private set; }
