@@ -63,9 +63,6 @@ public class Card : MonoBehaviour
         _bulletText.text = "Bullet :   " + Stats._bulletPlayer[0].ToString() + "    " + 
                                            Stats._bulletPlayer[1].ToString() + "    " + 
                                            Stats._bulletPlayer[2].ToString();
-        _goldText.text = "Gold :   " + Stats._goldPlayer[0].ToString() + "  " + 
-                                       Stats._goldPlayer[1].ToString() + "  " + 
-                                       Stats._goldPlayer[2].ToString();
         _hordeText.text = "The Horde : " + _theHorde.ToString();
         _turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
         _lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
@@ -158,7 +155,8 @@ public class Card : MonoBehaviour
         _description.text = _card._description;
         if (_card._name == "Attack of a bandit" && Stats._bulletPlayer[Stats._turnPlayer] == 0)
         {
-            Stats._goldPlayer[Stats._turnPlayer] -= 3; AnimationStats._goldAnim -= 3;
+            Sc_CharacterManager.Instance._playerInfo[Stats._turnPlayer].GetComponent<Sc_ScriptableReader>()._gold -= 3; 
+            AnimationStats._goldAnim -= 3;
             Stats._hpPlayer[Stats._turnPlayer] -= 1; AnimationStats._hpAnim -= 1;
         }
         else if (_card._name == "Choice")
@@ -228,8 +226,8 @@ public class Card : MonoBehaviour
             {
                 if (Stats._zonePlayer[i] == "River")
                 {
-                    int dé = Random.Range(0, 1);
-                    if (dé == 0)
+                    int de = Random.Range(0, 1);
+                    if (de == 0)
                     {
                         _enter = false;
                         for (int j = 0; j < Stats._nbPlayer; j++)
@@ -262,7 +260,7 @@ public class Card : MonoBehaviour
         }
         else
         {
-            Stats._goldPlayer[Stats._turnPlayer] += _card._gold;
+            Sc_CharacterManager.Instance._playerInfo[Stats._turnPlayer].GetComponent<Sc_ScriptableReader>()._gold += _card._gold;
             AnimationStats._goldAnim += _card._gold;
 
             Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
