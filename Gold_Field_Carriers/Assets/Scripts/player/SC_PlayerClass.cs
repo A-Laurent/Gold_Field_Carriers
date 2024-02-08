@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu]
-public class PlayerClass : ScriptableObject
+public class SC_PlayerClass : ScriptableObject
 {
     //main Information
     public string _name;

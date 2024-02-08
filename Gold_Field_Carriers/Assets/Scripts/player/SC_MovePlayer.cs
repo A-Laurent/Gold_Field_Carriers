@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MovePlayer : MonoBehaviour
+public class SC_MovePlayer : MonoBehaviour
 {
-    [SerializeField] Graph graph;
+    [SerializeField] SC_Graph graph;
      GameObject PlayerBody;
-    [SerializeField] PlayerTurn pTurn;
+    [SerializeField] SC_PlayerTurn pTurn;
 
 
     public bool canMove;
@@ -31,17 +31,19 @@ public class MovePlayer : MonoBehaviour
         while (time / total_time < 1)
         {
             time += Time.deltaTime;
-            PlayerBody.transform.position = Vector3.Lerp(start_pos, end_pos, time / total_time);
+            PlayerBody.transform.position = Vector3.Lerp(start_pos, end_pos,  time / total_time);
 
             yield return null;
         }
-        graph.neighborsSommetPos.Clear();
+
+        graph._neighborsSommetPos.Clear();
 
         if (PlayerBody.transform.position == end_pos)
         {
             graph.CheckOccupedPath();
+            graph.EndTownCase(pTurn.currentPlayer);
             canMove = true;
-            pTurn.endTurn = true;       //a retirer
+            pTurn.endTurn = true;//a retirer
         }
     }
 
