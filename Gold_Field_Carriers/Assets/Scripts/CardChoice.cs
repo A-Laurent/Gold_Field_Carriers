@@ -162,12 +162,10 @@ public class CardChoice : MonoBehaviour
         {
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
-                if (i != Stats._turnPlayer)
-                {
-                    if (Stats._zonePlayer[i] == "Mountain")
-                        return;
-                }
+                if (Stats._zonePlayer[i] == "Mountain" && Stats._zonePlayer[i] == Stats._zonePlayer[Stats._turnPlayer])
+                    return;
             }
+            Stats._zonePlayer[Stats._turnPlayer] = "Mountain";
             DestroyCard();
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
@@ -259,12 +257,10 @@ public class CardChoice : MonoBehaviour
         {
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
-                if (i != Stats._turnPlayer)
-                {
-                    if (Stats._zonePlayer[i] == "Desert")
-                        return;
-                }
+                if (Stats._zonePlayer[i] == "Desert" && Stats._zonePlayer[i] == Stats._zonePlayer[Stats._turnPlayer])
+                    return;
             }
+            Stats._zonePlayer[Stats._turnPlayer] = "Desert";
             DestroyCard();
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
