@@ -60,16 +60,26 @@ public class Sc_CharacterSelection : MonoBehaviour
             _initColor = _characters[_player].GetComponent<Image>().color;
             _spritesCharacters._characterToSelect.GetComponent<Sc_CanSelect>()._canSelect = false;
             _spritesCharacters._characterToSelect.GetComponent<Image>().color = _characterAlreadySelectedColor;
-            Sc_SpritesCharacters.Instance._selectedCharacters[_player] = Sc_SpritesCharacters.Instance._characterToSelect;
-            _characters[_player].GetComponent<Image>().sprite = Sc_SpritesCharacters.Instance._characterToSelect.GetComponent<Image>().sprite;
+            Sc_SpritesCharacters.Instance._selectedCharacters[_player] =
+                Sc_SpritesCharacters.Instance._characterToSelect;
+            _characters[_player].GetComponent<Image>().sprite =
+                Sc_SpritesCharacters.Instance._characterToSelect.GetComponent<Image>().sprite;
             _characters[_player].GetComponent<Image>().color = Color.white;
-            Sc_SpritesCharacters.Instance._ID[_player] = Sc_SpritesCharacters.Instance._characterToSelect.GetComponent<Sc_CanSelect>()._id;
+            Sc_SpritesCharacters.Instance._ID[_player] =
+                Sc_SpritesCharacters.Instance._characterToSelect.GetComponent<Sc_CanSelect>()._id;
             _player++;
         }
 
-        if (_player == 3)
+        bool _canStart = true;
+        foreach (var character in _characters)
         {
-            _startButton.interactable = true;
+            if (character.GetComponent<Image>().sprite == null)
+            {
+                _canStart = false;
+                break;
+            }
         }
+
+        _startButton.interactable = _canStart;
     }
 }

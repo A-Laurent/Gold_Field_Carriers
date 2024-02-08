@@ -29,6 +29,7 @@ public class Card : MonoBehaviour
     public GameObject _uiChoice;
     public GameObject _uiTrade;
     public static List<bool> _skipTurn = new();
+    public bool _enter;
 
     public void Start()
     {
@@ -225,44 +226,36 @@ public class Card : MonoBehaviour
         {
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
-                int dé = Random.Range(0, 1);
-                if (dé == 0)
+                if (Stats._zonePlayer[i] == "River")
                 {
-                    if (Stats._zonePlayer[i] == "River")
+                    int dé = Random.Range(0, 1);
+                    if (dé == 0)
                     {
+                        _enter = false;
                         for (int j = 0; j < Stats._nbPlayer; j++)
                         {
-                            if (j != i)
+                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Desert")
                             {
-                                if (Zone._line[i] == Zone._line[j] && Stats._zonePlayer[j] == "Desert")
-                                {
-                                    Stats._hpPlayer[i] += _card._hp;
-                                }
-                                else
-                                    Stats._zonePlayer[i] = "Desert";
-                                j = 4;
-                            }
+                                _enter = true;
+                                Stats._hpPlayer[i] += _card._hp;
+                            }                                    
                         }
-                        
-                    }                                     
-                }
-                else
-                {
-                    if (Stats._zonePlayer[i] == "River")
+                        if (!_enter)
+                            Stats._zonePlayer[i] = "Desert";
+                    }
+                    else
                     {
+                        _enter = false;
                         for (int j = 0; j < Stats._nbPlayer; j++)
                         {
-                            if (j != i)
+                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Mountain")
                             {
-                                if (Zone._line[i] == Zone._line[j] && Stats._zonePlayer[j] == "Mountain")
-                                {
-                                    Stats._hpPlayer[i] += _card._hp;
-                                }
-                                else
-                                    Stats._zonePlayer[i] = "Mountain";
-                                j = 4;
+                                _enter = true;
+                                Stats._hpPlayer[i] += _card._hp;
                             }
                         }
+                        if (!_enter)
+                            Stats._zonePlayer[i] = "Mountain";
                     }
                 }
             }
