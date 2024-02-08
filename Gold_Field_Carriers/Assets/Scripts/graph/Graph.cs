@@ -21,6 +21,9 @@ public class Graph : MonoBehaviour
 
     [SerializeField] PlayerTurn pTurn;
 
+
+     GameObject _endTown;
+
     public class Sommets
     {
         public int id;
@@ -61,6 +64,7 @@ public class Graph : MonoBehaviour
             for (int j = 0; j < 8; j++)
             {
                 GameObject newStep = Instantiate(step, new Vector3(j * 2, i * 2, 0), Quaternion.identity);
+                newStep.gameObject.tag = "Path";
                 Sommets sommet = new Sommets(i * 8 + j, i, newStep.transform.position, newStep) ;
                 _sommets.Add(sommet);
 
@@ -91,20 +95,20 @@ public class Graph : MonoBehaviour
         _sommets.Add(entrySommet);
 
         //create Endpoint
-        GameObject _endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
+         _endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
         Sommets exitSommet = new Sommets(3 * 8, 5, _endTown.transform.position, _endTown);
         _sommets.Add(exitSommet);
 
         for(int i = 0; i <  3; i++)
         {
-            GameObject newLine = Instantiate(Line,new Vector3(0 - 1,i * 2,0),Quaternion.Euler(0, 0, 90));
+            //GameObject newLine = Instantiate(Line,new Vector3(0 - 1,i * 2,0),Quaternion.Euler(0, 0, 90));
             Aretes entryArete = new Aretes(entrySommet, _sommets[i * 8]);
             _aretes.Add(entryArete);
         }
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject newLine = Instantiate(Line, new Vector3(0 + 15, i * 2, 0), Quaternion.Euler(0,0,90));
+            //GameObject newLine = Instantiate(Line, new Vector3(0 + 15, i * 2, 0), Quaternion.Euler(0,0,90));
             Aretes exitArete = new Aretes(_sommets[7 + 8 * i], exitSommet);
             _aretes.Add(exitArete);
         }
@@ -116,17 +120,29 @@ public class Graph : MonoBehaviour
         UpdateSommetIsOcupped(_player);
         foreach (var arete in _aretes)
         {
-            if (arete.endSommets.StepPos == _player.transform.position || arete.startSommets.StepPos == _player.transform.position)
+            if ((arete.startSommets.StepPos == _player.transform.position | arete.endSommets.StepPos == _player.transform.position))
             {
-                if (arete.startSommets.IsOccuped == false)
+                if (arete.startSommets.IsOccuped == false && arete.startSommets.Obj.tag == "Path")
                 {
                     neighborsSommetPos.Add(arete.startSommets.StepPos);
+                    arete.startSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
                 }
-                if (arete.endSommets.IsOccuped == false)
+            
+                if (arete.endSommets.IsOccuped == false && arete.endSommets.Obj.tag == "Path")
                 {
                     neighborsSommetPos.Add(arete.endSommets.StepPos);
+                    arete.endSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
                 }
             }
+        }
+    }
+
+    public void ResetColor()
+    {
+        foreach (var arete in _aretes)
+        {
+            arete.endSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            arete.startSommets.Obj.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         }
     }
 
@@ -134,7 +150,7 @@ public class Graph : MonoBehaviour
     {
         foreach (var arete in _aretes)
         {
-            if (arete.startSommets.StepPos == pTurn.currentPlayer.transform.position && arete.endSommets.StepPos != new Vector3(16,2,0))
+            if (arete.startSommets.StepPos == pTurn.currentPlayer.transform.position)
             {
                 arete.startSommets.IsOccuped = true;
             }
@@ -149,13 +165,23 @@ public class Graph : MonoBehaviour
     {
         foreach (var sommet in _sommets)
         {
-            if (sommet.Obj.transform.position == pTurn.currentPlayer.transform.position && sommet.id != _sommets[_sommets.Count - 1].id)
+            if (sommet.Obj.transform.position == pTurn.currentPlayer.transform.position && sommet.Obj.transform.position != _sommets[_sommets.Count - 1].Obj.transform.position)
             {
                 sommet.Obj.tag = "Occuped";
             }
         }
-
     }
+
+    public void EndTownCase(GameObject _Player)
+    {
+        if (_sommets[_sommets.Count - 1].Obj.transform.position == _Player.transform.position)
+        {
+            pTurn.endTurn = true;
+            pTurn._canMove[pTurn.turn] = false;
+        }
+    }
+
+
     void AddNeighbors()
     {
         foreach (var sommet in _sommets)
@@ -174,10 +200,6 @@ public class Graph : MonoBehaviour
     private void Start()
     {
         InitializeGraph();
-        foreach(var sommet in _sommets)
-        {
-            sommet.Obj.tag = "Path";
-        }
     }
 
 

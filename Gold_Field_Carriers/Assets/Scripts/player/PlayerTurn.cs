@@ -9,69 +9,97 @@ public class PlayerTurn : MonoBehaviour
     public int maxPlayer = 3;
 
     public bool endTurn = false;
+    public bool recupPos = true;
 
     public List<GameObject> _player = new List<GameObject>();
+    public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
 
     [SerializeField] Graph graph;
 
-    public class Player
-    {
-        public bool CanMove;
-        public GameObject PlayerBody;
-
-        public Player(GameObject playerBody, bool canMove = true)
-        {
-            CanMove = canMove;
-            PlayerBody = playerBody;
-        }
-    }
-    public void FirstPlayerTurn()
+    public void PlayerTurnLogic()
     {
         if (_player.Count == maxPlayer)
         {
             switch (turn)
             {
                 case 0:
-                    currentPlayer = _player[0];
-                    if (endTurn)
+                    if (_canMove[turn] == true)
                     {
-                        turn++;
-                        graph.recupPos(_player[1]);
-                        endTurn = false;
+                        currentPlayer = _player[0];
+                        if (recupPos == true)
+                        {
+                            graph.recupPos(_player[turn]);
+                            recupPos = false;
+                        }
+                        if (endTurn)
+                        {
+                            graph.ResetColor();
+                            turn++;
+                            recupPos = true;
+                            endTurn = false;
+                        }
                     }
+                    else
+                        turn++;
                     break;
                 case 1:
-                    currentPlayer = _player[1];
-                    if (endTurn)
+                    if (_canMove[turn] == true)
                     {
-                        turn++;
-                        graph.recupPos(_player[2]);
-                        endTurn = false;
+                        currentPlayer = _player[1];
+                        if (recupPos == true)
+                        {
+                            graph.recupPos(_player[turn]);
+                            recupPos = false;
+                        }
+                        if (endTurn)
+                        {
+                            graph.ResetColor();
+                            turn++;
+                            recupPos = true;
+                            endTurn = false;
+                        }
                     }
+                    else
+                        turn++;
                     break;
                 case 2:
-                    currentPlayer = _player[2];
-                    if (endTurn)
+                    if (_canMove[turn] == true)
                     {
-                        turn = 0;
-                        graph.recupPos(_player[0]);
-                        endTurn = false;
+                        currentPlayer = _player[2];
+                        if (recupPos == true)
+                        {
+                            graph.recupPos(_player[turn]);
+                            recupPos = false;
+                        }
+                        if (endTurn)
+                        {
+                            graph.ResetColor();
+                            turn = 0;
+                            recupPos = true;
+                            endTurn = false;
+                        }
                     }
+                    else
+                        turn = 0;
                     break;
                 default:
                     currentPlayer = null;
                     break;
             }
-
+        }
+        for(int i = 0; i < _canMove.Count; i++)
+        {
+            if (_canMove[0] == false && _canMove[1] == false && _canMove[2] == false)
+            {
+                turn = 5;
+                graph.ResetColor();
+            }
         }
     }
-
-
-
     private void Update()
     {
-        FirstPlayerTurn();
+        PlayerTurnLogic();
     }
 
 }
