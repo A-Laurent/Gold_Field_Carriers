@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Stats : MonoBehaviour
 {
-    public static List<int> _goldPlayer = new();
     public static List<int> _bulletPlayer = new();
     public static List<int> _hpPlayer = new();
     public static List<string> _zonePlayer = new();
@@ -18,7 +18,6 @@ public class Stats : MonoBehaviour
     {
         for (int i = 0; i < _nbPlayer; i++)
         {
-            _goldPlayer.Add(25);
             _bulletPlayer.Add(2);
             _hpPlayer.Add(3);
             _zonePlayer.Add("Start");
@@ -36,7 +35,9 @@ public class Stats : MonoBehaviour
             _hpPlayer[_turnPlayer] = 3;
         if (_hpPlayer[_turnPlayer] == 0)
         {
-            _goldPlayer[_turnPlayer] -= 8;
+            Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold -= 8;
+            Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<TMP_Text>().text = Sc_CharacterManager
+                .Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold.ToString();
             _hpPlayer[_turnPlayer] = 1;
         }
 
@@ -47,7 +48,7 @@ public class Stats : MonoBehaviour
             _bulletPlayer[_turnPlayer] = 0;
 
         //Gold
-        if (_goldPlayer[_turnPlayer] < 0)
-            _goldPlayer[_turnPlayer] = 0;
+        if (Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold < 0)
+            Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold = 0;
     }
 }

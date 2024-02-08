@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -8,10 +6,17 @@ using UnityEngine.UI;
 
 public class Sc_CharacterManager : MonoBehaviour
 {
+    public List<PlayerClass> _scriptableObject = new List<PlayerClass>();
+
     public List<GameObject> _playerInfo = new List<GameObject>();
     public List<int> _ID = new List<int>();
-    
+
+    public List<PlayerClass> _selectedPlayer = new List<PlayerClass>();
+
+    public bool _canSetPlayerInfo = true;
+
     public static Sc_CharacterManager Instance;
+
     private void Awake()
     {
         if (Instance == null)
@@ -24,9 +29,9 @@ public class Sc_CharacterManager : MonoBehaviour
             Debug.LogError("Two instance of Sc_CharacterManager");
             return;
         }
-        
-        if(File.Exists(Application.dataPath + "/Saves/Characters.json"))
-            Sc_SaveCharacters.Instance.LoadFromJson();  
+
+        if (File.Exists(Application.dataPath + "/Saves/Characters.json"))
+            Sc_SaveCharacters.Instance.LoadFromJson();
     }
 
     private void Start()
@@ -36,14 +41,21 @@ public class Sc_CharacterManager : MonoBehaviour
 
     private void SetPlayerInfo()
     {
-        int i = 0;
         foreach (var playerinfo in _playerInfo)
         {
-            playerinfo.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite = Sc_ScriptableReader.Instance._playerClasses[i]._sprite;
-            
-            playerinfo.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite = Sc_ScriptableReader.Instance._playerClasses[i]._sprite;
-            playerinfo.transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text = Sc_ScriptableReader.Instance._playerClasses[i]._name;
-            i++;
+            playerinfo.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._sprite;
+
+            playerinfo.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._sprite;
+            playerinfo.transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._name;
+        }
+
+        foreach (var playerinfo in _playerInfo)
+        {
+            playerinfo.transform.GetChild(0).Find("Number of Gold").GetComponent<TMP_Text>().text =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._gold.ToString();
         }
     }
 }
