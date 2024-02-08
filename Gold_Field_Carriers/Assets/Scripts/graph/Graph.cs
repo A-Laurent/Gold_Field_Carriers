@@ -134,7 +134,7 @@ public class Graph : MonoBehaviour
     {
         foreach (var arete in _aretes)
         {
-            if (arete.startSommets.StepPos == pTurn.currentPlayer.transform.position)
+            if (arete.startSommets.StepPos == pTurn.currentPlayer.transform.position && arete.endSommets.StepPos != new Vector3(16,2,0))
             {
                 arete.startSommets.IsOccuped = true;
             }
@@ -149,7 +149,7 @@ public class Graph : MonoBehaviour
     {
         foreach (var sommet in _sommets)
         {
-            if (sommet.Obj.transform.position == pTurn.currentPlayer.transform.position)
+            if (sommet.Obj.transform.position == pTurn.currentPlayer.transform.position && sommet.id != _sommets[_sommets.Count - 1].id)
             {
                 sommet.Obj.tag = "Occuped";
             }
@@ -235,11 +235,4 @@ public class Graph : MonoBehaviour
         StartRaycast();
         CheckRay();
     }
-
-
-    public void TurnPass()
-    {
-        pTurn.turn++;
-    }
-
 }
