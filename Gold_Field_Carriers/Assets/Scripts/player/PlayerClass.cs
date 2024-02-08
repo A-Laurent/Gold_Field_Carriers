@@ -4,21 +4,24 @@ using UnityEngine;
 public class PlayerClass : ScriptableObject
 {
     //main Information
-    public string PlayerName;
-    public string Description;
-    public Sprite Image;
+    public string _name;
+    public string _desc;
+    public Sprite _sprite;
 
-    public bool IsAlive = true;
+    public bool _isAlive = true;
+    public bool _isInTheCity = false;
 
     //stat
-    public int CurrentLife;
-    public int MaxLife = 3;
+    public int _currentLife;
+    public int _maxLife = 3;
     private int _minLife = 0;
 
-    public int CurrentAmmount;
-    public int MaxAmmount;
+    public int _currentAmmount;
+    public int _maxAmmount;
     private int _minAmmount = 0;
 
-    public int Gold;
+    public int _gold;
+
+    public int _id;
 
 }

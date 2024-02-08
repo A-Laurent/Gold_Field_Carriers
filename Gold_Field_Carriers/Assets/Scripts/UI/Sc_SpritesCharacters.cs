@@ -12,9 +12,10 @@ public class Sc_SpritesCharacters : MonoBehaviour
     public GameObject _characterToSelect;
 
     [Header("Button")] 
-    public List<Button> _selectCharacterButton = new List<Button>();
-    public List<Button> _undoCharacterButton = new List<Button>();
     public Button _startButton;
+
+    [Header("ID")] 
+    public List<int> _ID = new List<int>();
     
     private int _characterIndex = 2;
     
@@ -36,13 +37,6 @@ public class Sc_SpritesCharacters : MonoBehaviour
     private void Start()
     {
         _characterToSelect = _charactersSelection[_characterIndex];
-        _selectCharacterButton[1].interactable = false;
-        _selectCharacterButton[2].interactable = false;
-
-        foreach (var button in _undoCharacterButton)
-        {
-            button.interactable = false;
-        }
     }
 
     public void LeftArrow()
@@ -85,6 +79,14 @@ public class Sc_SpritesCharacters : MonoBehaviour
             _characterIndex = 5;
         
         _characterToSelect = _charactersSelection[_characterIndex];
+        
+        foreach (var character in _charactersSelection)
+        {
+            if(character == _characterToSelect)
+                character.GetComponent<Button>().interactable = true;
+            else
+                character.GetComponent<Button>().interactable = false; 
+        }
     }
 
     public void RightArrow()
@@ -125,5 +127,13 @@ public class Sc_SpritesCharacters : MonoBehaviour
             _characterIndex = 0;
         
         _characterToSelect = _charactersSelection[_characterIndex];
+        
+        foreach (var character in _charactersSelection)
+        {
+            if(character == _characterToSelect)
+                character.GetComponent<Button>().interactable = true;
+            else
+                character.GetComponent<Button>().interactable = false; 
+        }
     }
 }

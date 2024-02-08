@@ -6,4 +6,6 @@ using UnityEngine.EventSystems;
 public class Sc_CanSelect : MonoBehaviour
 {
     public bool _canSelect = true;
+
+    public int _id;
 }

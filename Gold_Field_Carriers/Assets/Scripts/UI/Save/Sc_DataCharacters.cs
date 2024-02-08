@@ -3,6 +3,5 @@ using UnityEngine;
 
 public class Sc_DataCharacters
 {
-    public List<string> _selectedCharactersNames = new List<string>();
-    public List<Sprite> _selectedCharactersSprites = new List<Sprite>();
+    public List<int> _id = new List<int>();
 }

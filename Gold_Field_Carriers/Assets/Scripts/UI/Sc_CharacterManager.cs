@@ -8,11 +8,10 @@ using UnityEngine.UI;
 
 public class Sc_CharacterManager : MonoBehaviour
 {
-    public List<string> _characterSelectedNames = new List<string>();
-    public List<Sprite> _characterSelectedSprites = new List<Sprite>();
     public List<GameObject> _playerInfo = new List<GameObject>();
+    public List<int> _ID = new List<int>();
+    
     public static Sc_CharacterManager Instance;
-
     private void Awake()
     {
         if (Instance == null)
@@ -22,29 +21,29 @@ public class Sc_CharacterManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            Debug.LogError("Two instance of Sc_CharacterManager");
             return;
         }
+        
+        if(File.Exists(Application.dataPath + "/Saves/Characters.json"))
+            Sc_SaveCharacters.Instance.LoadFromJson();  
     }
 
     private void Start()
     {
-        if(File.Exists(Application.dataPath + "/Saves/Characters.json"))
-            Sc_SaveCharacters.Instance.LoadFromJson();  
-        
         SetPlayerInfo();
     }
 
     private void SetPlayerInfo()
     {
-        for (var i = 0; i < _characterSelectedNames.Count; i++)
+        int i = 0;
+        foreach (var playerinfo in _playerInfo)
         {
-            for (var j = 0; j < _characterSelectedSprites.Count; j++)
-            {
-                _playerInfo[j].transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite = _characterSelectedSprites[j];
-                _playerInfo[j].transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite = _characterSelectedSprites[j];
-
-                _playerInfo[i].transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text = _characterSelectedNames[i];
-            }
+            playerinfo.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite = Sc_ScriptableReader.Instance._playerClasses[i]._sprite;
+            
+            playerinfo.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite = Sc_ScriptableReader.Instance._playerClasses[i]._sprite;
+            playerinfo.transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text = Sc_ScriptableReader.Instance._playerClasses[i]._name;
+            i++;
         }
     }
 }
