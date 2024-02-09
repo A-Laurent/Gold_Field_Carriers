@@ -11,7 +11,7 @@ public class AnimationCard : MonoBehaviour
     public TextMeshProUGUI _text;
     public Card _card;
     bool showtext = false;
-    private SC_PlayerTurn _endTurn;
+    public SC_PlayerTurn _endTurn;
 
     private void Start()
     {
@@ -46,11 +46,15 @@ public class AnimationCard : MonoBehaviour
         }
         if (_cardAnim.transform.rotation.y <= 0 && !CardChoice._choice)
         {
-            _timer += Time.deltaTime;
             AnimationStats._animation = true;
-            if (Input.GetMouseButtonDown(0))
-                _timer = 15;
-            if (_timer >= 15 && !CardChoice._choice && !CardChoice._cardTrade && !CardChoice._cardDonation && !CardChoice._changeZoneRiver && !CardChoice._medium)
+            if (!Card.Instance._isChoice)
+            {
+                _timer += Time.deltaTime;
+                if (Input.GetMouseButtonDown(0))
+                    _timer = 15;
+            }
+            
+            if (_timer >= 15 && !CardChoice._cardDonation && !CardChoice._medium && !CardChoice._cardTrade && !CardChoice._choice)
             {
                 _animation = false;
                 _timer = 0.0f;
@@ -63,15 +67,17 @@ public class AnimationCard : MonoBehaviour
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;
                 AnimationStats._goldAnim = 0;
+                SC_PlayerTurn.Instance.turn += 1;
                 Stats._turnPlayer += 1;
-                if (Stats._turnPlayer == Stats._nbPlayer)
-                    Stats._turnPlayer = 0;
-                if (Card._skipTurn[Stats._turnPlayer])
+                Card.Instance._isChoice = false;
+                if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                    SC_PlayerTurn.Instance.turn = 0;
+                if (Card._skipTurn[SC_PlayerTurn.Instance.turn])
                 {
-                    Card._skipTurn[Stats._turnPlayer] = false;
-                    Stats._turnPlayer += 1;
-                    if (Stats._turnPlayer == Stats._nbPlayer)
-                        Stats._turnPlayer = 0;
+                    Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
+                    SC_PlayerTurn.Instance.turn += 1;
+                    if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                        SC_PlayerTurn.Instance.turn = 0;
                 }
             }
         }

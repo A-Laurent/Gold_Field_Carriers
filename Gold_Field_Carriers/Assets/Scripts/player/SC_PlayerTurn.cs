@@ -49,7 +49,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (endTurn)
                         {
                             graph.ResetColor();
-                            turn++;
                             recupPos = true;
                             endTurn = false;
                         }
@@ -71,7 +70,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (endTurn)
                         {
                             graph.ResetColor();
-                            turn++;
                             recupPos = true;
                             endTurn = false;
                         }
@@ -93,7 +91,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (endTurn)
                         {
                             graph.ResetColor();
-                            turn = 0;
                             recupPos = true;
                             endTurn = false;
                         }
@@ -120,6 +117,7 @@ public class SC_PlayerTurn : MonoBehaviour
 
     private void Update()
     {
+        print(turn);
         PlayerTurnLogic();
     }
 
@@ -197,23 +195,116 @@ public class SC_PlayerTurn : MonoBehaviour
         }
     }
 
-    public void SetMountainsBool()
+    public void SetChoice1()
     {
-        _mountains = true;
-        ZoneChanged(currentPlayer);
-        Debug.Log("Mountains");
-        endTurn = true;//a 
-        ButtonChoice.SetActive(false);
-        AnimationCard._timer = 15;
+        if (Card._card._name == "Change of zone")
+        {
+            _mountains = true;
+            ZoneChanged(currentPlayer);
+            Debug.Log("Mountains");
+            endTurn = true;//a 
+            ButtonChoice.SetActive(false);
+            AnimationCard._timer = 15;
+            CardChoice.instance.DestroyCard();
+        }
+        else if (Card._card._name == "Medium")
+        {
+            if (CardChoice.instance._choiceRiver || CardChoice.instance._choiceDesert || CardChoice.instance._choiceMountain)
+            {
+                AnimationCard._timer = 15;
+                endTurn = true;//a 
+            }
+            CardChoice.instance.Choice1();
+        }
+        else if (Card._card._name == "Donation")
+        {
+            CardChoice.instance.Choice1();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
+        else if (Card._card._name == "Choice")
+        {
+            CardChoice.instance.Choice1();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
+        else if (Card._card._name == "TradePlayer")
+        {
+            CardChoice.instance.Choice1();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
     }
 
-    public void SetDesertBool()
+    public void SetChoice2()
     {
-        _desert = true;
-        ZoneChanged(currentPlayer);
-        Debug.Log("Desert");
-        endTurn = true;//a 
-        ButtonChoice.SetActive(false);
-        AnimationCard._timer = 15;
+        if (Card._card._name == "Change of zone")
+        {
+            _desert = true;
+            ZoneChanged(currentPlayer);
+            Debug.Log("Desert");
+            endTurn = true;//a 
+            ButtonChoice.SetActive(false);
+            AnimationCard._timer = 15;
+            CardChoice.instance.DestroyCard();
+        }
+        else if (Card._card._name == "Medium")
+        {
+            if (CardChoice.instance._choiceRiver || CardChoice.instance._choiceDesert || CardChoice.instance._choiceMountain)
+            {
+                AnimationCard._timer = 15;
+                endTurn = true;//a 
+            }
+            CardChoice.instance.Choice2();
+        }
+        else if (Card._card._name == "Donation")
+        {
+            if (CardChoice.instance._choicePlayer1 || CardChoice.instance._choicePlayer2)
+            {
+                AnimationCard._timer = 15;
+                endTurn = true;
+            }
+            CardChoice.instance.Choice2();
+        }
+        else if (Card._card._name == "Choice")
+        {
+            CardChoice.instance.Choice2();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
+        else if (Card._card._name == "TradePlayer")
+        {
+            CardChoice.instance.Choice2();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
+    }
+
+    public void SetChoice3()
+    {
+        if (Card._card._name == "Medium")
+        {
+            if (CardChoice.instance._choiceRiver || CardChoice.instance._choiceDesert || CardChoice.instance._choiceMountain)
+            {
+                AnimationCard._timer = 15;
+                endTurn = true;//a 
+            }
+            CardChoice.instance.Choice3();
+        }
+        else if (Card._card._name == "Donation")
+        {
+            if (CardChoice.instance._choicePlayer1 || CardChoice.instance._choicePlayer2)
+            {
+                AnimationCard._timer = 15;
+                endTurn = true;
+            }
+            CardChoice.instance.Choice3();              
+        }
+        else if (Card._card._name == "TradePlayer")
+        {
+            CardChoice.instance.Choice3();
+            AnimationCard._timer = 15;
+            endTurn = true;
+        }
     }
 }

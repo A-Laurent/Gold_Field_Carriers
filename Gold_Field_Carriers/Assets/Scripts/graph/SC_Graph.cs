@@ -96,7 +96,7 @@ public class SC_Graph : MonoBehaviour
 
         //create Endpoint
         endTown = Instantiate(EndTown, new Vector3(16, 2, 0), Quaternion.identity);
-        Sommets exitSommet = new Sommets(3 * 8, 5, endTown.transform.position, endTown);
+        Sommets exitSommet = new Sommets(3 * 8, 10, endTown.transform.position, endTown);
         _sommets.Add(exitSommet);
         for (int i = 0; i < 3; i++)
         {
@@ -247,11 +247,11 @@ public class SC_Graph : MonoBehaviour
 
     public void DrawCard(GameObject _player)
     {
-        foreach (var arete in _aretes)
+        foreach (var sommet in _sommets)
         {
-            if(arete.startSommets.Obj.transform.position == _player.transform.position)
+            if (sommet.Obj.transform.position == _player.transform.position)
             {
-                switch (arete.startSommets.zone)
+                switch (sommet.zone)
                 {
                     case 0:
                         Zone.SetDesert();

@@ -15,9 +15,9 @@ public class SC_MovePlayer : MonoBehaviour
 
     private IEnumerator CharacterMove(float total_time)
     {
-        foreach(var a in graph._sommets)
+        foreach (var a in graph._sommets)
         {
-            if(a.Obj.transform.position == pTurn.currentPlayer.transform.position)
+            if (a.Obj.transform.position == pTurn.currentPlayer.transform.position)
             {
                 a.Obj.tag = "Path";
             }
