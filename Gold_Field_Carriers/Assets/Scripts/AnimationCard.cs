@@ -11,16 +11,18 @@ public class AnimationCard : MonoBehaviour
     public TextMeshProUGUI _text;
     public Card _card;
     bool showtext = false;
+    private SC_PlayerTurn _endTurn;
 
     private void Start()
     {
-        _cardAnim.transform.position = new Vector3(813, -300, 0);
+        _cardAnim.transform.position = new Vector3(300, 300, 0);
     }
     void Update()
     {
-        if (_cardAnim.transform.rotation.y <= 0.75 && !showtext && Card._card!=null)
+        if (_cardAnim.transform.rotation.y <= 0.75 && !showtext && Card._card != null)
         {
             _text.text = Card._card._description;
+            Debug.Log("Ca passe la");
             showtext = true;
         }
 
@@ -52,9 +54,11 @@ public class AnimationCard : MonoBehaviour
             {
                 _animation = false;
                 _timer = 0.0f;
+                _endTurn.endTurn = true;
+                showtext = false;
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
-                _cardAnim.transform.position = new Vector3(813, -300, 0);
+                _cardAnim.transform.position = new Vector3(300, 300, 0);
                 Zone._draw = false;
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;

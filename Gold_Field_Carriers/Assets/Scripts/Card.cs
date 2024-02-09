@@ -160,6 +160,7 @@ public class Card : MonoBehaviour
             _cardDataRiver.RemoveAt(_cardIndex);
     } 
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public void EffectCard()
     {
         //_description.text = _card._description;
@@ -196,13 +197,14 @@ public class Card : MonoBehaviour
         {
             if (_card._zone == "River")
             {
-                if (Zone._line[0] == Zone._line[1] && Zone._line[1] == Zone._line[2])
-                {
-                    Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
-                    return;
-                }
-                CardChoice._changeZoneRiver = true;
+                // if (Zone._line[0] == Zone._line[1] && Zone._line[1] == Zone._line[2])
+                // {
+                //     Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
+                //     return;
+                // }
+                // CardChoice._changeZoneRiver = true;
                 _uiChoice.SetActive(true);
+                //SC_PlayerTurn.Instance.ZoneChanged(SC_PlayerTurn.Instance.currentPlayer);
             }
             else
             {

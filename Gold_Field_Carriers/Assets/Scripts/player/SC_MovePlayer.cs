@@ -44,7 +44,6 @@ public class SC_MovePlayer : MonoBehaviour
             graph.EndTownCase(pTurn.currentPlayer);
             graph.DrawCard(pTurn.currentPlayer);
             canMove = true;
-            pTurn.endTurn = true;//a 
         }
     }
 
