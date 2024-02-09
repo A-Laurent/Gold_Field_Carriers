@@ -1,0 +1,56 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "b71d8305-f557-439c-a1d1-b4742887f79c",
+            "actions": [
+                {
+                    "name": "Camera Movement",
+                    "type": "Button",
+                    "id": "3c7f5753-9bba-419f-a4e0-645ef6e5f4c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Direction",
+                    "id": "688fa6b0-91eb-4127-b9f5-895c65be7ab8",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera Movement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1955022c-668b-43f4-b83a-d8f4aa33830d",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "fe6e4349-1fb1-4a2b-9cf7-02875e472a67",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
