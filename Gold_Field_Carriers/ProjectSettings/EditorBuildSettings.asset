@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/Settings.unity
     guid: 6b21a569f7b09d845a6cc2603240c251
+  - enabled: 1
+    path: Assets/Scenes/Devroom_FixUI.unity
+    guid: 623f65280459381498f4a695e0d51b4b
   m_configObjects: {}

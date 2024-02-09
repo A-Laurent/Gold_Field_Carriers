@@ -41,21 +41,33 @@ public class Sc_CharacterManager : MonoBehaviour
 
     private void SetPlayerInfo()
     {
-        foreach (var playerinfo in _playerInfo)
+        foreach (var t in _playerInfo)
         {
-            playerinfo.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._sprite;
-
-            playerinfo.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._sprite;
-            playerinfo.transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._name;
+            t.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite =
+                t.GetComponent<Sc_ScriptableReader>()._sprite;  
+            
+            Debug.Log(t.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite.name);
+            
+            t.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite =
+                t.GetComponent<Sc_ScriptableReader>()._sprite;
+            
+            t.transform.GetChild(0).Find("Name").GetComponent<TMP_Text>().text =
+                t.GetComponent<Sc_ScriptableReader>()._name;
         }
 
         foreach (var playerinfo in _playerInfo)
         {
             playerinfo.transform.GetChild(0).Find("Number of Gold").GetComponent<TMP_Text>().text =
                 playerinfo.GetComponent<Sc_ScriptableReader>()._gold.ToString();
+            
+            playerinfo.transform.GetChild(1).Find("Number of Gold").GetComponent<TMP_Text>().text =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._gold.ToString();
+            
+            playerinfo.transform.GetChild(1).Find("Number of Hearth").GetComponent<TMP_Text>().text =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._maxLife.ToString();
+            
+            playerinfo.transform.GetChild(1).Find("Number of Bullet").GetComponent<TMP_Text>().text =
+                playerinfo.GetComponent<Sc_ScriptableReader>()._maxAmmount.ToString();
         }
     }
 }

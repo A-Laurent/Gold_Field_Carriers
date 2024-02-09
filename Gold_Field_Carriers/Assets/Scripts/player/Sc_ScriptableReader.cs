@@ -46,32 +46,8 @@ public class Sc_ScriptableReader : MonoBehaviour
             Sc_CharacterManager.Instance._canSetPlayerInfo = true;
             Sc_CharacterManager.Instance._scriptableObject.Remove(_playerClasse);
         }
-
-        // if (Sc_CharacterManager.Instance._selectedPlayer.Count >= 3)
-        // {
-        //     for (var i = 0; i < Sc_CharacterManager.Instance._selectedPlayer.Count; i++)
-        //     {
-        //         Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._playerClasse = Sc_CharacterManager.Instance._selectedPlayer[i];
-        //     }
-        //
-        // }
-        
         
         SetVariables();
-        // if (Sc_CharacterManager.Instance._canSetPlayerInfo)
-        // {
-        //     Sc_CharacterManager.Instance._canSetPlayerInfo = false;
-        //     foreach (var playerinfo in Sc_CharacterManager.Instance._playerInfo)
-        //     {
-        //         foreach (var id in Sc_CharacterManager.Instance._ID)
-        //         {
-        //             if (playerinfo.GetComponent<Sc_ScriptableReader>()._id == id)
-        //             {
-        //                 Sc_CharacterManager.Instance._selectedPlayer.Add(playerinfo.GetComponent<Sc_ScriptableReader>()
-        //                     ._playerClasse);
-        //             }
-        //         }
-        //     }
     }
 
     void SetVariables()
@@ -93,13 +69,4 @@ public class Sc_ScriptableReader : MonoBehaviour
 
         _id = _playerClasse._id;
     }
-
-    // for (var i = 0; i < Sc_CharacterManager.Instance._ID.Count; i++)
-    // {
-    //     for (var j = 0; j < _scriptableObject.Count; j++)
-    //     {
-    //         if (_scriptableObject[j]._id == Sc_CharacterManager.Instance._ID[i])
-    //             _playerClasses.Add(_scriptableObject[j]);
-    //     }
-    // }
 }

@@ -6,10 +6,7 @@ public class Sc_GameManager : MonoBehaviour
 {
     void Start()
     {
-        foreach (var playerinfo in Sc_CharacterManager.Instance._playerInfo)
-        {
-            
-        }
+ 
     }
     
     void Update()
