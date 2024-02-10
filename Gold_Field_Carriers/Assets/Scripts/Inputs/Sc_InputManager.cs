@@ -12,12 +12,6 @@ public class Sc_InputManager : MonoBehaviour
         if (context.performed)
         {
             Sc_CameraMovement.Instance._cameraDirection = context.ReadValue<float>();
-            
-            if(Sc_CameraMovement.Instance._cameraDirection == 1)
-                Sc_CameraMovement.Instance._rightDirection = true;
-            else if(Sc_CameraMovement.Instance._cameraDirection == -1)
-                Sc_CameraMovement.Instance._leftDirection = true;
-
         }
         else if (context.canceled)
         {
