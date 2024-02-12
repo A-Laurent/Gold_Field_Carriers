@@ -21,7 +21,7 @@ public class SC_PlayerTurn : MonoBehaviour
 
     public GameObject ButtonChoice;
 
-    [SerializeField] SC_Graph graph;
+    [SerializeField] public SC_Graph graph;
 
     public static SC_PlayerTurn Instance;
 
@@ -117,7 +117,6 @@ public class SC_PlayerTurn : MonoBehaviour
 
     private void Update()
     {
-        print(turn);
         PlayerTurnLogic();
     }
 
@@ -145,6 +144,32 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         else
                             Debug.Log("dont move");
+                    }
+                    else if (sommet.zone == 0)
+                    {
+                        if (graph._sommets[sommet.id + 8].Obj.tag == "Path")
+                        {
+                            player.transform.position = graph._sommets[sommet.id + 8].Obj.transform.position;
+                            sommet.Obj.tag = "Path";
+                            graph._sommets[sommet.id + 8].Obj.tag = "Occuped";
+                        }
+                        else
+                        {
+                            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
+                        }
+                    }
+                    else if (sommet.zone == 2)
+                    {
+                        if (graph._sommets[sommet.id - 8].Obj.tag == "Path")
+                        {
+                            player.transform.position = graph._sommets[sommet.id - 8].Obj.transform.position;
+                            sommet.Obj.tag = "Path";
+                            graph._sommets[sommet.id - 8].Obj.tag = "Occuped";
+                        }
+                        else
+                        {
+                            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
+                        }
                     }
                 }
             }

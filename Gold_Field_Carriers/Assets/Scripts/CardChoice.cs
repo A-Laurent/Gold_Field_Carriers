@@ -185,7 +185,10 @@ public class CardChoice : MonoBehaviour
         {
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
-            _changeZoneRiver = false;
+            _medium = false;
+            _choiceDesert = false;
+            _choiceMountain = false;
+            _choiceRiver = false;
             DestroyCard();
         }
         if (_medium)
@@ -283,14 +286,13 @@ public class CardChoice : MonoBehaviour
             if (_card._cardDataDesert.Count > 1)
             {
                 (_card._cardDataDesert[1], _card._cardDataDesert[0]) = (_card._cardDataDesert[0], _card._cardDataDesert[1]);
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
             else
             {
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
+            _medium = false;
             _choiceDesert = false;
             DestroyCard();
         }
@@ -299,14 +301,13 @@ public class CardChoice : MonoBehaviour
             if (_card._cardDataRiver.Count > 1)
             {
                 (_card._cardDataRiver[1], _card._cardDataRiver[0]) = (_card._cardDataRiver[0], _card._cardDataRiver[1]);
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
             else
             {
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
+            _medium = false;
             _choiceRiver = false;
             DestroyCard();
         }
@@ -315,14 +316,13 @@ public class CardChoice : MonoBehaviour
             if (_card._cardDataMountain.Count > 1)
             {
                 (_card._cardDataMountain[2], _card._cardDataMountain[1]) = (_card._cardDataMountain[1], _card._cardDataMountain[2]);
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
             else
             {
-                _medium = false;
                 _card._uiChoice.SetActive(false);
             }
+            _medium = false;
             _choiceMountain = false;
             DestroyCard();
         }
@@ -450,7 +450,7 @@ public class CardChoice : MonoBehaviour
                 if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
                 {
                     Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
                 else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
                 {

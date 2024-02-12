@@ -9,8 +9,6 @@ public class Stats : MonoBehaviour
     public static List<string> _zonePlayer = new();
 
     private SC_PlayerTurn _playerTurnInstance = SC_PlayerTurn.Instance;
-
-    public static int _turnPlayer = 0;
     public static int _nbPlayer = 3;
     public Text _zoneText;
 

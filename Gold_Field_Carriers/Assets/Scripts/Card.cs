@@ -159,7 +159,7 @@ public class Card : MonoBehaviour
     {
         _card = _cardDataRiver[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium" && _card._name != "Change of zone")
             _cardDataRiver.RemoveAt(_cardIndex);
     } 
 
@@ -188,7 +188,11 @@ public class Card : MonoBehaviour
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
                 if (Stats._zonePlayer[i] == "River")
-                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp; ;
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
+                if (Stats._zonePlayer[i] == "Desert")
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._gold += _card._gold;
+                if (Stats._zonePlayer[i] == "Mountain")
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
             }
         }
         else if (_card._name == "TradePlayer")
@@ -202,29 +206,12 @@ public class Card : MonoBehaviour
         {
             if (_card._zone == "River")
             {
-                // if (Zone._line[0] == Zone._line[1] && Zone._line[1] == Zone._line[2])
-                // {
-                //     Stats._hpPlayer[Stats._turnPlayer] += _card._hp;
-                //     return;
-                // }
-                // CardChoice._changeZoneRiver = true;
-
                 _uiChoice.SetActive(true);
                 _isChoice = true;
-                //SC_PlayerTurn.Instance.ZoneChanged(SC_PlayerTurn.Instance.currentPlayer);
             }
             else
             {
-                for (int i = 0; i < Stats._nbPlayer; i++)
-                {
-                    if (i != SC_PlayerTurn.Instance.turn)
-                        if (Zone._line[i] == Zone._line[SC_PlayerTurn.Instance.turn] && Stats._zonePlayer[i] == "River")
-                        {
-                            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
-                            return;
-                        }
-                }
-                Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "River";
+                SC_PlayerTurn.Instance.OverFlow();
             }
         }
         else if (_card._name == "Donation")

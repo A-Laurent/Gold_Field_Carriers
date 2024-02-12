@@ -22,7 +22,6 @@ public class AnimationCard : MonoBehaviour
         if (_cardAnim.transform.rotation.y <= 0.75 && !showtext && Card._card != null)
         {
             _text.text = Card._card._description;
-            Debug.Log("Ca passe la");
             showtext = true;
         }
 
@@ -68,8 +67,26 @@ public class AnimationCard : MonoBehaviour
                 AnimationStats._bulletAnim = 0;
                 AnimationStats._goldAnim = 0;
                 SC_PlayerTurn.Instance.turn += 1;
-                Stats._turnPlayer += 1;
                 Card.Instance._isChoice = false;
+                if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                    SC_PlayerTurn.Instance.turn = 0;
+                SkipTurn();
+            }
+        }
+    }
+
+    public void SkipTurn()
+    {
+        if (Card._skipTurn[SC_PlayerTurn.Instance.turn])
+        {
+            Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
+            SC_PlayerTurn.Instance.turn += 1;
+            if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                SC_PlayerTurn.Instance.turn = 0;
+            if (Card._skipTurn[SC_PlayerTurn.Instance.turn])
+            {
+                Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
+                SC_PlayerTurn.Instance.turn += 1;
                 if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
                     SC_PlayerTurn.Instance.turn = 0;
                 if (Card._skipTurn[SC_PlayerTurn.Instance.turn])

@@ -21,7 +21,7 @@ public class Zone : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < Stats._nbPlayer; i++)
+        for (int i = 0; i < SC_PlayerTurn.Instance.turn; i++)
         {
             _line.Add(0);
         }
@@ -42,7 +42,7 @@ public class Zone : MonoBehaviour
         //    }
         //    if (Stats._zonePlayer[Stats._turnPlayer] == "Desert" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
         //        _line[Stats._turnPlayer] += 1;
-        Stats._zonePlayer[Stats._turnPlayer] = "Desert";
+        Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "Desert";
         _draw = true;
             //if (Stats._turnPlayer == 0)
             //    _turn += 1;
@@ -66,7 +66,7 @@ public class Zone : MonoBehaviour
         //    }
         //    if (Stats._zonePlayer[Stats._turnPlayer] == "River" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
         //        _line[Stats._turnPlayer] += 1;
-        Stats._zonePlayer[Stats._turnPlayer] = "River";
+        Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "River";
         _draw = true;
             //if (Stats._turnPlayer == 0)
             //    _turn += 1;
@@ -90,7 +90,7 @@ public class Zone : MonoBehaviour
         //    }
         //    if (Stats._zonePlayer[Stats._turnPlayer] == "Mountain" || Stats._zonePlayer[Stats._turnPlayer] == "Start")
         //        _line[Stats._turnPlayer] += 1;
-        Stats._zonePlayer[Stats._turnPlayer] = "Mountain";
+        Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "Mountain";
         _draw = true;
             //if (Stats._turnPlayer == 0)
             //    _turn += 1;
