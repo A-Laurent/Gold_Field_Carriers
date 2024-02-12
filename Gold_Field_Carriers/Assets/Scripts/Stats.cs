@@ -30,10 +30,10 @@ public class Stats : MonoBehaviour
         //_zoneText.text = "Zone : " + _zonePlayer[0] + " " + _zonePlayer[1] + " " + _zonePlayer[2];
         StatLimit();
 
-        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold, 
-            _hpPlayer[_turnPlayer],
-               _bulletPlayer[_turnPlayer],
-               _turnPlayer);
+        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold, 
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife,
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount,
+            SC_PlayerTurn.Instance.turn);
     }
 
     public void StatLimit()

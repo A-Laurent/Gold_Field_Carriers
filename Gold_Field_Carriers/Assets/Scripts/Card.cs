@@ -211,7 +211,7 @@ public class Card : MonoBehaviour
             }
             else
             {
-                SC_PlayerTurn.Instance.OverFlow();
+                //SC_PlayerTurn.Instance.OverFlow();
             }
         }
         else if (_card._name == "Donation")
@@ -230,7 +230,7 @@ public class Card : MonoBehaviour
         }
         else if (_card._name == "Overflow")
         {
-            SC_PlayerTurn.Instance.OverFlow();
+            //SC_PlayerTurn.Instance.OverFlow();
         }
         else
         {

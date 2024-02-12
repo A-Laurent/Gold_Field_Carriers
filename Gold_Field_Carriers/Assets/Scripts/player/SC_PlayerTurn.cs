@@ -102,34 +102,34 @@ public class SC_PlayerTurn : MonoBehaviour
     {
         PlayerTurnLogic();
     }
-    public void OverFlow()
-    {
-        foreach (var player in _player)
-        {
-            foreach (var sommet in playerMovement._sommets)
-            {
-                if (player.transform.position == sommet.Obj.transform.position)
-                {
-                    if (sommet.zone == 1)
-                    {
-                        int RandNumber = Random.Range(0, 2);
-    
-                        if (RandNumber == 0 && sommet.Obj.tag == "Path")
-                        {
-                            player.transform.position = playerMovement._sommets[sommet.id + 8].Obj.transform.position;
-                            sommet.Obj.tag = "Path";
-                        }
-                        else if (sommet.Obj.tag == "Path")
-                        {
-                            player.transform.position = playerMovement._sommets[sommet.id - 8].Obj.transform.position;
-                            sommet.Obj.tag = "Path";
-    
-                        }
-                        else
-                            Debug.Log("dont move"); 
-                    }
-                }
-            }
-        }
-    }
+    // public void OverFlow()
+    // {
+    //     foreach (var player in _player)
+    //     {
+    //         foreach (var sommet in playerMovement._sommets)
+    //         {
+    //             if (player.transform.position == sommet.Obj.transform.position)
+    //             {
+    //                 if (sommet.zone == 1)
+    //                 {
+    //                     int RandNumber = Random.Range(0, 2);
+    //
+    //                     if (RandNumber == 0 && sommet.Obj.tag == "Path")
+    //                     {
+    //                         player.transform.position = playerMovement._sommets[sommet.id + 8].Obj.transform.position;
+    //                         sommet.Obj.tag = "Path";
+    //                     }
+    //                     else if (sommet.Obj.tag == "Path")
+    //                     {
+    //                         player.transform.position = playerMovement._sommets[sommet.id - 8].Obj.transform.position;
+    //                         sommet.Obj.tag = "Path";
+    //
+    //                     }
+    //                     else
+    //                         Debug.Log("dont move"); 
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
