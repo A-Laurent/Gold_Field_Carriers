@@ -84,6 +84,11 @@ public class Card : MonoBehaviour
             DrawCard();
         }
         Shuffle();
+        
+        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[Stats._turnPlayer].GetComponent<Sc_ScriptableReader>()._gold, 
+                                     Stats._hpPlayer[Stats._turnPlayer], 
+                                        Stats._bulletPlayer[Stats._turnPlayer], 
+                                        Stats._turnPlayer);
     }
     public void DrawCard()
     {
@@ -232,41 +237,41 @@ public class Card : MonoBehaviour
         }
         else if (_card._name == "Overflow")
         {
-            //for (int i = 0; i < Stats._nbPlayer; i++)
-            //{
-            //    if (Stats._zonePlayer[i] == "River")
-            //    {
-            //        int de = Random.Range(0, 1);
-            //        if (de == 0)
-            //        {
-            //            _enter = false;
-            //            for (int j = 0; j < Stats._nbPlayer; j++)
-            //            {
-            //                if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Desert")
-            //                {
-            //                    _enter = true;
-            //                    Stats._hpPlayer[i] += _card._hp;
-            //                }                                    
-            //            }
-            //            if (!_enter)
-            //                Stats._zonePlayer[i] = "Desert";
-            //        }
-            //        else
-            //        {
-            //            _enter = false;
-            //            for (int j = 0; j < Stats._nbPlayer; j++)
-            //            {
-            //                if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Mountain")
-            //                {
-            //                    _enter = true;
-            //                    Stats._hpPlayer[i] += _card._hp;
-            //                }
-            //            }
-            //            if (!_enter)
-            //                Stats._zonePlayer[i] = "Mountain";
-            //        }
-            //    }
-            //}
+            for (int i = 0; i < Stats._nbPlayer; i++)
+            {
+                if (Stats._zonePlayer[i] == "River")
+                {
+                    int de = Random.Range(0, 1);
+                    if (de == 0)
+                    {
+                        _enter = false;
+                        for (int j = 0; j < Stats._nbPlayer; j++)
+                        {
+                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Desert")
+                            {
+                                _enter = true;
+                                Stats._hpPlayer[i] += _card._hp;
+                            }                                    
+                        }
+                        if (!_enter)
+                            Stats._zonePlayer[i] = "Desert";
+                    }
+                    else
+                    {
+                        _enter = false;
+                        for (int j = 0; j < Stats._nbPlayer; j++)
+                        {
+                            if (Zone._line[j] == Zone._line[i] && Stats._zonePlayer[j] == "Mountain")
+                            {
+                                _enter = true;
+                                Stats._hpPlayer[i] += _card._hp;
+                            }
+                        }
+                        if (!_enter)
+                            Stats._zonePlayer[i] = "Mountain";
+                    }
+                }
+            }
             SC_PlayerTurn.Instance.OverFlow();
         }
         else

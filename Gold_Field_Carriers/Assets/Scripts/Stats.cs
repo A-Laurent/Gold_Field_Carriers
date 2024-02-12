@@ -23,11 +23,18 @@ public class Stats : MonoBehaviour
             _zonePlayer.Add("Start");
         }
     }
+
     void Update()
     {
         //_zoneText.text = "Zone : " + _zonePlayer[0] + " " + _zonePlayer[1] + " " + _zonePlayer[2];
         StatLimit();
+
+        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[_turnPlayer].GetComponent<Sc_ScriptableReader>()._gold, 
+            _hpPlayer[_turnPlayer],
+               _bulletPlayer[_turnPlayer],
+               _turnPlayer);
     }
+
     public void StatLimit()
     {
         //HP

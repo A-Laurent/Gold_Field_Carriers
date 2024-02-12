@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,11 @@ public class CardChoice : MonoBehaviour
     public Text _textChoice1;
     public Text _textChoice2;
     public Text _textChoice3;
+
+    private void Start()
+    {
+
+    }
 
     public void Update()
     {
@@ -117,6 +123,11 @@ public class CardChoice : MonoBehaviour
                     _textChoice3.text = "5 Gold"; break;
             }
         }
+        
+        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[Stats._turnPlayer].GetComponent<Sc_ScriptableReader>()._gold, 
+            Stats._hpPlayer[Stats._turnPlayer], 
+            Stats._bulletPlayer[Stats._turnPlayer], 
+            Stats._turnPlayer);
     }
     public void Choice1()
     {
@@ -192,7 +203,7 @@ public class CardChoice : MonoBehaviour
             switch (Stats._zonePlayer[Stats._turnPlayer])
             {
                 case "Desert":
-                    Stats._bulletPlayer[Stats._turnPlayer] += Card._card._bullet + 1;
+                    Stats._bulletPlayer[Stats._turnPlayer] += Card._card._bullet + 1; ;
                     AnimationStats._bulletAnim += Card._card._bullet + 1;
 
                     Stats._hpPlayer[Stats._turnPlayer] += Card._card._hp;

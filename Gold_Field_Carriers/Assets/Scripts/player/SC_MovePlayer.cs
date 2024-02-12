@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SC_MovePlayer : MonoBehaviour
 {
-    [SerializeField] SC_Graph graph;
+    [FormerlySerializedAs("graph")] [SerializeField] Sc_PlayerMovement playerMovement;
      GameObject PlayerBody;
     [SerializeField] SC_PlayerTurn pTurn;
 
@@ -13,19 +15,27 @@ public class SC_MovePlayer : MonoBehaviour
     public bool canMove;
     private Vector3 start_pos, end_pos;
 
+    public static SC_MovePlayer Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     private IEnumerator CharacterMove(float total_time)
     {
-        foreach(var a in graph._sommets)
-        {
-            if(a.Obj.transform.position == pTurn.currentPlayer.transform.position)
-            {
-                a.Obj.tag = "Path";
-            }
-        }
         PlayerBody = pTurn.currentPlayer;
         canMove = false;
         float time = 0f;
-        end_pos = graph.SetEndPos();
+        end_pos = playerMovement.SetEndPos();
         start_pos = PlayerBody.transform.position;
 
         while (time / total_time < 1)
@@ -35,14 +45,9 @@ public class SC_MovePlayer : MonoBehaviour
 
             yield return null;
         }
-
-        graph._neighborsSommetPos.Clear();
-
+        
         if (PlayerBody.transform.position == end_pos)
         {
-            graph.CheckOccupedPath();
-            graph.EndTownCase(pTurn.currentPlayer);
-            graph.DrawCard(pTurn.currentPlayer);
             canMove = true;
             pTurn.endTurn = true;//a 
         }
@@ -50,8 +55,7 @@ public class SC_MovePlayer : MonoBehaviour
 
     public void StartMoving()
     {
-        StartCoroutine(CharacterMove(1f));
+        if(canMove)
+            StartCoroutine(CharacterMove(1f));
     }
-
-    
 }

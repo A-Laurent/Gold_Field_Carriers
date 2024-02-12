@@ -46,8 +46,6 @@ public class Sc_CharacterManager : MonoBehaviour
             t.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite =
                 t.GetComponent<Sc_ScriptableReader>()._sprite;  
             
-            Debug.Log(t.transform.GetChild(0).Find("Sprite").GetComponent<Image>().sprite.name);
-            
             t.transform.GetChild(1).Find("Sprite").GetComponent<Image>().sprite =
                 t.GetComponent<Sc_ScriptableReader>()._sprite;
             

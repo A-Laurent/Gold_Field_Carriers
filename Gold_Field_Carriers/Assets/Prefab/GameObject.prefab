@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3375801341218864951}
   - component: {fileID: 5716562250334789519}
+  - component: {fileID: 4256980112385147082}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -48,6 +49,31 @@ MonoBehaviour:
   StartTown: {fileID: 3020836495159363225, guid: e452e276f7a646b47b43d8218ae8ad76, type: 3}
   EndTown: {fileID: 3020836495159363225, guid: de45df131965d98459f117b85b0be84c, type: 3}
   Line: {fileID: 8396461251749459020, guid: f514880bd6463bf43827e3e342ccb237, type: 3}
-  GridParent: {fileID: 0}
-  Player: {fileID: 4340955653515504773, guid: 42f5780c657bf4643943a4171a03d9a2, type: 3}
-  sommetNeighbors: []
+  pTurn: {fileID: 4256980112385147082}
+  move: {fileID: 0}
+  _neighborsSommetPos: []
+  _camera: {fileID: 2911069149651846486, guid: b93fb351d2c0d574987035aa5811cd34, type: 3}
+  CanMove: 1
+--- !u!114 &4256980112385147082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778374634811133013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8623d78f65b014eaaec2673fcb146d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 0
+  maxPlayer: 3
+  endTurn: 0
+  recupPos: 1
+  _player:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _canMove: 010101
+  currentPlayer: {fileID: 0}
+  graph: {fileID: 5716562250334789519}

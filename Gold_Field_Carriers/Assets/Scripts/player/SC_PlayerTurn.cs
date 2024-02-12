@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SC_PlayerTurn : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class SC_PlayerTurn : MonoBehaviour
     public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
 
-    [SerializeField] SC_Graph graph;
+    [FormerlySerializedAs("graph")] [SerializeField] Sc_PlayerMovement playerMovement;
 
     public static SC_PlayerTurn Instance;
 
@@ -36,12 +37,10 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[0];
                         if (recupPos == true)
                         {
-                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)
                         {
-                            graph.ResetColor();
                             turn++;
                             recupPos = true;
                             endTurn = false;
@@ -56,12 +55,10 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[1];
                         if (recupPos == true)
                         {
-                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)
                         {
-                            graph.ResetColor();
                             turn++;
                             recupPos = true;
                             endTurn = false;
@@ -76,12 +73,10 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[2];
                         if (recupPos == true)
                         {
-                            graph.RecupPos(_player[turn]);
                             recupPos = false;
                         }
                         if (endTurn)
                         {
-                            graph.ResetColor();
                             turn = 0;
                             recupPos = true;
                             endTurn = false;
@@ -100,7 +95,6 @@ public class SC_PlayerTurn : MonoBehaviour
             if (_canMove[0] == false && _canMove[1] == false && _canMove[2] == false)
             {
                 turn = 5;
-                graph.ResetColor();
             }
         }
     }
@@ -112,24 +106,24 @@ public class SC_PlayerTurn : MonoBehaviour
     {
         foreach (var player in _player)
         {
-            foreach (var sommet in graph._sommets)
+            foreach (var sommet in playerMovement._sommets)
             {
                 if (player.transform.position == sommet.Obj.transform.position)
                 {
                     if (sommet.zone == 1)
                     {
                         int RandNumber = Random.Range(0, 2);
-
+    
                         if (RandNumber == 0 && sommet.Obj.tag == "Path")
                         {
-                            player.transform.position = graph._sommets[sommet.id + 8].Obj.transform.position;
+                            player.transform.position = playerMovement._sommets[sommet.id + 8].Obj.transform.position;
                             sommet.Obj.tag = "Path";
                         }
                         else if (sommet.Obj.tag == "Path")
                         {
-                            player.transform.position = graph._sommets[sommet.id - 8].Obj.transform.position;
+                            player.transform.position = playerMovement._sommets[sommet.id - 8].Obj.transform.position;
                             sommet.Obj.tag = "Path";
-
+    
                         }
                         else
                             Debug.Log("dont move"); 
