@@ -16,6 +16,7 @@ public class Stats : MonoBehaviour
 
     private void Start()
     {
+        Sc_AudioManager.instance.PlaySong("Game");
         for (int i = 0; i < _nbPlayer; i++)
         {
             _bulletPlayer.Add(2);

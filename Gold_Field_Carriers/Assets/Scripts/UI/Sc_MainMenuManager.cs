@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class Sc_MainMenuManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class Sc_MainMenuManager : MonoBehaviour
         {
             Directory.CreateDirectory(saveFolderPath);
         }
+        Sc_AudioManager.instance.PlaySong("MainMenu");
     }
 
     public void Play()
