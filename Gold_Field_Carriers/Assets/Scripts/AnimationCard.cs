@@ -37,16 +37,15 @@ public class AnimationCard : MonoBehaviour
 
         if (_animation && _cardAnim.transform.rotation.y > 0)
         {
-            Zone._draw = false;
-            _cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 3 * Time.deltaTime,
-                                                       _cardAnim.transform.position.y,
-                                                       _cardAnim.transform.position.z);
+            //_cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 3 * Time.deltaTime,
+            //                                           _cardAnim.transform.position.y,
+            //                                           _cardAnim.transform.position.z);
             _cardAnim.transform.Rotate(0, 100 * Time.deltaTime, 0);
         }
         if (_cardAnim.transform.rotation.y <= 0 && !CardChoice._choice)
         {
             AnimationStats._animation = true;
-            if (!Card.Instance._isChoice)
+            if (!Card._isChoice)
             {
                 _timer += Time.deltaTime;
                 if (Input.GetMouseButtonDown(0))
@@ -67,7 +66,7 @@ public class AnimationCard : MonoBehaviour
                 AnimationStats._bulletAnim = 0;
                 AnimationStats._goldAnim = 0;
                 SC_PlayerTurn.Instance.turn += 1;
-                Card.Instance._isChoice = false;
+                Card._isChoice = false;
                 if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
                     SC_PlayerTurn.Instance.turn = 0;
                 SkipTurn();

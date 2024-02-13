@@ -41,7 +41,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            turn++;
+                            //turn++;
                             recupPos = true;
                             endTurn = false;
                         }
@@ -59,7 +59,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            turn++;
+                            //turn++;
                             recupPos = true;
                             endTurn = false;
                         }
@@ -77,7 +77,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            turn = 0;
+                            //turn = 0;
                             recupPos = true;
                             endTurn = false;
                         }
