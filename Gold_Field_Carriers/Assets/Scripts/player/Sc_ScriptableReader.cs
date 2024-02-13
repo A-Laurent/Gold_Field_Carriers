@@ -6,21 +6,21 @@ public class Sc_ScriptableReader : MonoBehaviour
 {
     public SC_PlayerClass _playerClasse;
 
-    [HideInInspector] public string _name; 
-    [HideInInspector] public string _desc; 
-    [HideInInspector] public Sprite _sprite;
+    public string _name;
+    public string _desc;
+    public Sprite _sprite;
 
-    [HideInInspector] public bool _isAlive; 
-    [HideInInspector] public bool _isInTheCity;
+    public bool _isAlive;
+    public bool _isInTheCity;
 
-    [HideInInspector] public int _currentLife; 
-    [HideInInspector] public int _maxLife; 
+    public int _currentLife;
+    public int _maxLife;
 
-    [HideInInspector] public int _currentAmmount;
-    [HideInInspector] public int _maxAmmount;
+    public int _currentAmmount;
+    public int _maxAmmount;
 
-    [HideInInspector] public int _gold; 
-    [HideInInspector] public int _id;
+    public int _gold;
+    public int _id;
 
     private void Awake()
     {

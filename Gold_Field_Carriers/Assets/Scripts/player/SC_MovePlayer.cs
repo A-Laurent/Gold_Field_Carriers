@@ -50,6 +50,23 @@ public class SC_MovePlayer : MonoBehaviour
         {
             canMove = true;
             pTurn.endTurn = true;//a 
+
+            switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()
+                        ._position.transform.parent.name)
+            {
+                case "River" :
+                    Zone.SetRiver();
+                    break;
+                case "Desert" :
+                    Zone.SetDesert();
+                    break;
+                case "Mountain" :
+                    Zone.SetMountain();
+                    break;
+                default:
+                    Debug.LogError("Failed for find parent by name");
+                    break;
+            }
         }
     }
 

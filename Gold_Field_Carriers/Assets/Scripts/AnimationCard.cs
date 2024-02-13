@@ -15,11 +15,11 @@ public class AnimationCard : MonoBehaviour
 
     private void Start()
     {
-        _cardAnim.transform.position = new Vector3(300, 300, 0);
+        Animation();
     }
     void Update()
     {
-        if (_cardAnim.transform.rotation.y <= 0.75 && !showtext && Card._card != null)
+        if (_cardAnim.transform.rotation.y <= 0.70 && !showtext && Card._card != null)
         {
             _text.text = Card._card._description;
             showtext = true;
@@ -61,7 +61,7 @@ public class AnimationCard : MonoBehaviour
                 showtext = false;
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
-                _cardAnim.transform.position = new Vector3(300, 300, 0);
+                //_cardAnim.transform.position = new Vector3(300, 300, 0);
                 Zone._draw = false;
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;

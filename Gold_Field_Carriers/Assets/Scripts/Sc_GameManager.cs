@@ -51,27 +51,55 @@ public class Sc_GameManager : MonoBehaviour
         {
             case 1 :
                 Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(2).GetComponent<Image>().color = 
+                    new Color32(118, 118, 118, 255);
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(3).GetComponent<Image>().color = 
                     new Color32(118, 118, 118, 255);
                 break;
             case 2 :
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
+                    Color.white;
                 Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(2).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(3).GetComponent<Image>().color = 
                     new Color32(118, 118, 118, 255);
                 break;
             default:
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(2).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(3).GetComponent<Image>().color = 
+                    Color.white;
                 break;
         }
         
         switch (bullet)
         {
             case 1 :
-                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(4).GetComponent<Image>().color =
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(5).GetComponent<Image>().color = 
+                    new Color32(118, 118, 118, 255);
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(6).GetComponent<Image>().color = 
                     new Color32(118, 118, 118, 255);
                 break;
             case 2 :
-                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(2).GetComponent<Image>().color = 
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(4).GetComponent<Image>().color =
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(5).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(6).GetComponent<Image>().color = 
                     new Color32(118, 118, 118, 255);
                 break;
             default:
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(4).GetComponent<Image>().color =
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(5).GetComponent<Image>().color = 
+                    Color.white;
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(6).GetComponent<Image>().color = 
+                    Color.white;
                 break;
         }
     }

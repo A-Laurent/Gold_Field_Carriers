@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,9 @@ public class CardChoice : MonoBehaviour
 
     public Card _card;
 
-    public Text _textChoice1;
-    public Text _textChoice2;
-    public Text _textChoice3;
+    public TMP_Text _textChoice1;
+    public TMP_Text _textChoice2;
+    public TMP_Text _textChoice3;
 
     public static CardChoice instance;
     private SC_PlayerTurn _playerTurnInstance = SC_PlayerTurn.Instance;
