@@ -6,16 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class Sc_StartTextLore : MonoBehaviour
 {
-    [SerializeField] private GameObject BackGround;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+    [SerializeField] private GameObject ButtonStartGame;
+    [SerializeField] private GameObject ButtonSkip;
 
     private string message;
+    private bool SkipIntro = false;
 
-    public float PauseBetweenLetter;        //valeur pas default 0.05
-    public float PauseBetweenEachPoint;     //valeur paar default 0.2
-        
+    public float PauseBetweenLetter;        //valeur pas default 0.035
+    public float PauseBetweenPoint;     //valeur par default 0.5
+
+
+    Sc_FadeInOut fade;
+
+    private void Awake()
+    {
+        fade = FindObjectOfType<Sc_FadeInOut>();
+    }
+
     private void Start()
     {
+        ButtonStartGame.SetActive(false);
         message = "";
         message = _textMeshProUGUI.text;
         _textMeshProUGUI.text = "";
@@ -24,17 +35,21 @@ public class Sc_StartTextLore : MonoBehaviour
     }
     private IEnumerator ProgressText()
     {
-        foreach (var letter in message.ToCharArray())
+        if (SkipIntro == false)
         {
-            _textMeshProUGUI.text += letter;
-            if(letter == '.')
+            foreach (var letter in message.ToCharArray())
             {
-                yield return new WaitForSeconds(PauseBetweenEachPoint);
+                _textMeshProUGUI.text += letter;
+                if (letter == '.')
+                {
+                    yield return new WaitForSeconds(PauseBetweenPoint);
+                }
+                yield return new WaitForSeconds(PauseBetweenLetter);
             }
-            yield return new WaitForSeconds(PauseBetweenLetter);
+            ButtonSkip.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            ButtonStartGame.SetActive(true);
         }
-        yield return new WaitForSeconds(1);
-        ButtonSkip();
     }
 
     public void StartProgressText()
@@ -42,8 +57,16 @@ public class Sc_StartTextLore : MonoBehaviour
         StartCoroutine(ProgressText());
     }
 
-    public void ButtonSkip()
+    private IEnumerator ChangeScene()
     {
+        fade.FadeIn();
+        yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Devroom_FixUI");
+    }
+
+    public void StartGame()
+    {
+        SkipIntro = true;
+        StartCoroutine(ChangeScene());
     }
 }

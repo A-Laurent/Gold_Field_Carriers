@@ -9,9 +9,12 @@ public class Sc_Credits : MonoBehaviour
     [SerializeField] private float m_FadeInDuration, m_fadeOutDuration, m_AttendanceTime, m_WaitBeforeStart;
 
     public static Sc_Credits Instance;
+    Sc_FadeInOut fade;
+
 
     private void Awake()
     {
+        fade = FindObjectOfType<Sc_FadeInOut>();
         if (Instance == null)
             Instance = this;
         else
@@ -100,8 +103,15 @@ public class Sc_Credits : MonoBehaviour
         StartCoroutine(StartFadeSequence());
     }
 
+    private IEnumerator ChangeScene()
+    {
+        fade.FadeIn();
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(ChangeScene());
     }
 }
