@@ -14,11 +14,11 @@ public class SC_PlayerClass : ScriptableObject
     //stat
     public int _currentLife;
     public int _maxLife = 3;
-    private int _minLife = 0;
+    public int _minLife = 0;
 
     public int _currentAmmount;
     public int _maxAmmount;
-    private int _minAmmount = 0;
+    public int _minAmmount = 0;
 
     public int _gold;
 

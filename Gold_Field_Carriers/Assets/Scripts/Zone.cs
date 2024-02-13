@@ -3,7 +3,6 @@ using UnityEngine;
 public class Zone : MonoBehaviour
 {
     public static bool _draw;
-    public static List<int> _line = new();
     public static int _turn;
     public static Zone Instance;
 
@@ -14,14 +13,6 @@ public class Zone : MonoBehaviour
             Destroy(Instance);
         }
         Instance = this;
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < SC_PlayerTurn.Instance.turn; i++)
-        {
-            _line.Add(0);
-        }
     }
     public static void SetDesert()
     {

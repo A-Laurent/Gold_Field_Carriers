@@ -8,8 +8,6 @@ public class Card : MonoBehaviour
     public int _cardIndex = 0;
     public static CardData _card;
 
-    private SC_PlayerTurn _playerTurnInstance = SC_PlayerTurn.Instance;
-
     public List<CardData> _cardDataMountain = new();
     public List<CardData> _cardDataRiver = new();
     public List<CardData> _cardDataDesert = new();
@@ -22,7 +20,6 @@ public class Card : MonoBehaviour
     public GameObject _uiChoice;
     public GameObject _uiTrade;
     public static List<bool> _skipTurn = new();
-    public bool _enter;
     public static Card Instance;
     public static bool _isChoice;
 
