@@ -14,9 +14,9 @@ public class Card : MonoBehaviour
     public List<CardData> _cardDataRiver = new();
     public List<CardData> _cardDataDesert = new();
 
-    public List<CardData> _cardDataBackupMountain = new();
-    public List<CardData> _cardDataBackupRiver = new();
-    public List<CardData> _cardDataBackupDesert = new();
+    [HideInInspector] public List<CardData> _cardDataBackupMountain = new();
+    [HideInInspector] public List<CardData> _cardDataBackupRiver = new();
+    [HideInInspector] public List<CardData> _cardDataBackupDesert = new();
 
     public int _theHorde;
     public GameObject _uiChoice;

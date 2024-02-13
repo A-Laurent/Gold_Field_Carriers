@@ -10,7 +10,6 @@ public class Stats : MonoBehaviour
 
     private SC_PlayerTurn _playerTurnInstance = SC_PlayerTurn.Instance;
     public static int _nbPlayer = 3;
-    public Text _zoneText;
 
     private void Awake()
     {

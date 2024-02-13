@@ -10,11 +10,11 @@ public class CardChoice : MonoBehaviour
     public static bool _changeZoneRiver;
     public static bool _medium;
 
-    public bool _choiceDesert;
-    public bool _choiceMountain;
-    public bool _choiceRiver;
-    public bool _choicePlayer1;
-    public bool _choicePlayer2;
+    [HideInInspector] public bool _choiceDesert;
+    [HideInInspector] public bool _choiceMountain;
+    [HideInInspector] public bool _choiceRiver;
+    [HideInInspector] public bool _choicePlayer1;
+    [HideInInspector] public bool _choicePlayer2;
 
     public Card _card;
 
