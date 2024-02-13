@@ -38,10 +38,15 @@ public class Stats : MonoBehaviour
 
         if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife == 0)
         {
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= 8;
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<TMP_Text>().text = Sc_CharacterManager
-                .Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold.ToString();
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife = 1;
+            if(!SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._isThereGold)
+                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._gold =
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold;
+
+            SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._isThereGold = true;
+                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold = 0;
+                SC_PlayerTurn.Instance.turn++;
+
+                SC_PlayerTurn.Instance._player.Remove(SC_PlayerTurn.Instance.currentPlayer);
         }
 
         //Bullet
