@@ -3,15 +3,22 @@ using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Sc_MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private Sc_FadeInOut fade;
+    Sc_FadeInOut fade;
+
     private string saveFolderPath = Application.dataPath + "/Saves";
 
     private string SceneToLoad;
     private float timer;
-    
+
+
+    private void Awake()
+    {
+        fade = FindObjectOfType<Sc_FadeInOut>();
+    }
     private void Start()
     {
         if (!Directory.Exists(saveFolderPath))
