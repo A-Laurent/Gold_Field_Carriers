@@ -17,7 +17,8 @@ MonoBehaviour:
   _bullet: 0
   _description: 'Downpour : Change zone to mountain or deser, if this is not possible
     lose 1 hp'
-  _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
+  _cardImage: {fileID: 21300000, guid: b79f4192066d8ce408b23dee1842c413, type: 3}
+  _cardImageDos: {fileID: 21300000, guid: 082b839a819189b4a86d8ff016dc51bd, type: 3}
   _name: Change of zone
   _horde: 0
   _zone: River

@@ -262,17 +262,17 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
-        if (_choicePlayer1)
+        if (_choicePlayer2)
         {
-            ChoiceDonation1();
+            ChoiceDonation2();
             _cardDonation = false;
             AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
-            _choicePlayer1 = false;
+            _choicePlayer2 = false;
         }
-        else if (_cardDonation && !_choicePlayer1)
-            _choicePlayer1 = true;
+        else if (_cardDonation && !_choicePlayer2)
+            _choicePlayer2 = true;
 
         //CardChangezone River
         if (_changeZoneRiver)

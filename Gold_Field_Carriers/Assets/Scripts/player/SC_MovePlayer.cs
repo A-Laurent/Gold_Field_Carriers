@@ -72,7 +72,7 @@ public class SC_MovePlayer : MonoBehaviour
 
     public void StartMoving()
     {
-        if(canMove)
+        if(canMove && !AnimationCard._animation)
             StartCoroutine(CharacterMove(1f));
     }
 }

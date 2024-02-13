@@ -17,7 +17,8 @@ MonoBehaviour:
   _bullet: 0
   _description: 'Water shortage : You go to the river zone, if there is already a
     player, lose 1 hp'
-  _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
+  _cardImage: {fileID: 21300000, guid: 05ff306598689cd43ab935ba89837370, type: 3}
+  _cardImageDos: {fileID: 21300000, guid: a60c5af8ba9470b42a635e8537307d7e, type: 3}
   _name: Change of zone
   _horde: 0
   _zone: Desert
