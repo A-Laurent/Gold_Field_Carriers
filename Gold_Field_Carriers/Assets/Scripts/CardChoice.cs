@@ -150,6 +150,7 @@ public class CardChoice : MonoBehaviour
             }
             _card._uiChoice.SetActive(false);
             _choice = false;
+            AnimationCard._timer = 15;
         }
         if (_cardTrade)
         {
@@ -161,12 +162,14 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _cardTrade = false;
+            AnimationCard._timer = 15;
         }
         if (_cardDonation)
         {
             _cardDonation = false;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
+            AnimationCard._timer = 15;
             DestroyCard();
         }
         if (_changeZoneRiver)
@@ -181,6 +184,7 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _changeZoneRiver = false;
+            AnimationCard._timer = 15;
         }
         if (_choiceDesert || _choiceMountain || _choiceRiver)
         {
@@ -189,6 +193,7 @@ public class CardChoice : MonoBehaviour
             _medium = false;
             _choiceDesert = false;
             _choiceMountain = false;
+            AnimationCard._timer = 15;
             _choiceRiver = false;
             DestroyCard();
         }
@@ -245,6 +250,7 @@ public class CardChoice : MonoBehaviour
             }
             _card._uiChoice.SetActive(false);
             _choice = false;
+            AnimationCard._timer = 15;
         }
 
         //CardTrade
@@ -252,6 +258,7 @@ public class CardChoice : MonoBehaviour
         {
             ChoiceTrade1();
             _cardTrade = false;
+            AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
@@ -259,6 +266,7 @@ public class CardChoice : MonoBehaviour
         {
             ChoiceDonation1();
             _cardDonation = false;
+            AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _choicePlayer1 = false;
@@ -279,6 +287,7 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _changeZoneRiver = false;
+            AnimationCard._timer = 15;
         }
 
         //Card Medium
@@ -295,6 +304,7 @@ public class CardChoice : MonoBehaviour
             }
             _medium = false;
             _choiceDesert = false;
+            AnimationCard._timer = 15;
             DestroyCard();
         }
         if (_choiceRiver)
@@ -310,6 +320,7 @@ public class CardChoice : MonoBehaviour
             }
             _medium = false;
             _choiceRiver = false;
+            AnimationCard._timer = 15;
             DestroyCard();
         }
         if (_choiceMountain)
@@ -325,6 +336,7 @@ public class CardChoice : MonoBehaviour
             }
             _medium = false;
             _choiceMountain = false;
+            AnimationCard._timer = 15;
             DestroyCard();
         }
 
@@ -341,6 +353,7 @@ public class CardChoice : MonoBehaviour
         {
             ChoiceTrade2();
             _cardTrade = false;
+            AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
@@ -348,6 +361,7 @@ public class CardChoice : MonoBehaviour
         {
             ChoiceDonation2();
             _cardDonation = false;
+            AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _choicePlayer2 = false;

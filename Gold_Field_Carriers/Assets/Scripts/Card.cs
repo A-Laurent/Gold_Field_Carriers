@@ -8,15 +8,6 @@ public class Card : MonoBehaviour
     public int _cardIndex = 0;
     public static CardData _card;
 
-    public Text _hpText;
-    public Text _bulletText;
-    public Text _goldText;
-    public Text _hordeText;
-    public Text _description;
-    public Text _turnText;
-    public Text _lineText;
-    public Text _nbTurnText;
-
     private SC_PlayerTurn _playerTurnInstance = SC_PlayerTurn.Instance;
 
     public List<CardData> _cardDataMountain = new();
@@ -33,7 +24,7 @@ public class Card : MonoBehaviour
     public static List<bool> _skipTurn = new();
     public bool _enter;
     public static Card Instance;
-    public bool _isChoice;
+    public static bool _isChoice;
 
     private void Awake()
     {
@@ -69,22 +60,10 @@ public class Card : MonoBehaviour
     
     private void Update()
     {
-        
-        //_hpText.text = "HP :   " + Stats._hpPlayer[0].ToString() + "    " +
-        //                           Stats._hpPlayer[1].ToString() + "    " + 
-        //                           Stats._hpPlayer[2].ToString();
-        //_bulletText.text = "Bullet :   " + Stats._bulletPlayer[0].ToString() + "    " + 
-        //                                   Stats._bulletPlayer[1].ToString() + "    " + 
-        //                                   Stats._bulletPlayer[2].ToString();
-        //_hordeText.text = "The Horde : " + _theHorde.ToString();
-        //_turnText.text = "Turn : Joueur " + (Stats._turnPlayer + 1).ToString();
-        //_lineText.text = "Line :   " + Zone._line[0].ToString() + "      " 
-        //                             + Zone._line[1].ToString() + "      " + Zone._line[2].ToString();
-        //_nbTurnText.text = "Nb turn :  " + Zone._turn.ToString();
-
         if (Zone._draw && !CardChoice._choice)
         {
             DrawCard();
+            Zone._draw = false;
         }
         Shuffle();
     }
