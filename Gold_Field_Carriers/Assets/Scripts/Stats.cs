@@ -21,11 +21,13 @@ public class Stats : MonoBehaviour
     void Update()
     {
         StatLimit();
-
-        Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold, 
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife,
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount,
-            SC_PlayerTurn.Instance.turn);
+        for (int i = 0; i < _nbPlayer; ++i)
+        {
+            Sc_GameManager.Instance.StatsUI(Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._gold,
+            Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife,
+            Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentAmmount,
+            i);
+        }    
     }
 
     public void StatLimit()

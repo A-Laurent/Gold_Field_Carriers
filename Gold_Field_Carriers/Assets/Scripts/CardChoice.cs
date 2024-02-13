@@ -269,23 +269,15 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
-        if (_choicePlayer1)
+        else if (_choicePlayer2 || _choicePlayer1)
         {
             ChoiceDonation1();
             _cardDonation = false;
             AnimationCard._timer = 15;
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
-            _choicePlayer1 = false;
-        }
-        else if (_choicePlayer2)
-        {
-            ChoiceDonation2();
-            _cardDonation = false;
-            AnimationCard._timer = 15;
-            _card._uiTrade.SetActive(false);
-            _card._uiChoice.SetActive(false);
             _choicePlayer2 = false;
+            _choicePlayer1 = false;
         }
         else if (_cardDonation && !_choicePlayer1)
             _choicePlayer1 = true;
@@ -379,7 +371,7 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
-        else if (_choicePlayer2)
+        else if (_choicePlayer2 || _choicePlayer1)
         {
             ChoiceDonation2();
             _cardDonation = false;
@@ -387,6 +379,7 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
             _choicePlayer2 = false;
+            _choicePlayer1 = false;
         }
         else if ( _cardDonation && !_choicePlayer2)
             _choicePlayer2 = true;
@@ -472,14 +465,12 @@ public class CardChoice : MonoBehaviour
                 if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
                 {
                     Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                    //Stats._bulletPlayer[1] += Card._card._bullet;
                     Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
-                    //Stats._bulletPlayer[Stats._turnPlayer] -= Card._card._bullet;
                 }
-                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
+                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
                 DestroyCard();
                 break;
@@ -489,10 +480,10 @@ public class CardChoice : MonoBehaviour
                     Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
                     Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
-                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
+                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
                 DestroyCard();
                 break;
@@ -502,10 +493,10 @@ public class CardChoice : MonoBehaviour
                     Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
                     Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
-                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
+                else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
                 }
                 DestroyCard();
                 break;
@@ -517,10 +508,10 @@ public class CardChoice : MonoBehaviour
         switch (SC_PlayerTurn.Instance.turn)
         {
             case 0:
-                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
                 }   
                 else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
                 {
@@ -530,10 +521,10 @@ public class CardChoice : MonoBehaviour
                 DestroyCard();
                 break;
             case 1:
-                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
                 }
                 else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
                 {
@@ -543,10 +534,10 @@ public class CardChoice : MonoBehaviour
                 DestroyCard();
                 break;
             case 2:
-                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                if (_choicePlayer1 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 0)
                 {
-                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._gold += Card._card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= Card._card._gold;
                 }
                 else if (_choicePlayer2 && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold > 4)
                 {
