@@ -22,11 +22,6 @@ public class Sc_ScriptableReader : MonoBehaviour
     public int _gold;
     public int _id;
 
-    private void Awake()
-    {
-        
-    }
-
     private void Start()
     {
         if (Sc_CharacterManager.Instance._canSetPlayerInfo)

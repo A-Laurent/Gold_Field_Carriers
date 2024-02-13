@@ -62,10 +62,10 @@ public class Sc_CharacterManager : MonoBehaviour
                 playerinfo.GetComponent<Sc_ScriptableReader>()._gold.ToString();
             
             playerinfo.transform.GetChild(1).Find("Number of Hearth").GetComponent<TMP_Text>().text =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._maxLife.ToString();
+                playerinfo.GetComponent<Sc_ScriptableReader>()._currentLife.ToString();
             
             playerinfo.transform.GetChild(1).Find("Number of Bullet").GetComponent<TMP_Text>().text =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._maxAmmount.ToString();
+                playerinfo.GetComponent<Sc_ScriptableReader>()._currentAmmount.ToString();
         }
     }
 }

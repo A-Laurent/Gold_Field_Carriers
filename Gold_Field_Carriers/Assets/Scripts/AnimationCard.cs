@@ -61,11 +61,21 @@ public class AnimationCard : MonoBehaviour
                 showtext = false;
                 _text.text = "";
                 _cardAnim.transform.Rotate(0, -180, 0);
-                //_cardAnim.transform.position = new Vector3(300, 300, 0);
                 Zone._draw = false;
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;
                 AnimationStats._goldAnim = 0;
+                switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
+                {
+                    case "River" :
+                        Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._riverDecoration);
+                        break;
+                    case "Desert" :
+                        Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._desertDecoration);
+                        break;
+                    default:
+                        break;
+                }
                 SC_PlayerTurn.Instance.turn += 1;
                 Card.Instance._isChoice = false;
                 if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)

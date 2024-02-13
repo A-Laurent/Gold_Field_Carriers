@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class Sc_GameManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _riverDecoration = new List<GameObject>();
-    [SerializeField] private List<GameObject> _desertDecoration = new List<GameObject>();
+    public List<GameObject> _riverDecoration = new List<GameObject>();
+    public List<GameObject> _desertDecoration = new List<GameObject>();
 
     public static Sc_GameManager Instance;
 
@@ -49,6 +49,17 @@ public class Sc_GameManager : MonoBehaviour
         
         switch (life)
         {
+            case 0 :
+                for (int i = 1; i < 4; i++)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
+                        new Color32(118, 118, 118, 255);
+                    Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(2).GetComponent<Image>().color = 
+                        new Color32(118, 118, 118, 255);
+                    Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(3).GetComponent<Image>().color = 
+                        new Color32(118, 118, 118, 255);
+                }
+                break;
             case 1 :
                 Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(1).GetComponent<Image>().color = 
                     Color.white;
@@ -77,6 +88,14 @@ public class Sc_GameManager : MonoBehaviour
         
         switch (bullet)
         {
+            case 0 :
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(4).GetComponent<Image>().color =
+                    new Color32(118, 118, 118, 255);
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(5).GetComponent<Image>().color = 
+                    new Color32(118, 118, 118, 255);
+                Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(6).GetComponent<Image>().color = 
+                    new Color32(118, 118, 118, 255);
+                break;
             case 1 :
                 Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(4).GetComponent<Image>().color =
                     Color.white;
