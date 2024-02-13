@@ -39,6 +39,45 @@ public class Sc_CharacterManager : MonoBehaviour
         SetPlayerInfo();
     }
 
+    public void ChangePlayer()
+    {
+        switch (SC_PlayerTurn.Instance.turn)
+        {
+            case 0 :
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(false);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 1 :
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(false);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 2:
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void SetPlayerInfo()
     {
         foreach (var t in _playerInfo)
@@ -62,10 +101,10 @@ public class Sc_CharacterManager : MonoBehaviour
                 playerinfo.GetComponent<Sc_ScriptableReader>()._gold.ToString();
             
             playerinfo.transform.GetChild(1).Find("Number of Hearth").GetComponent<TMP_Text>().text =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._maxLife.ToString();
+                playerinfo.GetComponent<Sc_ScriptableReader>()._currentLife.ToString();
             
             playerinfo.transform.GetChild(1).Find("Number of Bullet").GetComponent<TMP_Text>().text =
-                playerinfo.GetComponent<Sc_ScriptableReader>()._maxAmmount.ToString();
+                playerinfo.GetComponent<Sc_ScriptableReader>()._currentAmmount.ToString();
         }
     }
 }

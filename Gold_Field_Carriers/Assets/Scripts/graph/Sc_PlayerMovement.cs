@@ -32,10 +32,6 @@ public class Sc_PlayerMovement : MonoBehaviour
                         SC_MovePlayer.Instance.StartMoving();
                         break;
                     }
-                    else
-                    {
-                        Debug.Log("You can't move");
-                    }
                 }
             }
         }

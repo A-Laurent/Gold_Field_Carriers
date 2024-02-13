@@ -9,7 +9,7 @@ public class SC_MovePlayer : MonoBehaviour
 {
     [FormerlySerializedAs("graph")] [SerializeField] Sc_PlayerMovement playerMovement;
      GameObject PlayerBody;
-    [SerializeField] SC_PlayerTurn pTurn;
+    public SC_PlayerTurn pTurn;
 
 
     public bool canMove;
@@ -51,17 +51,19 @@ public class SC_MovePlayer : MonoBehaviour
             canMove = true;
             pTurn.endTurn = true;//a 
 
-            switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()
-                        ._position.transform.parent.name)
+            switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
             {
                 case "River" :
                     Zone.SetRiver();
+                    Debug.Log("River");
                     break;
                 case "Desert" :
                     Zone.SetDesert();
+                    Debug.Log("Desert");
                     break;
                 case "Mountain" :
                     Zone.SetMountain();
+                    Debug.Log("Mountain");
                     break;
                 default:
                     Debug.LogError("Failed for find parent by name");

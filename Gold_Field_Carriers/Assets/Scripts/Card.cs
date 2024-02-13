@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -29,50 +30,65 @@ public class Card : MonoBehaviour
         {
             Destroy(Instance);
         }
+
         Instance = this;
     }
 
     public void Start()
     {
-        for (int i  = 0; i < _cardDataDesert.Count; i++)
+        for (int i = 0; i < _cardDataDesert.Count; i++)
         {
             _cardDataBackupDesert.Add(_cardDataDesert[i]);
         }
+
         for (int i = 0; i < _cardDataRiver.Count; i++)
         {
             _cardDataBackupRiver.Add(_cardDataRiver[i]);
         }
+
         for (int i = 0; i < _cardDataMountain.Count; i++)
         {
             _cardDataBackupMountain.Add(_cardDataMountain[i]);
         }
+
         for (int i = 0; i < Stats._nbPlayer; i++)
         {
             _skipTurn.Add(false);
         }
+
         ShuffleDeck(_cardDataDesert);
         ShuffleDeck(_cardDataMountain);
         ShuffleDeck(_cardDataRiver);
     }
-    
+
     private void Update()
     {
         if (Zone._draw && !CardChoice._choice)
         {
             DrawCard();
+            AnimationCard._animation = true;
             Zone._draw = false;
         }
+
         Shuffle();
     }
+
     public void DrawCard()
     {
         switch (Stats._zonePlayer[SC_PlayerTurn.Instance.turn])
         {
-            case "Desert": Desert(); break;
-            case "River": River(); break;
-            case "Mountain": Mountain(); break;
-        }      
+            case "Desert":
+                Desert();
+                break;
+            case "River":
+                River();
+                break;
+            case "Mountain":
+                Mountain();
+                break;
+        }
     }
+
     public void ShuffleDeck<T>(IList<T> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -92,18 +108,20 @@ public class Card : MonoBehaviour
             {
                 _cardDataDesert.Add(_cardDataBackupDesert[i]);
             }
+
             ShuffleDeck(_cardDataDesert);
         }
-            
+
         if (_cardDataRiver.Count == 0)
         {
             for (int i = 0; i < _cardDataBackupRiver.Count; i++)
             {
                 _cardDataRiver.Add(_cardDataBackupRiver[i]);
             }
+
             ShuffleDeck(_cardDataRiver);
         }
-            
+
 
         if (_cardDataMountain.Count == 0)
         {
@@ -111,6 +129,7 @@ public class Card : MonoBehaviour
             {
                 _cardDataMountain.Add(_cardDataBackupMountain[i]);
             }
+
             ShuffleDeck(_cardDataMountain);
         }
     }
@@ -119,7 +138,8 @@ public class Card : MonoBehaviour
     {
         _card = _cardDataDesert[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" &&
+            _card._name != "Medium")
             _cardDataDesert.RemoveAt(_cardIndex);
     }
 
@@ -127,7 +147,8 @@ public class Card : MonoBehaviour
     {
         _card = _cardDataMountain[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" &&
+            _card._name != "Medium")
             _cardDataMountain.RemoveAt(_cardIndex);
     }
 
@@ -135,19 +156,24 @@ public class Card : MonoBehaviour
     {
         _card = _cardDataRiver[_cardIndex];
         EffectCard();
-        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" && _card._name != "Medium" && _card._name != "Change of zone")
+        if (_card._name != "Choice" && _card._name != "TradePlayer" && _card._name != "Donation" &&
+            _card._name != "Medium" && _card._name != "Change of zone")
             _cardDataRiver.RemoveAt(_cardIndex);
-    } 
+    }
 
     // ReSharper disable Unity.PerformanceAnalysis
     public void EffectCard()
     {
         //_description.text = _card._description;
-        if (_card._name == "Attack of a bandit" && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount == 0)
+        if (_card._name == "Attack of a bandit" && Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn]
+                .GetComponent<Sc_ScriptableReader>()._currentAmmount == 0)
         {
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold -= 3; 
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._gold -= 3;
             AnimationStats._goldAnim -= 3;
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= 1; AnimationStats._hpAnim -= 1;
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._currentLife -= 1;
+            AnimationStats._hpAnim -= 1;
         }
         else if (_card._name == "Choice")
         {
@@ -164,11 +190,14 @@ public class Card : MonoBehaviour
             for (int i = 0; i < Stats._nbPlayer; i++)
             {
                 if (Stats._zonePlayer[i] == "River")
-                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife +=
+                        _card._hp;
                 if (Stats._zonePlayer[i] == "Desert")
-                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._gold += _card._gold;
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._gold +=
+                        _card._gold;
                 if (Stats._zonePlayer[i] == "Mountain")
-                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
+                    Sc_CharacterManager.Instance._playerInfo[i].GetComponent<Sc_ScriptableReader>()._currentLife +=
+                        _card._hp;
             }
         }
         else if (_card._name == "TradePlayer")
@@ -184,10 +213,11 @@ public class Card : MonoBehaviour
             {
                 _uiChoice.SetActive(true);
                 _isChoice = true;
+                CardChoice._changeZoneRiver = true;
             }
             else
             {
-                //SC_PlayerTurn.Instance.OverFlow();
+                ChangeOfZone();
             }
         }
         else if (_card._name == "Donation")
@@ -206,20 +236,45 @@ public class Card : MonoBehaviour
         }
         else if (_card._name == "Overflow")
         {
-            //SC_PlayerTurn.Instance.OverFlow();
+            SC_PlayerTurn.Instance.OverFlow();
         }
         else
         {
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold += _card._gold;
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._gold += _card._gold;
             AnimationStats._goldAnim += _card._gold;
 
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife += _card._hp;
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._currentLife += _card._hp;
             AnimationStats._hpAnim += _card._hp;
 
-            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount += _card._bullet;
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._currentAmmount += _card._bullet;
             AnimationStats._bulletAnim += _card._bullet;
             if (Zone._turn > 2)
                 _theHorde += _card._horde;
+        }
+    }
+
+    private void ChangeOfZone()
+    {
+        if (!SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                .GetComponent<Sc_Neighbor>()._neighbor[1].gameObject.CompareTag("Occuped"))
+        {
+            StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
+                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[1].transform.position + new Vector3(0, 1, 0),
+                SC_PlayerTurn.Instance.currentPlayer));
+            Debug.Log("Desert");
+        }
+        else
+        {
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._currentLife += _card._hp;
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                ._currentAmmount += _card._bullet;
+                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
+                    ._gold += _card._gold;
         }
     }
 }

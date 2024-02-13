@@ -174,12 +174,19 @@ public class CardChoice : MonoBehaviour
         }
         if (_changeZoneRiver)
         {
-            for (int i = 0; i < Stats._nbPlayer; i++)
+            if (!SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.CompareTag("Occuped"))
             {
-                if (Stats._zonePlayer[i] == "Mountain" && Stats._zonePlayer[i] == Stats._zonePlayer[SC_PlayerTurn.Instance.turn])
-                    return;
+                StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
+                    SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                        .GetComponent<Sc_Neighbor>()._neighbor[2].transform.position + new Vector3(0, 1, 0),
+                    SC_PlayerTurn.Instance.currentPlayer));
+                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.tag = "Occuped";
             }
-            Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "Mountain";
+            else
+                return;
+
             DestroyCard();
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
@@ -262,7 +269,16 @@ public class CardChoice : MonoBehaviour
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);
         }
-        if (_choicePlayer2)
+        if (_choicePlayer1)
+        {
+            ChoiceDonation1();
+            _cardDonation = false;
+            AnimationCard._timer = 15;
+            _card._uiTrade.SetActive(false);
+            _card._uiChoice.SetActive(false);
+            _choicePlayer1 = false;
+        }
+        else if (_choicePlayer2)
         {
             ChoiceDonation2();
             _cardDonation = false;
@@ -271,18 +287,24 @@ public class CardChoice : MonoBehaviour
             _card._uiChoice.SetActive(false);
             _choicePlayer2 = false;
         }
-        else if (_cardDonation && !_choicePlayer2)
-            _choicePlayer2 = true;
+        else if (_cardDonation && !_choicePlayer1)
+            _choicePlayer1 = true;
 
         //CardChangezone River
         if (_changeZoneRiver)
         {
-            for (int i = 0; i < Stats._nbPlayer; i++)
+            if (!SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.CompareTag("Occuped"))
             {
-                if (Stats._zonePlayer[i] == "Desert" && Stats._zonePlayer[i] == Stats._zonePlayer[SC_PlayerTurn.Instance.turn])
-                    return;
+                StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
+                    SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                        .GetComponent<Sc_Neighbor>()._neighbor[0].transform.position + new Vector3(0, 1, 0),
+                    SC_PlayerTurn.Instance.currentPlayer));
+                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.tag = "Occuped";
             }
-            Stats._zonePlayer[SC_PlayerTurn.Instance.turn] = "Desert";
+            else
+                return;
             DestroyCard();
             _card._uiTrade.SetActive(false);
             _card._uiChoice.SetActive(false);

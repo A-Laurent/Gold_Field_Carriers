@@ -23,18 +23,12 @@ public class AnimationCard : MonoBehaviour
     }
     void Update()
     {
-        if (_cardAnim.transform.rotation.y <= 0.70 && !showtext && Card._card != null)
+        if (_cardAnim.transform.rotation.y <= 0.60 && !showtext && Card._card != null)
         {
             _text.text = Card._card._description;
             _textName.text = Card._card._name;
             _cardUi.GetComponent<Image>().sprite = Card._card._cardImage;
             showtext = true;
-        }
-
-        if (Zone._draw)
-        {
-
-            _animation = true;
         }
         Animation();
     }  
@@ -82,6 +76,7 @@ public class AnimationCard : MonoBehaviour
                     SC_PlayerTurn.Instance.turn = 0;
                 SkipTurn();
                 _cardUi.SetActive(false);
+                Sc_CharacterManager.Instance.ChangePlayer();
             }
         }
     }
