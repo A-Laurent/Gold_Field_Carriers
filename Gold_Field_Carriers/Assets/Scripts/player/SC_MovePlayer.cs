@@ -11,6 +11,8 @@ public class SC_MovePlayer : MonoBehaviour
      GameObject PlayerBody;
     [SerializeField] SC_PlayerTurn pTurn;
 
+    public ParticleSystem particule;
+
 
     public bool canMove;
     private Vector3 start_pos, end_pos;
@@ -33,6 +35,7 @@ public class SC_MovePlayer : MonoBehaviour
     private IEnumerator CharacterMove(float total_time)
     {
         PlayerBody = pTurn.currentPlayer;
+        PlayerBody.GetComponent<ParticleSystem>().Play();
         canMove = false;
         float time = 0f;
         end_pos = playerMovement.SetEndPos();
@@ -48,6 +51,8 @@ public class SC_MovePlayer : MonoBehaviour
         
         if (PlayerBody.transform.position == end_pos)
         {
+            PlayerBody.GetComponent<ParticleSystem>().Pause();
+            PlayerBody.GetComponent<ParticleSystem>().Clear();
             canMove = true;
             pTurn.endTurn = true;//a 
         }
