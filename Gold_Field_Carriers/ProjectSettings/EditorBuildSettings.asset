@@ -5,7 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 0
+    path: Assets/Scenes/MainSceneLucasDarpeix.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Devroom.unity
+    guid: dbd29f5558ed2a04b9c47e2b5d9ccd8b
+  - enabled: 1
+    path: Assets/Scenes/Menus/MainMenu.unity
+    guid: 8b12a070c90cb594a847fb5ae83d9018
+  - enabled: 1
+    path: Assets/Scenes/Menus/Credits.unity
+    guid: 466a0ebb17f682c4993272bfdf6187bc
+  - enabled: 1
+    path: Assets/Scenes/Menus/CharacterSelection.unity
+    guid: 481b4b6244f992c4f941bc07a8872854
+  - enabled: 1
+    path: Assets/Scenes/Menus/Settings.unity
+    guid: 6b21a569f7b09d845a6cc2603240c251
+  - enabled: 1
+    path: Assets/Scenes/Devroom_FixUI.unity
+    guid: 623f65280459381498f4a695e0d51b4b
   m_configObjects: {}
