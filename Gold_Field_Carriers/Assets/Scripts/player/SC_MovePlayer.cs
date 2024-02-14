@@ -55,15 +55,12 @@ public class SC_MovePlayer : MonoBehaviour
             {
                 case "River" :
                     Zone.SetRiver();
-                    Debug.Log("River");
                     break;
                 case "Desert" :
                     Zone.SetDesert();
-                    Debug.Log("Desert");
                     break;
                 case "Mountain" :
                     Zone.SetMountain();
-                    Debug.Log("Mountain");
                     break;
                 default:
                     Debug.LogError("Failed for find parent by name");

@@ -1,8 +1,7 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Card : MonoBehaviour
 {
@@ -23,6 +22,10 @@ public class Card : MonoBehaviour
     public static List<bool> _skipTurn = new();
     public static Card Instance;
     public static bool _isChoice;
+
+    private bool _move;
+
+    public GameObject _horde;
 
     private void Awake()
     {
@@ -238,6 +241,10 @@ public class Card : MonoBehaviour
         {
             SC_PlayerTurn.Instance.OverFlow();
         }
+        else if (_card._name == "The Horde")
+        {
+            MoveHorde(_horde);
+        }
         else
         {
             Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
@@ -251,8 +258,62 @@ public class Card : MonoBehaviour
             Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()
                 ._currentAmmount += _card._bullet;
             AnimationStats._bulletAnim += _card._bullet;
-            if (Zone._turn > 2)
-                _theHorde += _card._horde;
+        }
+    }
+
+    public void MoveHorde(GameObject theHorde)
+    {
+        float DistEntreDeuxCase = 5.8f;     // a modifier en fonction de la map.
+        if (Zone._turn > 2)
+        {
+            _theHorde += _card._horde;
+            theHorde.transform.position += new Vector3(DistEntreDeuxCase, 0, 0);
+            foreach (var player in SC_PlayerTurn.Instance._player)
+            {
+                if (player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "End")
+                {
+                    int turn = Int32.Parse(player.name[1].ToString());
+                    if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) <= _theHorde - 1)
+                    {
+                        Sc_CharacterManager.Instance._playerInfo[turn - 1].GetComponent<Sc_ScriptableReader>()
+                        ._gold -= 2;
+                        _skipTurn[turn - 1] = true;
+                        _move = true;
+                        for (int i = 0; i < player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor.Count; i++)
+                        {
+                            if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].name[2].ToString()) == Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
+                            {
+                                if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].gameObject.CompareTag("Occuped"))
+                                {
+                                StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position + new Vector3(0, 1, 0), player));
+                                _move = false;
+                                }
+                                else
+                                {
+                                    foreach (var player2 in SC_PlayerTurn.Instance._player)
+                                    { 
+                                        if (player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name == player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].name)
+                                        {
+                                            for (int j = 0; j < player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor.Count; j++)
+                                            {
+                                                if (Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].name[2].ToString()) == Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
+                                                {
+                                                    int turn2 = Int32.Parse(player2.name[1].ToString());
+                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position + new Vector3(0, 1, 0), player));
+                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].transform.position + new Vector3(0, 1, 0), player2));
+                                                    _move = false;
+                                                    _skipTurn[turn2 - 1] = true;
+                                                    Sc_CharacterManager.Instance._playerInfo[turn2 - 1].GetComponent<Sc_ScriptableReader>()._gold -= 2;
+                                                }
+                                            }                                              
+                                        }
+                                    }
+                                }                                    
+                            }
+                        }                       
+                    }
+                }
+            }
         }
     }
 

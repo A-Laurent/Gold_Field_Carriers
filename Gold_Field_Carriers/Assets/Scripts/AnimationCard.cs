@@ -74,6 +74,7 @@ public class AnimationCard : MonoBehaviour
                 Card._isChoice = false;
                 if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
                     SC_PlayerTurn.Instance.turn = 0;
+                Zone.AddTurn();
                 SkipTurn();
                 _cardUi.SetActive(false);
                 Sc_CharacterManager.Instance.ChangePlayer();
@@ -100,7 +101,10 @@ public class AnimationCard : MonoBehaviour
                     Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
                     SC_PlayerTurn.Instance.turn += 1;
                     if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                    {
                         SC_PlayerTurn.Instance.turn = 0;
+                        Zone.AddTurn();
+                    }
                 }
             }
         }
