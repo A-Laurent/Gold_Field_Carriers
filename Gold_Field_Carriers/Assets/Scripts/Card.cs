@@ -214,6 +214,15 @@ public class Card : MonoBehaviour
         {
             if (_card._zone == "River")
             {
+                if (SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.CompareTag("Occuped") && SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.CompareTag("Occuped"))
+                {
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
+                    CardChoice.instance.DestroyCard();
+                    return;
+                }
+
                 _uiChoice.SetActive(true);
                 _isChoice = true;
                 CardChoice._changeZoneRiver = true;
