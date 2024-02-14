@@ -6,6 +6,11 @@ public class Cs_Help : MonoBehaviour
 {
     [SerializeField] private GameObject Panel;
 
+    private void Start()
+    {
+        ButtonHelp();
+    }
+
     public void ButtonHelp()
     {
         Panel.SetActive(true);
