@@ -39,6 +39,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[0];
                         if (recupPos == true)
                         {
+                            StartCoroutine(PLayerBlocked());
                             recupPos = false;
                         }
                         if (endTurn)
@@ -55,6 +56,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[1];
                         if (recupPos == true)
                         {
+                            StartCoroutine(PLayerBlocked());
                             recupPos = false;
                         }
                         if (endTurn)
@@ -70,6 +72,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         currentPlayer = _player[2];
                         if (recupPos == true)
                         {
+                            StartCoroutine(PLayerBlocked());
                             recupPos = false;
                         }
                         if (endTurn)
@@ -147,6 +150,19 @@ public class SC_PlayerTurn : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
+
+    private IEnumerator PLayerBlocked()
+    {
+        if (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.tag == "Occuped"
+         && SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[1].gameObject.tag == "Occuped")
+        {
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
+            yield return new WaitForSeconds(0.5f);
+            Card._skipTurn[turn] = true;
+            AnimationCard.Instance.SkipTurn();
+            Sc_CharacterManager.Instance.ChangePlayer();
         }
     }
 }
