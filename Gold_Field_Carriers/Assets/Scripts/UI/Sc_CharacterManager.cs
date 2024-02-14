@@ -39,6 +39,45 @@ public class Sc_CharacterManager : MonoBehaviour
         SetPlayerInfo();
     }
 
+    public void ChangePlayer()
+    {
+        switch (SC_PlayerTurn.Instance.turn)
+        {
+            case 0 :
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(false);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 1 :
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(false);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(true);
+                break;
+            case 2:
+                _playerInfo[0].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[0].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[1].transform.GetChild(0).gameObject.SetActive(false);
+                _playerInfo[1].transform.GetChild(1).gameObject.SetActive(true);
+                
+                _playerInfo[2].transform.GetChild(0).gameObject.SetActive(true);
+                _playerInfo[2].transform.GetChild(1).gameObject.SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
     private void SetPlayerInfo()
     {
         foreach (var t in _playerInfo)

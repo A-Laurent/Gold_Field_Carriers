@@ -9,7 +9,7 @@ public class SC_MovePlayer : MonoBehaviour
 {
     [FormerlySerializedAs("graph")] [SerializeField] Sc_PlayerMovement playerMovement;
      GameObject PlayerBody;
-    [SerializeField] SC_PlayerTurn pTurn;
+    public SC_PlayerTurn pTurn;
 
 
     public bool canMove;
@@ -50,27 +50,28 @@ public class SC_MovePlayer : MonoBehaviour
         {
             canMove = true;
             pTurn.endTurn = true;//a 
-            // switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
-            // {
-            //     case "River" :
-            //         Zone.SetRiver();
-            //         break;
-            //     case "Desert" :
-            //         Zone.SetDesert();
-            //         break;
-            //     case "Mountain" :
-            //         Zone.SetMountain();
-            //         break;
-            //     default:
-            //         Debug.LogError("Failed for find parent by name");
-            //         break;
-            // }
+
+            switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
+            {
+                case "River" :
+                    Zone.SetRiver();
+                    break;
+                case "Desert" :
+                    Zone.SetDesert();
+                    break;
+                case "Mountain" :
+                    Zone.SetMountain();
+                    break;
+                default:
+                    Debug.LogError("Failed for find parent by name");
+                    break;
+            }
         }
     }
 
     public void StartMoving()
     {
-        if(canMove)
+        if(canMove && !AnimationCard._animation)
             StartCoroutine(CharacterMove(1f));
     }
 }

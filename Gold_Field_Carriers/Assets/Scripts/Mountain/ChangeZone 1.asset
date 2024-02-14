@@ -17,7 +17,8 @@ MonoBehaviour:
   _bullet: 0
   _description: 'High heat : You go to the river zone, if there is already a player,
     lose 1 hp'
-  _cardImage: {fileID: 21300000, guid: c62ec1f53a31e9d479c665a4418d94db, type: 3}
+  _cardImage: {fileID: 21300000, guid: 1078fa3bc10a3fb408ba778d82c6d6f7, type: 3}
+  _cardImageDos: {fileID: 21300000, guid: 4c5cd79fd172ce94890ea99d426f61ad, type: 3}
   _name: Change of zone
   _horde: 0
   _zone: Mountain

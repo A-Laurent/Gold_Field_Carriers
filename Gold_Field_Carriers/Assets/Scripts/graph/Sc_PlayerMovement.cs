@@ -34,10 +34,6 @@ public class Sc_PlayerMovement : MonoBehaviour
                         GetZonePlayer(hit.collider.gameObject);
                         break;
                     }
-                    else
-                    {
-                        Debug.Log("You can't move");
-                    }
                 }
             }
         }

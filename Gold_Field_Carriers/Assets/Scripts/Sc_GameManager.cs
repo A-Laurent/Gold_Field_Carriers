@@ -44,8 +44,13 @@ public class Sc_GameManager : MonoBehaviour
 
     public void StatsUI(int gold, int life, int bullet, int turn)
     {
-        Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(8).GetComponent<TMP_Text>().text = 
-            gold.ToString();
+        Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(8).GetComponent<TMP_Text>().text = gold.ToString();
+       
+        Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(1).GetChild(2).GetComponent<TMP_Text>().text = life.ToString();
+        
+        Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(1).GetChild(4).GetComponent<TMP_Text>().text = bullet.ToString();
+        
+        Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(1).GetChild(6).GetComponent<TMP_Text>().text = gold.ToString();
         
         switch (life)
         {

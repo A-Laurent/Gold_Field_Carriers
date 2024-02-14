@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class SC_PlayerTurn : MonoBehaviour
 {
@@ -102,34 +104,57 @@ public class SC_PlayerTurn : MonoBehaviour
     {
         PlayerTurnLogic();
     }
-    // public void OverFlow()
-    // {
-    //     foreach (var player in _player)
-    //     {
-    //         foreach (var sommet in playerMovement._sommets)
-    //         {
-    //             if (player.transform.position == sommet.Obj.transform.position)
-    //             {
-    //                 if (sommet.zone == 1)
-    //                 {
-    //                     int RandNumber = Random.Range(0, 2);
-    //
-    //                     if (RandNumber == 0 && sommet.Obj.tag == "Path")
-    //                     {
-    //                         player.transform.position = playerMovement._sommets[sommet.id + 8].Obj.transform.position;
-    //                         sommet.Obj.tag = "Path";
-    //                     }
-    //                     else if (sommet.Obj.tag == "Path")
-    //                     {
-    //                         player.transform.position = playerMovement._sommets[sommet.id - 8].Obj.transform.position;
-    //                         sommet.Obj.tag = "Path";
-    //
-    //                     }
-    //                     else
-    //                         Debug.Log("dont move"); 
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+
+    public IEnumerator MovePlayer(float total_time, Vector3 endpos, GameObject player)
+    {
+        Debug.Log("Move");
+        float time = 0f;
+        Vector3 start_pos = player.transform.position;
+
+        while (time / total_time < 1)
+        {
+            time += Time.deltaTime;
+            player.transform.position = Vector3.Lerp(start_pos, endpos,  time / total_time);
+            
+            yield return null;
+        }
+    }
+    
+    
+    public void OverFlow()
+    {
+        foreach (var player in _player)
+        {
+            if (player.GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name == "River")
+            {
+                int RandNumber = Random.Range(0, 2);
+                int turn = Int32.Parse(player.name[1].ToString());
+                Debug.Log("Turn : " + turn);
+                Debug.Log("Random Number : " + RandNumber);
+                switch (RandNumber)
+                {
+                    case 0:
+                        if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.CompareTag("Occuped"))
+                        {
+                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].transform.position + new Vector3(0,1,0), player));
+                        }
+                        else
+                            Sc_CharacterManager.Instance._playerInfo[turn - 1].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
+                        break;
+                    case 1 :
+                        if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.CompareTag("Occuped"))
+                        {
+                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[2].transform.position + new Vector3(0, 1, 0), player));
+                        }
+                        else
+                        {
+                            Sc_CharacterManager.Instance._playerInfo[turn - 1].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;    
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
 }
