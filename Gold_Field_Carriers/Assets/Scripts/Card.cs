@@ -263,7 +263,7 @@ public class Card : MonoBehaviour
         {
             StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
                 SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
-                    .GetComponent<Sc_Neighbor>()._neighbor[1].transform.position + new Vector3(0, 1, 0),
+                    .GetComponent<Sc_Neighbor>()._neighbor[1].transform.position,
                 SC_PlayerTurn.Instance.currentPlayer));
             Debug.Log("Desert");
         }

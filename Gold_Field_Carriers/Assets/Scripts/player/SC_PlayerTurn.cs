@@ -43,13 +43,11 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            //turn++;
                             recupPos = true;
                             endTurn = false;
                         }
                     }
-                    else
-                        turn++;
+                    
                     break;
                 case 1:
                     if (_canMove[turn] == true)
@@ -61,13 +59,10 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            //turn++;
                             recupPos = true;
                             endTurn = false;
                         }
                     }
-                    else
-                        turn++;
                     break;
                 case 2:
                     if (_canMove[turn] == true)
@@ -79,13 +74,10 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            //turn = 0;
                             recupPos = true;
                             endTurn = false;
                         }
                     }
-                    else
-                        turn = 0;
                     break;
                 default:
                     currentPlayer = null;
@@ -136,7 +128,7 @@ public class SC_PlayerTurn : MonoBehaviour
                     case 0:
                         if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.CompareTag("Occuped"))
                         {
-                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].transform.position + new Vector3(0,1,0), player));
+                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].transform.position, player));
                         }
                         else
                             Sc_CharacterManager.Instance._playerInfo[turn - 1].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
@@ -144,7 +136,7 @@ public class SC_PlayerTurn : MonoBehaviour
                     case 1 :
                         if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.CompareTag("Occuped"))
                         {
-                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[2].transform.position + new Vector3(0, 1, 0), player));
+                            StartCoroutine(MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[2].transform.position, player));
                         }
                         else
                         {

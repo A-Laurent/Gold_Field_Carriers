@@ -44,9 +44,8 @@ public class Stats : MonoBehaviour
 
             SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._isThereGold = true;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold = 0;
-                SC_PlayerTurn.Instance.turn++;
-
-                SC_PlayerTurn.Instance._player.Remove(SC_PlayerTurn.Instance.currentPlayer);
+                
+                SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn] = false;
         }
 
         //Bullet

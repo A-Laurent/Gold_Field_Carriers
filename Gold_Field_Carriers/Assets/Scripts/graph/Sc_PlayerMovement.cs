@@ -39,7 +39,7 @@ public class Sc_PlayerMovement : MonoBehaviour
 
     public Vector3 SetEndPos()
     {
-        return hit.transform.position + new Vector3(0f, 1.0f, 0f);
+        return hit.transform.position;
     }
 
     private void Update()
