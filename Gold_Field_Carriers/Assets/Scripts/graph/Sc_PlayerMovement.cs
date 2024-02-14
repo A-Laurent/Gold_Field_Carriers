@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Sc_PlayerMovement : MonoBehaviour
@@ -27,6 +28,7 @@ public class Sc_PlayerMovement : MonoBehaviour
                 //Debug.Log(hit.collider.name);
                 foreach (var neighbor in SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor)
                 {
+                    Debug.Log(neighbor);
                     if (neighbor == hit.collider.gameObject)
                     {
                         SC_MovePlayer.Instance.StartMoving();

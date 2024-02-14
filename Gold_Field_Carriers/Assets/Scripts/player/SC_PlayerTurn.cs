@@ -22,6 +22,8 @@ public class SC_PlayerTurn : MonoBehaviour
 
     public static SC_PlayerTurn Instance;
 
+    [SerializeField] private GameObject Arrow;
+
     private void Awake()
     {
         Instance = this;
@@ -40,6 +42,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -57,6 +60,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -73,6 +77,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -163,6 +168,15 @@ public class SC_PlayerTurn : MonoBehaviour
             Card._skipTurn[turn] = true;
             AnimationCard.Instance.SkipTurn();
             Sc_CharacterManager.Instance.ChangePlayer();
+        }
+    }
+
+
+    private void ChangeColorNeighbors()
+    {
+        foreach (var neighbor in SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor)
+        {
+            neighbor.GetComponentInChildren<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
         }
     }
 }
