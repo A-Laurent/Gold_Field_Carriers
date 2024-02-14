@@ -98,6 +98,7 @@ public class AnimationCard : MonoBehaviour
                     SC_PlayerTurn.Instance.turn = 0;
                 
                 Card._isChoice = false;
+                Zone.AddTurn();
                 SkipTurn();
                 _cardUi.SetActive(false);
             }
@@ -111,19 +112,28 @@ public class AnimationCard : MonoBehaviour
             Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
             SC_PlayerTurn.Instance.turn += 1;
             if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+            {
                 SC_PlayerTurn.Instance.turn = 0;
+                Zone.AddTurn();
+            }
             if (Card._skipTurn[SC_PlayerTurn.Instance.turn])
             {
                 Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
                 SC_PlayerTurn.Instance.turn += 1;
                 if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                {
+                    Zone.AddTurn();
                     SC_PlayerTurn.Instance.turn = 0;
+                }
                 if (Card._skipTurn[SC_PlayerTurn.Instance.turn])
                 {
                     Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
                     SC_PlayerTurn.Instance.turn += 1;
                     if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                    {
+                        Zone.AddTurn();
                         SC_PlayerTurn.Instance.turn = 0;
+                    }
                 }
             }
         }
