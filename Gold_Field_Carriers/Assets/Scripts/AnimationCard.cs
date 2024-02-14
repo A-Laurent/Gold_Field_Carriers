@@ -21,6 +21,7 @@ public class AnimationCard : MonoBehaviour
     {
         Animation();
     }
+
     void Update()
     {
         if (_cardAnim.transform.rotation.y <= 0.60 && !showtext && Card._card != null)
@@ -30,22 +31,20 @@ public class AnimationCard : MonoBehaviour
             _cardUi.GetComponent<Image>().sprite = Card._card._cardImage;
             showtext = true;
         }
+
         Animation();
-    }  
+    }
 
     public void Animation()
     {
-
         if (_animation && _cardAnim.transform.rotation.y > 0)
         {
-            //_cardAnim.transform.position = new Vector3(_cardAnim.transform.position.x - 3 * Time.deltaTime,
-            //                                           _cardAnim.transform.position.y,
-            //                                           _cardAnim.transform.position.z);
             _cardAnim.transform.Rotate(0, 100 * Time.deltaTime, 0);
             _cardUi.SetActive(true);
             if (!showtext)
                 _cardUi.GetComponent<Image>().sprite = Card._card._cardImageDos;
         }
+
         if (_cardAnim.transform.rotation.y <= 0 && !CardChoice._choice)
         {
             AnimationStats._animation = true;
@@ -53,10 +52,14 @@ public class AnimationCard : MonoBehaviour
             {
                 _timer += Time.deltaTime;
                 if (Input.GetMouseButtonDown(0))
+                {
                     _timer = 15;
+                    Sc_CharacterManager.Instance.ChangePlayer();
+                }
             }
-            
-            if (_timer >= 15 && !CardChoice._cardDonation && !CardChoice._medium && !CardChoice._cardTrade && !CardChoice._choice)
+
+            if (_timer >= 15 && !CardChoice._cardDonation && !CardChoice._medium && !CardChoice._cardTrade &&
+                !CardChoice._choice)
             {
                 _animation = false;
                 _timer = 0.0f;
@@ -69,25 +72,34 @@ public class AnimationCard : MonoBehaviour
                 AnimationStats._hpAnim = 0;
                 AnimationStats._bulletAnim = 0;
                 AnimationStats._goldAnim = 0;
-                switch (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
-                {
-                    case "River" :
-                        Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._riverDecoration);
-                        break;
-                    case "Desert" :
-                        Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._desertDecoration);
-                        break;
-                    default:
-                        break;
-                }
+
+                // if (SC_PlayerTurn.Instance.turn == 0)
+                // {
+                //     if (SC_PlayerTurn.Instance._canMove[2] == false)
+                //     {
+                //         SC_PlayerTurn.Instance.turn += 1;
+                //     }
+                // }
+                // else if (SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn -1])
+                // {
+                //     SC_PlayerTurn.Instance.turn += 1;
+                // }
+                
                 SC_PlayerTurn.Instance.turn += 1;
-                Card._isChoice = false;
-                if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
+                if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
                     SC_PlayerTurn.Instance.turn = 0;
-                Zone.AddTurn();
+                
+                if(!SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn])
+                    SC_PlayerTurn.Instance.turn += 1;
+                
+                Sc_CharacterManager.Instance.ChangePlayer();
+                
+                if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
+                    SC_PlayerTurn.Instance.turn = 0;
+                
+                Card._isChoice = false;
                 SkipTurn();
                 _cardUi.SetActive(false);
-                Sc_CharacterManager.Instance.ChangePlayer();
             }
         }
     }
@@ -111,10 +123,7 @@ public class AnimationCard : MonoBehaviour
                     Card._skipTurn[SC_PlayerTurn.Instance.turn] = false;
                     SC_PlayerTurn.Instance.turn += 1;
                     if (SC_PlayerTurn.Instance.turn == Stats._nbPlayer)
-                    {
                         SC_PlayerTurn.Instance.turn = 0;
-                        Zone.AddTurn();
-                    }
                 }
             }
         }

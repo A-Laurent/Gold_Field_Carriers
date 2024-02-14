@@ -179,7 +179,7 @@ public class CardChoice : MonoBehaviour
             {
                 StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
                     SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
-                        .GetComponent<Sc_Neighbor>()._neighbor[2].transform.position + new Vector3(0, 1, 0),
+                        .GetComponent<Sc_Neighbor>()._neighbor[2].transform.position,
                     SC_PlayerTurn.Instance.currentPlayer));
                 SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
                     .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.tag = "Occuped";
@@ -290,7 +290,7 @@ public class CardChoice : MonoBehaviour
             {
                 StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f,
                     SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
-                        .GetComponent<Sc_Neighbor>()._neighbor[0].transform.position + new Vector3(0, 1, 0),
+                        .GetComponent<Sc_Neighbor>()._neighbor[0].transform.position,
                     SC_PlayerTurn.Instance.currentPlayer));
                 SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
                     .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.tag = "Occuped";
