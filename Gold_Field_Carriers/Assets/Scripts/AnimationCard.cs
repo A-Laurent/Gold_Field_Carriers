@@ -17,6 +17,18 @@ public class AnimationCard : MonoBehaviour
 
     public GameObject _cardUi;
 
+    public static AnimationCard Instance;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(Instance);
+        }
+
+        Instance = this;
+    }
+
     private void Start()
     {
         Animation();
@@ -103,6 +115,7 @@ public class AnimationCard : MonoBehaviour
             }
         }
     }
+
 
     public void SkipTurn()
     {
