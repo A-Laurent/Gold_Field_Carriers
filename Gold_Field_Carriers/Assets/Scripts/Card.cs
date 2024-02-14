@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -214,6 +216,15 @@ public class Card : MonoBehaviour
         {
             if (_card._zone == "River")
             {
+                if (SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.CompareTag("Occuped") && SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
+                    .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.CompareTag("Occuped"))
+                {
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
+                    CardChoice.instance.DestroyCard();
+                    return;
+                }
+
                 _uiChoice.SetActive(true);
                 _isChoice = true;
                 CardChoice._changeZoneRiver = true;
@@ -262,12 +273,11 @@ public class Card : MonoBehaviour
     }
 
     public void MoveHorde(GameObject theHorde)
-    {
-        float DistEntreDeuxCase = 5.8f;     // a modifier en fonction de la map.
+    {   // a modifier en fonction de la map.
         if (Zone._turn > 2)
         {
             _theHorde += _card._horde;
-            theHorde.transform.position += new Vector3(DistEntreDeuxCase, 0, 0);
+            StartCoroutine(MoveHorde(1));
             foreach (var player in SC_PlayerTurn.Instance._player)
             {
                 if (player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "End")
@@ -285,7 +295,7 @@ public class Card : MonoBehaviour
                             {
                                 if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].gameObject.CompareTag("Occuped"))
                                 {
-                                StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position + new Vector3(0, 1, 0), player));
+                                StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position, player));
                                 _move = false;
                                 }
                                 else
@@ -299,8 +309,8 @@ public class Card : MonoBehaviour
                                                 if (Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].name[2].ToString()) == Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
                                                 {
                                                     int turn2 = Int32.Parse(player2.name[1].ToString());
-                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position + new Vector3(0, 1, 0), player));
-                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].transform.position + new Vector3(0, 1, 0), player2));
+                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position, player));
+                                                    StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].transform.position, player2));
                                                     _move = false;
                                                     _skipTurn[turn2 - 1] = true;
                                                     Sc_CharacterManager.Instance._playerInfo[turn2 - 1].GetComponent<Sc_ScriptableReader>()._gold -= 2;
@@ -314,6 +324,22 @@ public class Card : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private IEnumerator MoveHorde(float total_time)
+    {
+        float time = 0f;
+        float DistEntreDeuxCase = 5.8f;
+        Vector3 start_pos = _horde.transform.position;
+        Vector3 endpos = _horde.transform.position + new Vector3(DistEntreDeuxCase,0,0);
+
+        while (time / total_time < 1)
+        {
+            time += Time.deltaTime;
+            _horde.transform.position = Vector3.Lerp(start_pos, endpos, time / total_time);
+
+            yield return null;
         }
     }
 
