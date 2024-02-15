@@ -280,8 +280,8 @@ public class Card : MonoBehaviour
             StartCoroutine(MoveHorde(1));
             foreach (var player in SC_PlayerTurn.Instance._player)
             {
-                if (player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name 
-                    != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "End")
+                if (player.GetComponent<Sc_getPlayerPosition>()._position.name 
+                    != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.name != "End")
                 {
                     int turn = Int32.Parse(player.name[1].ToString());
                     if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) <= _theHorde - 1)

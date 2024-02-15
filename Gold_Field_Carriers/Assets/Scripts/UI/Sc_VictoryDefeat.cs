@@ -21,6 +21,7 @@ public class Sc_VictoryDefeat : MonoBehaviour
         {
             SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn] = false;
             SC_PlayerTurn.Instance.turn += 1;
+            Sc_CharacterManager.Instance.ChangePlayer();
             if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
                 SC_PlayerTurn.Instance.turn = 0;
         } 

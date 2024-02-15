@@ -165,8 +165,13 @@ public class SC_PlayerTurn : MonoBehaviour
 
     private IEnumerator PLayerBlocked()
     {
-        if (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.tag == "Occuped"
-         && SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[1].gameObject.tag == "Occuped")
+        bool blocked = true;
+        for (int i = 0; i < SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor.Count; i++)
+        {
+            if (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].gameObject.tag != "Occuped")
+                blocked = false;
+        }
+        if (blocked)
         {
             Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= 1;
             yield return new WaitForSeconds(0.5f);

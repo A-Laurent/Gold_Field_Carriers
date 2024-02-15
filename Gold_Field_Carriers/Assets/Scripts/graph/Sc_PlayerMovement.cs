@@ -32,6 +32,7 @@ public class Sc_PlayerMovement : MonoBehaviour
                     Debug.Log(neighbor);
                     if (neighbor == hit.collider.gameObject)
                     {
+                        _end = false;
                         if (hit.collider.gameObject.name == "End")
                             _end = true;
                         SC_MovePlayer.Instance.StartMoving();

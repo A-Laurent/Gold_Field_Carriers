@@ -181,8 +181,6 @@ public class CardChoice : MonoBehaviour
                     SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
                         .GetComponent<Sc_Neighbor>()._neighbor[2].transform.position,
                     SC_PlayerTurn.Instance.currentPlayer));
-                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
-                    .GetComponent<Sc_Neighbor>()._neighbor[2].gameObject.tag = "Occuped";
             }
             else
                 return;
@@ -292,8 +290,6 @@ public class CardChoice : MonoBehaviour
                     SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
                         .GetComponent<Sc_Neighbor>()._neighbor[0].transform.position,
                     SC_PlayerTurn.Instance.currentPlayer));
-                SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position
-                    .GetComponent<Sc_Neighbor>()._neighbor[0].gameObject.tag = "Occuped";
             }
             else
                 return;
@@ -396,20 +392,29 @@ public class CardChoice : MonoBehaviour
         switch (SC_PlayerTurn.Instance.turn) 
         {
             case 0:
-                Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard(); break;
             case 1:
-                Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard(); break;
             case 2:
-                Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[0].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard(); break;
@@ -421,22 +426,31 @@ public class CardChoice : MonoBehaviour
         switch (SC_PlayerTurn.Instance.turn)
         {
             case 0:
-                Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard();
                 break;
             case 1:
-                Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[2].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard();
                 break;
             case 2:
-                Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
-                Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount > 0)
+                {
+                    Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentAmmount += Card._card._bullet;
+                    Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentAmmount -= Card._card._bullet;
+                }
                 Sc_CharacterManager.Instance._playerInfo[1].GetComponent<Sc_ScriptableReader>()._currentLife += Card._card._hp;
                 Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife -= Card._card._hp;
                 DestroyCard();
