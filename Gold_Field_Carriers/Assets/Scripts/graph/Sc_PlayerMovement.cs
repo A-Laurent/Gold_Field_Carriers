@@ -5,6 +5,7 @@ public class Sc_PlayerMovement : MonoBehaviour
 {
     private float _rayDistance = 100f;
     RaycastHit hit;
+    public static bool _end;
     
     private void StartRaycast()
     {
@@ -29,6 +30,8 @@ public class Sc_PlayerMovement : MonoBehaviour
                 {
                     if (neighbor == hit.collider.gameObject)
                     {
+                        if (hit.collider.gameObject.name == "End")
+                            _end = true;
                         SC_MovePlayer.Instance.StartMoving();
                         //if(hit.collider.transform.parent.name != SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
                         GetZonePlayer(hit.collider.gameObject);
@@ -63,7 +66,7 @@ public class Sc_PlayerMovement : MonoBehaviour
             case "Mountain" :
                 break;
             default:
-                Debug.LogError("Failed for find parent by name");
+
                 break;
         }
     }

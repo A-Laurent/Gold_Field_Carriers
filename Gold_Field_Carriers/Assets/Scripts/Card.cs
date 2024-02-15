@@ -76,6 +76,8 @@ public class Card : MonoBehaviour
         }
 
         Shuffle();
+
+        print(SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].transform.position.x);
     }
 
     public void DrawCard()
@@ -280,7 +282,8 @@ public class Card : MonoBehaviour
             StartCoroutine(MoveHorde(1));
             foreach (var player in SC_PlayerTurn.Instance._player)
             {
-                if (player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "End")
+                if (player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name 
+                    != "Start" && player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name != "End")
                 {
                     int turn = Int32.Parse(player.name[1].ToString());
                     if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) <= _theHorde - 1)
@@ -291,7 +294,8 @@ public class Card : MonoBehaviour
                         _move = true;
                         for (int i = 0; i < player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor.Count; i++)
                         {
-                            if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].name[2].ToString()) == Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
+                            if (Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].name[2].ToString()) 
+                                == Int32.Parse(player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
                             {
                                 if (!player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].gameObject.CompareTag("Occuped"))
                                 {
@@ -306,7 +310,8 @@ public class Card : MonoBehaviour
                                         {
                                             for (int j = 0; j < player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor.Count; j++)
                                             {
-                                                if (Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].name[2].ToString()) == Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
+                                                if (Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[j].name[2].ToString())
+                                                    == Int32.Parse(player2.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>().name[2].ToString()) + 1 && _move)
                                                 {
                                                     int turn2 = Int32.Parse(player2.name[1].ToString());
                                                     StartCoroutine(SC_PlayerTurn.Instance.MovePlayer(1f, player.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor[i].transform.position, player));
