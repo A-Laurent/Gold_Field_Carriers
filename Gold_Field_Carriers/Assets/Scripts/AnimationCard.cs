@@ -102,7 +102,22 @@ public class AnimationCard : MonoBehaviour
                     SC_PlayerTurn.Instance.turn = 0;
                 
                 if(!SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn])
+                {
                     SC_PlayerTurn.Instance.turn += 1;
+                    if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
+                        SC_PlayerTurn.Instance.turn = 0;
+                    if (!SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn])
+                    {
+                        SC_PlayerTurn.Instance.turn += 1;
+                        if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
+                            SC_PlayerTurn.Instance.turn = 0;
+                        if (!SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn])
+                        {
+                            Sc_VictoryDefeat._endGame = true;
+                        }
+                    }
+
+                }          
                 
                 Sc_CharacterManager.Instance.ChangePlayer();
                 

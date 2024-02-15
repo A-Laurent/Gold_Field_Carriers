@@ -9,8 +9,11 @@ public class Sc_getPlayerPosition : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.name == "P1" || other.name == "P2" || other.name == "P3")
+            return;
         _position = other.gameObject;
-        _position.tag = "Occuped";
+        if (_position.name != "End")
+            _position.tag = "Occuped";
     }
 
     private void OnTriggerExit(Collider other)

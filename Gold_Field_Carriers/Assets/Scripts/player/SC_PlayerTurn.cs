@@ -14,6 +14,7 @@ public class SC_PlayerTurn : MonoBehaviour
     public bool endTurn = false;
     public bool recupPos = true;
 
+
     public List<GameObject> _player = new List<GameObject>();
     public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
@@ -91,7 +92,7 @@ public class SC_PlayerTurn : MonoBehaviour
         {
             if (_canMove[0] == false && _canMove[1] == false && _canMove[2] == false)
             {
-                turn = 5;
+                Sc_VictoryDefeat._endGame = true;
             }
         }
     }
