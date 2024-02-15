@@ -37,9 +37,6 @@ public class Sc_MainMenuManager : MonoBehaviour
         {
             Directory.CreateDirectory(saveFolderPath);
         }
-        
-        if(!Sc_AudioManager.Instance.sound[0].Value.Source.isPlaying)
-            Sc_AudioManager.Instance.PlaySong("MainMenu");
     }
 
     private IEnumerator ChangeScene()

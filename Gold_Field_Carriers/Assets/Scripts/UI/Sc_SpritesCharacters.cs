@@ -37,6 +37,9 @@ public class Sc_SpritesCharacters : MonoBehaviour
     private void Start()
     {
         _characterToSelect = _charactersSelection[_characterIndex];
+        
+        if(!Sc_AudioManager.Instance.sound[0].Value.Source.isPlaying)
+            Sc_AudioManager.Instance.PlaySong("MainMenu");
     }
 
     public void LeftArrow()

@@ -6,20 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3f6d468d-e127-4a70-aa4c-aa24e72269a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gold_Field_Carriers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gold_Field_Carriers/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Settings.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Settings.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Devroom_FixUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Devroom_FixUI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/CharacterSelection.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/CharacterSelection.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/Settings.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/Settings.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/First.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/First.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_AudioManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_MainMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_MainMenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SettingsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SettingsManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sound/Game.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sound/Game.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sound/Lose.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sound/Lose.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sound/Main Menu.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sound/Main Menu.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SpritesCharacters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SpritesCharacters.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Sound/Mixer/MainMixer.mixer" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sound/Mixer/MainMixer.mixer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -23,12 +23,19 @@ public class Sc_AudioManager : MonoBehaviour
         }
         else
         {
-            Debug.LogException(new Exception("You have several objects with the Sc_AudioManager script in your scene. With an instance, you only need one."));
+            Debug.LogException(new Exception(
+                "You have several objects with the Sc_AudioManager script in your scene. With an instance, you only need one."));
             Destroy(gameObject);
             return;
         }
     }
-    
+
+    private void Start()
+    {
+        if (!sound[0].Value.Source.isPlaying)
+            sound[0].Value.Source.Play();
+    } 
+
     public List<DictionaryElement<string, AudioClipe>> sound;
 
     public void PlaySong(string name)
