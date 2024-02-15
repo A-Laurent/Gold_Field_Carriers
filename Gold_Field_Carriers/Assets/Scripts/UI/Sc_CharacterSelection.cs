@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,9 +10,29 @@ public class Sc_CharacterSelection : MonoBehaviour
     [SerializeField] private Color32 _characterAlreadySelectedColor;
     [SerializeField] private Color32 _initColor;
     [SerializeField] private List<GameObject> _characters = new List<GameObject>();
+    [SerializeField] private List<GameObject> resetButton = new List<GameObject>();
     private Sc_SpritesCharacters _spritesCharacters;
     [SerializeField] private int _player = 0;
     [SerializeField] private Button _startButton;
+
+    private void Update()
+    {
+        foreach(var a in resetButton)
+        {
+            if (a.gameObject.name == "1st character")
+            {
+                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
+            }
+            else if(a.gameObject.name == "2nd character")
+            {
+                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
+            }
+            else if(a.gameObject.name == "3nd character")
+            {
+                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
+            }
+        }
+    }
 
     private void Start()
     {
@@ -19,7 +40,7 @@ public class Sc_CharacterSelection : MonoBehaviour
     }
 
     public void ResetCharacter()
-    {
+    { 
         foreach (var characterselection in Sc_SpritesCharacters.Instance._charactersSelection)
         {
             if (characterselection.GetComponent<Image>().sprite ==
@@ -48,6 +69,7 @@ public class Sc_CharacterSelection : MonoBehaviour
             _player++;
         }
 
+        //this.GetComponentInChildren<Button>().GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
         _startButton.interactable = false;
         EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button>().interactable = false;
     }
@@ -67,6 +89,7 @@ public class Sc_CharacterSelection : MonoBehaviour
             _characters[_player].GetComponent<Image>().color = Color.white;
             Sc_SpritesCharacters.Instance._ID[_player] =
                 Sc_SpritesCharacters.Instance._characterToSelect.GetComponent<Sc_CanSelect>()._id;
+            _characters[_player].GetComponent<RectTransform>().sizeDelta = new Vector2(430, 432);
             _player++;
         }
 
