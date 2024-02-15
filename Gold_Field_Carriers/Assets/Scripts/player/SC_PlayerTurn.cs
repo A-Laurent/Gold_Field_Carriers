@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public class SC_PlayerTurn : MonoBehaviour
@@ -15,6 +16,7 @@ public class SC_PlayerTurn : MonoBehaviour
     public bool recupPos = true;
 
     public List<GameObject> _player = new List<GameObject>();
+    public List<GameObject> _stepNeighbor = new List<GameObject>();
     public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
 
@@ -174,9 +176,26 @@ public class SC_PlayerTurn : MonoBehaviour
 
     private void ChangeColorNeighbors()
     {
-        foreach (var neighbor in SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor)
+        ClearColor();
+        _stepNeighbor.Clear();
+        foreach (var neighbor in _player[turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor)
         {
-            neighbor.GetComponentInChildren<SpriteRenderer>().color = new Color32(253, 108, 158, 255);
+            if (neighbor.gameObject.tag == "Path")
+            {
+                _stepNeighbor.Add(neighbor);
+                foreach (var stepNeighbor in _stepNeighbor)
+                {
+                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 255, 255);
+                }
+            }
+        }
+    }
+
+    void ClearColor()
+    {
+        foreach (var stepNeighbor in _stepNeighbor)
+        {
+            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0);
         }
     }
 }
