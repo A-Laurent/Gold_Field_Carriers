@@ -37,7 +37,7 @@ public class Sc_PlayerMovement : MonoBehaviour
                             _end = true;
                         SC_MovePlayer.Instance.StartMoving();
                         //if(hit.collider.transform.parent.name != SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
-                        GetZonePlayer(hit.collider.gameObject);
+                        //GetZonePlayer(hit.collider.gameObject);
                         break;
                     }
                 }
@@ -56,21 +56,21 @@ public class Sc_PlayerMovement : MonoBehaviour
         CheckRay();
     }
     
-    private void GetZonePlayer(GameObject collider)
-    {
-        switch (collider.transform.parent.name)
-        {
-            case "River" :
-                Sc_GameManager.Instance.RaiseDecoration(Sc_GameManager.Instance._riverDecoration);
-                break;
-            case "Desert" :
-                Sc_GameManager.Instance.RaiseDecoration(Sc_GameManager.Instance._desertDecoration);
-                break;
-            case "Mountain" :
-                break;
-            default:
+    //private void GetZonePlayer(GameObject collider)
+    //{
+    //    switch (collider.transform.parent.name)
+    //    {
+    //        case "River" :
+    //            Sc_GameManager.Instance.RaiseDecoration(Sc_GameManager.Instance._riverDecoration);
+    //            break;
+    //        case "Desert" :
+    //            Sc_GameManager.Instance.RaiseDecoration(Sc_GameManager.Instance._desertDecoration);
+    //            break;
+    //        case "Mountain" :
+    //            break;
+    //        default:
 
-                break;
-        }
-    }
+    //            break;
+    //    }
+    //}
 }

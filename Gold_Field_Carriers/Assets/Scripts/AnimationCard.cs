@@ -128,6 +128,11 @@ public class AnimationCard : MonoBehaviour
                 Zone.AddTurn();
                 SkipTurn();
                 _cardUi.SetActive(false);
+
+                if (Zone._animDesert)
+                    Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._desertDecoration);
+                if (Zone._animRiver)
+                    Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._riverDecoration);
             }
         }
     }
