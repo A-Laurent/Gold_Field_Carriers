@@ -1,32 +1,34 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class AudioClipe
 {
     public AudioClip Clip;
     public AudioSource Source;
-    
 }
 
 public class Sc_AudioManager : MonoBehaviour
 {
-    public static Sc_AudioManager instance;
+    public static Sc_AudioManager Instance;
 
     private void Awake()
     {
-        instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogException(new Exception("You have several objects with the Sc_AudioManager script in your scene. With an instance, you only need one."));
+            Destroy(gameObject);
+            return;
+        }
     }
-
-    private void Update()
-    {
-        if (sound[0].Key == "MainMenu")
-            if (!sound[0].Value.Source.isPlaying)
-                PlaySong("MainMenu");
-        if (sound[0].Key == "Game")
-            if (!sound[0].Value.Source.isPlaying)
-                PlaySong("Game");
-    }
+    
     public List<DictionaryElement<string, AudioClipe>> sound;
 
     public void PlaySong(string name)
