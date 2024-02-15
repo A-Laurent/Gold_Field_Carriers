@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
@@ -24,7 +25,8 @@ public class SC_PlayerTurn : MonoBehaviour
 
     public static SC_PlayerTurn Instance;
 
-    [SerializeField] private GameObject Arrow;
+    [SerializeField] private Material currentMat;
+    [SerializeField] private Material newMat;
 
     private void Awake()
     {
@@ -185,6 +187,7 @@ public class SC_PlayerTurn : MonoBehaviour
                 _stepNeighbor.Add(neighbor);
                 foreach (var stepNeighbor in _stepNeighbor)
                 {
+                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = newMat;
                     stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 255, 255);
                 }
             }
@@ -195,6 +198,7 @@ public class SC_PlayerTurn : MonoBehaviour
     {
         foreach (var stepNeighbor in _stepNeighbor)
         {
+            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = currentMat;
             stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0);
         }
     }
