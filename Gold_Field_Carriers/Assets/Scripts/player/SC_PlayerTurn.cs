@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
 public class SC_PlayerTurn : MonoBehaviour
@@ -16,12 +18,16 @@ public class SC_PlayerTurn : MonoBehaviour
 
 
     public List<GameObject> _player = new List<GameObject>();
+    public List<GameObject> _stepNeighbor = new List<GameObject>();
     public List<bool> _canMove = new List<bool>() {true, true, true};
     public GameObject currentPlayer;
 
     [FormerlySerializedAs("graph")] [SerializeField] Sc_PlayerMovement playerMovement;
 
     public static SC_PlayerTurn Instance;
+
+    [SerializeField] private Material currentMat;
+    [SerializeField] private Material newMat;
 
     private void Awake()
     {
@@ -41,6 +47,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -58,6 +65,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -74,6 +82,7 @@ public class SC_PlayerTurn : MonoBehaviour
                         if (recupPos == true)
                         {
                             StartCoroutine(PLayerBlocked());
+                            ChangeColorNeighbors();
                             recupPos = false;
                         }
                         if (endTurn)
@@ -164,6 +173,34 @@ public class SC_PlayerTurn : MonoBehaviour
             Card._skipTurn[turn] = true;
             AnimationCard.Instance.SkipTurn();
             Sc_CharacterManager.Instance.ChangePlayer();
+        }
+    }
+
+
+    private void ChangeColorNeighbors()
+    {
+        ClearColor();
+        _stepNeighbor.Clear();
+        foreach (var neighbor in _player[turn].GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._neighbor)
+        {
+            if (neighbor.gameObject.tag == "Path")
+            {
+                _stepNeighbor.Add(neighbor);
+                foreach (var stepNeighbor in _stepNeighbor)
+                {
+                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = newMat;
+                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 255, 255);
+                }
+            }
+        }
+    }
+
+    void ClearColor()
+    {
+        foreach (var stepNeighbor in _stepNeighbor)
+        {
+            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = currentMat;
+            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0);
         }
     }
 }
