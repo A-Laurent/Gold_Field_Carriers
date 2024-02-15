@@ -9,6 +9,8 @@ public class Sc_GameManager : MonoBehaviour
 {
     public List<GameObject> _riverDecoration = new List<GameObject>();
     public List<GameObject> _desertDecoration = new List<GameObject>();
+    public List <GameObject> _players = new List<GameObject>();
+    public List <GameObject> _playerUI = new List<GameObject>();
 
     public static Sc_GameManager Instance;
 
@@ -24,6 +26,19 @@ public class Sc_GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    private void Start()
+    {
+        for(int i = 0; i < _players.Count; i++)
+        {
+            _players[i].GetComponentInChildren<SpriteRenderer>().sprite = _playerUI[i].GetComponent<Sc_ScriptableReader>()._spriteInGame;
+        }
+    }
+
+    private void Update()
+    {
+        SetOrderInLayer();
     }
 
     public void RaiseDecoration(List<GameObject> zonedecoration)
@@ -125,6 +140,19 @@ public class Sc_GameManager : MonoBehaviour
                 Sc_CharacterManager.Instance._playerInfo[turn].transform.GetChild(0).GetChild(6).GetComponent<Image>().color = 
                     Color.white;
                 break;
+        }
+    }
+
+    private void SetOrderInLayer()
+    {
+        foreach (GameObject player in _players)
+        {
+            if (player.transform.position.z == -8.865f)
+            {
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+            }
+            else
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1;
         }
     }
 }

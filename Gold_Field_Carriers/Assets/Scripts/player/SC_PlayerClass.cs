@@ -7,6 +7,7 @@ public class SC_PlayerClass : ScriptableObject
     public string _name;
     public string _desc;
     public Sprite _sprite;
+    public Sprite _spriteInGame;
 
     public bool _isAlive = true;
     public bool _isInTheCity = false;

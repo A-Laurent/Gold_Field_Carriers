@@ -9,6 +9,7 @@ public class Sc_ScriptableReader : MonoBehaviour
     public string _name;
     public string _desc;
     public Sprite _sprite;
+    public Sprite _spriteInGame;
 
     public bool _isAlive;
     public bool _isInTheCity;
@@ -50,6 +51,7 @@ public class Sc_ScriptableReader : MonoBehaviour
         _name = _playerClasse._name;
         _desc = _playerClasse._desc;
         _sprite = _playerClasse._sprite;
+        _spriteInGame = _playerClasse._spriteInGame;
 
         _isAlive = _playerClasse._isAlive;
         _isInTheCity = _playerClasse._isInTheCity;
