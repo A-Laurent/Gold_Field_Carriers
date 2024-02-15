@@ -5,31 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3f6d468d-e127-4a70-aa4c-aa24e72269a6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_ControllerFade.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_ControllerFade.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_FadeInOut.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_FadeInOut.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_StartTextLore.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_StartTextLore.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/cielbg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/cielbg.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_1.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_2.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Map/nuage_3.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Devroom_FixUI.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Devroom_FixUI.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/CharacterSelection.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/CharacterSelection.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/Credits.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/Credits.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/Settings.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/Settings.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnimationCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimationCard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_Credits.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_Credits.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gold_Field_Carriers/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gold_Field_Carriers/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menus/First.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menus/First.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_AudioManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_AudioManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_MainMenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_MainMenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SettingsManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SettingsManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_StartGame.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_StartGame.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/player/SC_PlayerTurn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/player/SC_PlayerTurn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SpritesCharacters.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Sc_SpritesCharacters.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Sound/Mixer/MainMixer.mixer" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sound/Mixer/MainMixer.mixer" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +21,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30adf90198bc4c4b83910c6fb1877998174000/37/36660a94/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30adf90198bc4c4b83910c6fb1877998174000/60/6349b580/InvokableCall.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Save/Sc_AudioData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Sc_LoadSave.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Sc_SetAudioVolume.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -57,7 +40,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging Developpe",
+    "git-widget-placeholder": "feat-SaveAudio",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,10 +83,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="7180">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="7180" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -132,5 +115,17 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties exception="System.NullReferenceException" isInternal="false" displayValue="NullReferenceException" namespaceName="System">
+            <option name="internal" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

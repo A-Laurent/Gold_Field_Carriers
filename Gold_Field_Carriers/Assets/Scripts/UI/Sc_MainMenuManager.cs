@@ -20,13 +20,23 @@ public class Sc_MainMenuManager : MonoBehaviour
     {
         fade = FindObjectOfType<Sc_FadeInOut>();
     }
+
     private void Start()
     {
+        if (File.Exists(Application.dataPath + "/Saves/Audio.json"))
+        {
+            Sc_SaveAudio.Instance.LoadFromJSON();
+        }
+        else
+        {
+            Sc_SetAudioVolume.Instance.SetVolumeMusic(-40f);      
+            Sc_SetAudioVolume.Instance.SetVolumeSFX(-40f);      
+        }
+        
         if (!Directory.Exists(saveFolderPath))
         {
             Directory.CreateDirectory(saveFolderPath);
         }
-        Sc_AudioManager.instance.PlaySong("MainMenu");
     }
 
     private IEnumerator ChangeScene()
@@ -40,6 +50,7 @@ public class Sc_MainMenuManager : MonoBehaviour
         {
             timer = fade.TimeToFade;
         }
+
         yield return new WaitForSeconds(timer);
 
         SceneManager.LoadScene(SceneToLoad);
@@ -54,6 +65,7 @@ public class Sc_MainMenuManager : MonoBehaviour
         SceneToLoad = "CharacterSelection";
         StartCoroutine(ChangeScene());
     }
+
     public void Settings()
     {
         fade.TimeToFade = 2f;
@@ -61,6 +73,7 @@ public class Sc_MainMenuManager : MonoBehaviour
         StartCoroutine(ChangeScene());
         //SceneManager.LoadScene("Settings");
     }
+
     public void Credits()
     {
         fade.TimeToFade = 2f;
@@ -68,9 +81,10 @@ public class Sc_MainMenuManager : MonoBehaviour
         StartCoroutine(ChangeScene());
         //SceneManager.LoadScene("Credits");
     }
+
     public void Quit()
     {
-        if(File.Exists(Application.dataPath + "/Saves/Characters.json"))
+        if (File.Exists(Application.dataPath + "/Saves/Characters.json"))
             File.Delete(Application.dataPath + "/Saves/Characters.json");
         Application.Quit();
     }
