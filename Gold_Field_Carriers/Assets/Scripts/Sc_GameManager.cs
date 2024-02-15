@@ -147,11 +147,11 @@ public class Sc_GameManager : MonoBehaviour
     {
         foreach (GameObject player in _players)
         {
-            if (player.transform.position.z == -8.93f)
+            if (player.GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name == "Desert")
             {
                 player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6;
             }
-            else if (player.transform.position.z == -0.07f)
+            else if (player.GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name == "River")
             {
                 player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 3;
             }
