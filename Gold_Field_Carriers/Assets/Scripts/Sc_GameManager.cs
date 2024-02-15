@@ -151,8 +151,14 @@ public class Sc_GameManager : MonoBehaviour
             {
                 player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
             }
+            else if (player.transform.position.z == -0.029f)
+            {
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+            }
             else
+            {
                 player.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1;
+            }
         }
     }
 }
