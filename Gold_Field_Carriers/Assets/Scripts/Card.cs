@@ -76,8 +76,6 @@ public class Card : MonoBehaviour
         }
 
         Shuffle();
-
-        print(SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].transform.position.x);
     }
 
     public void DrawCard()
