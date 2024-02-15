@@ -40,8 +40,8 @@ public class Stats : MonoBehaviour
 
         if (Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._currentLife == 0)
         {
-            if(Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold != 0)
-                SC_PlayerTurn.Instance.currentPlayer.transform.position += new Vector3(0, 0f, 3f);
+            //if(Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold != 0)
+            //    SC_PlayerTurn.Instance.currentPlayer.transform.position += new Vector3(0, 0f, 3f);
             if(!SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._isThereGold)
                 SC_PlayerTurn.Instance.currentPlayer.GetComponent<Sc_getPlayerPosition>()._position.GetComponent<Sc_Neighbor>()._gold =
                     Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold;
