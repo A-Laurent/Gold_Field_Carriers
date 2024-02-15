@@ -130,6 +130,11 @@ public class AnimationCard : MonoBehaviour
                 //SC_PlayerTurn.Instance.ChangeColorNeighbors();
                 SC_PlayerTurn.Instance.recupPos = true;
                 _cardUi.SetActive(false);
+
+                if (Zone._animDesert)
+                    Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._desertDecoration);
+                if (Zone._animRiver)
+                    Sc_GameManager.Instance.LowerDecoration(Sc_GameManager.Instance._riverDecoration);
             }
         }
     }
