@@ -127,6 +127,8 @@ public class AnimationCard : MonoBehaviour
                 Card._isChoice = false;
                 Zone.AddTurn();
                 SkipTurn();
+                //SC_PlayerTurn.Instance.ChangeColorNeighbors();
+                SC_PlayerTurn.Instance.recupPos = true;
                 _cardUi.SetActive(false);
             }
         }

@@ -49,6 +49,7 @@ public class SC_MovePlayer : MonoBehaviour
         if (PlayerBody.transform.position == end_pos)
         {
             canMove = true;
+            SC_PlayerTurn.Instance._stepNeighbor.Clear();
             pTurn.endTurn = true;//a 
             if (!Sc_PlayerMovement._end)
             {

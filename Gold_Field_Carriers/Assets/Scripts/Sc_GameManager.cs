@@ -147,17 +147,17 @@ public class Sc_GameManager : MonoBehaviour
     {
         foreach (GameObject player in _players)
         {
-            if (player.transform.position.z == -8.865f)
+            if (player.transform.position.z == -8.93f)
             {
-                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 6;
             }
-            else if (player.transform.position.z == -0.029f)
+            else if (player.transform.position.z == -0.07f)
             {
-                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 3;
             }
             else
             {
-                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = -1;
+                player.GetComponentInChildren<SpriteRenderer>().sortingOrder = 0;
             }
         }
     }

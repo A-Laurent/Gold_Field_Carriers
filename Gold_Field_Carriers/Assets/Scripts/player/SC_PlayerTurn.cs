@@ -52,7 +52,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            recupPos = true;
                             endTurn = false;
                         }
                     }
@@ -70,7 +69,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            recupPos = true;
                             endTurn = false;
                         }
                     }
@@ -87,7 +85,6 @@ public class SC_PlayerTurn : MonoBehaviour
                         }
                         if (endTurn)
                         {
-                            recupPos = true;
                             endTurn = false;
                         }
                     }
@@ -182,7 +179,7 @@ public class SC_PlayerTurn : MonoBehaviour
     }
 
 
-    private void ChangeColorNeighbors()
+    public void ChangeColorNeighbors()
     {
         ClearColor();
         _stepNeighbor.Clear();
@@ -193,19 +190,18 @@ public class SC_PlayerTurn : MonoBehaviour
                 _stepNeighbor.Add(neighbor);
                 foreach (var stepNeighbor in _stepNeighbor)
                 {
-                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = newMat;
-                    stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 255, 255);
+
+                    stepNeighbor.gameObject.GetComponent<SpriteRenderer>().color = new Color32(164, 181, 203, 200);
                 }
             }
         }
     }
 
-    void ClearColor()
+    public void ClearColor()
     {
         foreach (var stepNeighbor in _stepNeighbor)
         {
-            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material = currentMat;
-            stepNeighbor.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0, 0, 0);
+            stepNeighbor.gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
         }
     }
 }

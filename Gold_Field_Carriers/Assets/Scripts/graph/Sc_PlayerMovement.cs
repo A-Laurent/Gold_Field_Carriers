@@ -38,6 +38,7 @@ public class Sc_PlayerMovement : MonoBehaviour
                         SC_MovePlayer.Instance.StartMoving();
                         //if(hit.collider.transform.parent.name != SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name)
                         GetZonePlayer(hit.collider.gameObject);
+                        SC_PlayerTurn.Instance.ClearColor();
                         break;
                     }
                 }
