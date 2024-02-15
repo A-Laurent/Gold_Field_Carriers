@@ -1,16 +1,13 @@
 using System.Collections;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Sc_MainMenuManager : MonoBehaviour
 {
     Sc_FadeInOut fade;
 
-    private string saveFolderPath = Application.dataPath + "/Saves";
+    //private string saveFolderPath = Application.persistentDataPath;
 
     private string SceneToLoad;
     private float timer;
@@ -23,7 +20,7 @@ public class Sc_MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        if (File.Exists(Application.dataPath + "/Saves/Audio.json"))
+        if (File.Exists(Application.persistentDataPath + "/Audio.json"))
         {
             Sc_SaveAudio.Instance.LoadFromJSON();
         }
@@ -33,10 +30,10 @@ public class Sc_MainMenuManager : MonoBehaviour
             Sc_SetAudioVolume.Instance.SetVolumeSFX(-40f);      
         }
         
-        if (!Directory.Exists(saveFolderPath))
-        {
-            Directory.CreateDirectory(saveFolderPath);
-        }
+        //if (!Directory.Exists(saveFolderPath))
+        //{
+        //    Directory.CreateDirectory(saveFolderPath);
+        //}
     }
 
     private IEnumerator ChangeScene()
@@ -84,8 +81,8 @@ public class Sc_MainMenuManager : MonoBehaviour
 
     public void Quit()
     {
-        if (File.Exists(Application.dataPath + "/Saves/Characters.json"))
-            File.Delete(Application.dataPath + "/Saves/Characters.json");
+        //if (File.Exists(Application.persistentDataPath + "/Characters.json"))
+        //    File.Delete(Application.persistentDataPath + "/Characters.json");
         Application.Quit();
     }
 }

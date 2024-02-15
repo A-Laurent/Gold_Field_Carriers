@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
@@ -31,7 +30,7 @@ public class Sc_CharacterManager : MonoBehaviour
             return;
         }
 
-        if (File.Exists(Application.dataPath + "/Saves/Characters.json"))
+        if (File.Exists(Application.persistentDataPath + "/Characters.json"))
             Sc_SaveCharacters.Instance.LoadFromJson();
     }
 

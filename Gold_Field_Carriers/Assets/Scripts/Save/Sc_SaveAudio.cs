@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -25,7 +23,7 @@ public class Sc_SaveAudio : MonoBehaviour
 
     public void LoadFromJSON()
     {
-        string filepath = Application.dataPath + "/Saves/Audio.json";
+        string filepath = Application.persistentDataPath + "/Audio.json";
         string gamedata = File.ReadAllText(filepath);
 
         _audioData = JsonUtility.FromJson<Sc_AudioData>(gamedata);
@@ -40,7 +38,7 @@ public class Sc_SaveAudio : MonoBehaviour
         Sc_SetAudioVolume.Instance.audioMixer.GetFloat("SFX", out _audioData._sfxVolume);
 
         string gamedata = JsonUtility.ToJson(_audioData);
-        File.WriteAllText(Application.dataPath + "/Saves/Audio.json", gamedata);
+        File.WriteAllText(Application.persistentDataPath + "/Audio.json", gamedata);
         Debug.Log("Audio is saved");
     }
 }

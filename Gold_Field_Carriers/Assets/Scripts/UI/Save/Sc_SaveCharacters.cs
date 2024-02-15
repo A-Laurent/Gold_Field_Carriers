@@ -1,7 +1,5 @@
 using System.IO;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Sc_SaveCharacters : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class Sc_SaveCharacters : MonoBehaviour
 
     public void LoadFromJson()
     {
-        string filepath = Application.dataPath + "/Saves/Characters.json";
+        string filepath = Application.persistentDataPath + "/Characters.json";
         string gameData = File.ReadAllText(filepath);
 
         _DataCharacters = JsonUtility.FromJson<Sc_DataCharacters>(gameData);
@@ -40,7 +38,7 @@ public class Sc_SaveCharacters : MonoBehaviour
         _DataCharacters._id.Add(Sc_SpritesCharacters.Instance._ID[2]);
         
         string gameData = JsonUtility.ToJson(_DataCharacters);
-        File.WriteAllText(Application.dataPath + "/Saves/Characters.json", gameData);
+        File.WriteAllText(Application.persistentDataPath + "/Characters.json", gameData);
         Debug.Log("Characters selection saved !");
     }
 }

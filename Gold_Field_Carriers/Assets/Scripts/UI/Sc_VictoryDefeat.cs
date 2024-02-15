@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Sc_VictoryDefeat : MonoBehaviour
 {
@@ -16,15 +13,18 @@ public class Sc_VictoryDefeat : MonoBehaviour
     public TextMeshProUGUI _nbGoldLose;
     public void Update()
     {
-        if (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name == "Steps" && 
-            SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.name == "End")
+        if (SC_PlayerTurn.Instance != null)
         {
-            SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn] = false;
-            SC_PlayerTurn.Instance.turn += 1;
-            Sc_CharacterManager.Instance.ChangePlayer();
-            if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
-                SC_PlayerTurn.Instance.turn = 0;
-        } 
+            if (SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.parent.name == "Steps" && 
+                SC_PlayerTurn.Instance._player[SC_PlayerTurn.Instance.turn].GetComponent<Sc_getPlayerPosition>()._position.transform.name == "End")
+            {
+                SC_PlayerTurn.Instance._canMove[SC_PlayerTurn.Instance.turn] = false;
+                SC_PlayerTurn.Instance.turn += 1;
+                Sc_CharacterManager.Instance.ChangePlayer();
+                if (SC_PlayerTurn.Instance.turn >= Stats._nbPlayer)
+                    SC_PlayerTurn.Instance.turn = 0;
+            } 
+        }
 
         if (_endGame)
         {
