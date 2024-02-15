@@ -11,6 +11,14 @@ public class Sc_getPlayerPosition : MonoBehaviour
     {
         _position = other.gameObject;
         _position.tag = "Occuped";
+        
+        //Get gold if player is dead
+        if (_position.GetComponent<Sc_Neighbor>()._isThereGold) 
+        {
+            Sc_CharacterManager.Instance._playerInfo[SC_PlayerTurn.Instance.turn].GetComponent<Sc_ScriptableReader>()._gold += _position.GetComponent<Sc_Neighbor>()._gold;
+            _position.GetComponent<Sc_Neighbor>()._gold = 0;
+            _position.GetComponent<Sc_Neighbor>()._isThereGold = false;   
+        }
     }
 
     private void OnTriggerExit(Collider other)
