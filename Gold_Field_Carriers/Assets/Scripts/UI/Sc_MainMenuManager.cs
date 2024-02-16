@@ -23,7 +23,7 @@ public class Sc_MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        if (File.Exists(Application.dataPath + "/Saves/Audio.json"))
+        if (File.Exists(Application.persistentDataPath + "/Audio.json"))
         {
             Sc_SaveAudio.Instance.LoadFromJSON();
         }
