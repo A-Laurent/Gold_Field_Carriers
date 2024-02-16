@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: '"Fatty" Bobby'
   _desc: 
   _sprite: {fileID: 21300000, guid: d5607b571c338644e9ab1101ab2922aa, type: 3}
-  _spriteInGame: {fileID: 21300000, guid: d5607b571c338644e9ab1101ab2922aa, type: 3}
+  _spriteInGame: {fileID: 21300000, guid: e218db55db7c93645a3845e200f376c3, type: 3}
   _isAlive: 1
   _isInTheCity: 0
   _currentLife: 3

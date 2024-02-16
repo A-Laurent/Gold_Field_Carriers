@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Miguel<br>"El Barbudo"
   _desc: 
   _sprite: {fileID: 21300000, guid: 4f2548b64570ba842bced6ffc79e610f, type: 3}
-  _spriteInGame: {fileID: 21300000, guid: 4f2548b64570ba842bced6ffc79e610f, type: 3}
+  _spriteInGame: {fileID: 21300000, guid: 83369dd17f62fbd49aba3e73d4a5f563, type: 3}
   _isAlive: 1
   _isInTheCity: 0
   _currentLife: 3

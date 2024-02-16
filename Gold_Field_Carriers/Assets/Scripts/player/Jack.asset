@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Jack "Le Boug"
   _desc: 
   _sprite: {fileID: 21300000, guid: ecef4eac40c509c4c8f82e88455f8d7e, type: 3}
-  _spriteInGame: {fileID: 21300000, guid: ecef4eac40c509c4c8f82e88455f8d7e, type: 3}
+  _spriteInGame: {fileID: 21300000, guid: 88a3237e93e2c2d419c901bf46d3ff5a, type: 3}
   _isAlive: 1
   _isInTheCity: 0
   _currentLife: 3

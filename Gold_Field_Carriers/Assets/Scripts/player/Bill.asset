@@ -15,7 +15,7 @@ MonoBehaviour:
   _name: Bill<br>"Le Sourd"
   _desc: 
   _sprite: {fileID: 21300000, guid: 4fb4b10f1522529408802ea39f8424f3, type: 3}
-  _spriteInGame: {fileID: 21300000, guid: 4fb4b10f1522529408802ea39f8424f3, type: 3}
+  _spriteInGame: {fileID: 21300000, guid: 5950294bb1f925d4eab181e04b99bf15, type: 3}
   _isAlive: 1
   _isInTheCity: 0
   _currentLife: 3
