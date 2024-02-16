@@ -15,25 +15,6 @@ public class Sc_CharacterSelection : MonoBehaviour
     [SerializeField] private int _player = 0;
     [SerializeField] private Button _startButton;
 
-    private void Update()
-    {
-        foreach(var a in resetButton)
-        {
-            if (a.gameObject.name == "1st character")
-            {
-                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
-            }
-            else if(a.gameObject.name == "2nd character")
-            {
-                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
-            }
-            else if(a.gameObject.name == "3nd character")
-            {
-                a.GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
-            }
-        }
-    }
-
     private void Start()
     {
         _spritesCharacters = Sc_SpritesCharacters.Instance;
@@ -69,7 +50,6 @@ public class Sc_CharacterSelection : MonoBehaviour
             _player++;
         }
 
-        //this.GetComponentInChildren<Button>().GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
         _startButton.interactable = false;
         EventSystem.current.currentSelectedGameObject.gameObject.GetComponent<Button>().interactable = false;
     }
@@ -104,5 +84,19 @@ public class Sc_CharacterSelection : MonoBehaviour
         }
 
         _startButton.interactable = _canStart;
+    }
+
+
+    public void ResetSizeButton1()
+    {
+        resetButton[0].GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
+    }
+    public void ResetSizeButton2()
+    {
+        resetButton[1].GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
+    }
+    public void ResetSizeButton3()
+    {
+        resetButton[2].GetComponent<RectTransform>().sizeDelta = new Vector2(230, 350);
     }
 }
