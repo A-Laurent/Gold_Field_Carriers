@@ -1,10 +1,7 @@
 using System.Collections;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Sc_MainMenuManager : MonoBehaviour
 {
