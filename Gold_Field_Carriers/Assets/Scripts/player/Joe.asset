@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: '"Goldie" Joe'
   _desc: 
-  _sprite: {fileID: 21300000, guid: 2b5a9e8037bd9cd43b1cc3b4be909669, type: 3}
-  _spriteInGame: {fileID: 21300000, guid: 91ecee90f6fbb714faca24dec8263086, type: 3}
+  _sprite: {fileID: 21300000, guid: 97c27f1b9b6fdfd42a3605faba01ee5d, type: 3}
+  _spriteInGame: {fileID: 21300000, guid: 97c27f1b9b6fdfd42a3605faba01ee5d, type: 3}
   _isAlive: 1
   _isInTheCity: 0
   _currentLife: 3
